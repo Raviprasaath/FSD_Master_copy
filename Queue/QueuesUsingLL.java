@@ -1,6 +1,6 @@
 package Queue;
 
-import LinkedList.LinkedList;
+import LinkedList.LiveClass.LinkedList;
 
 public class QueuesUsingLL {
     private LinkedList linkedListForQueues;

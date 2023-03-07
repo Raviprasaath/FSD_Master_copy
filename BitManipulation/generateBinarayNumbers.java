@@ -1,4 +1,4 @@
-package Practise;
+package BitManipulation;
 import java.util.Queue;
 import java.util.LinkedList;
 

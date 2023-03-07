@@ -2,12 +2,8 @@ import java.util.Scanner;
 
 public class insertionsort {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int array[]=new int [n];
-        for (int i = 0; i < n; i++) {
-            array[i]=sc.nextInt();
-        }
+        int array[]={3,4,6,22,11,5};
+        int n = array.length;
         insertionsorting(array, n);
         for (int i = 0; i < n; i++) {
             System.out.print(array[i]+" ");

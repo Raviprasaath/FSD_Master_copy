@@ -47,7 +47,6 @@ class LinkedList{
         }
         return slowPointer;   
     }
-    
 }
 
 public class MiddleoftheLinkedList876 {
@@ -59,7 +58,7 @@ public class MiddleoftheLinkedList876 {
         list.add(4);
         list.add(5);
         list.display();
-        list.middleNode(2);
+        // list.middleNode(2);
         list.display();
         
     }
