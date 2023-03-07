@@ -59,6 +59,7 @@ public class MiddleoftheLinkedList876 {
         list.add(5);
         list.display();
         // list.middleNode(2);
+
         list.display();
         
     }
