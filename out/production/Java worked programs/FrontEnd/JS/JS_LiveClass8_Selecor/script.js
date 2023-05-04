@@ -144,16 +144,16 @@ console.dir(caaard)
 // // 3.Attach the new Element to the ul list
 // // way 1
 // const unorderedlist = document.getElementById("names")
-// // way 2 of adding
- 
+
 
 // // 4. Adding things in the last 
 // unorderedlist.append(liElement)
 
-
-
+// // way 2 of adding
 // // unorderedlist.innerHTML = unorderedlist.innerHTML + "<li>hgafsa</li>\n"
 // // // don't use this
+
+
 
 
 
