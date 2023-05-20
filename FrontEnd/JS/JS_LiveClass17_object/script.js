@@ -253,3 +253,40 @@ for (const [key, value] of entryPerson) {
 // output
 // name: ravi
 // 17 rollNumber: 1
+
+for (const arr of entryPerson) {
+    console.log(`${arr[0]}: ${arr[1]} raviravi`)
+}
+// output
+// name: ravi raviravi
+// rollNumber: 1 raviravi
+
+
+
+
+
+
+
+
+
+// ----Object Destructing -------
+
+const objDes = {
+    namename : "ravi",
+    classes : 10,
+    rollNumber : 90,
+    choiceOfAirways : "Go Airways" 
+}
+
+console.log(objDes.choiceOfAirways)
+
+const {classes, choiceOfAirways} = objDes
+
+console.log(classes, choiceOfAirways)
+
+// output
+// Go Airways
+// 10 'Go Airways'
+
+// Object
+
