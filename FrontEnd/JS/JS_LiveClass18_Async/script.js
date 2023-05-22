@@ -1,326 +1,71 @@
+// setTimeout basically takes the call back function
+// here call back function is my function
 
-// Dynamic value here but not Dynamic keys
-// let obj = {
-//     name : "ravi",
-//     rollnum : 1,
-//     class: "10th"
-// }
-// // get
-// console.log(obj.name)
-// console.log(obj.rollnum)
+// () = {}
+// Arrow function as a argumnets and body seperated by => this
+// () => {}
 
-// // output
-// // ravi
-// // 10th
+console.log("hello")
+setTimeout ( () => {
+    console.log("ravi")
+}, 5000)
+console.log("bye")
 
-// // Add
-// obj ["newProperty"] = 12;
-// console.log(obj)
+// hello bye printed after 5 sec ravi printed
+
+
+console.log("hello")
+setTimeout ( () => {
+    console.log("ravi")
+}, 0)
+console.log("bye")
+// output
+// hello
+// bye
+// ravi
+
+// whenever program starts execute it will traverse, when its found setTimeout now its
+// sent to WebAPI memory here function execute and timer on 
+// then its moved to next line
+// executer is very fast when compared to timer
+// then after timer that call back function inside the timer sent to task queue 
+// in other words, when timer is 0, task queue create a function to excute 
+// now event loop - work was it will check task queue had anything
+// if task queue had anything now its returnig and task queue becomes empty now
+
+// another example
+// now the code had 6 million lines of code
+// 0-1 second - 1 million code will run
+// 1-2 second - 2 million code will run
+// 2-3 second - 3 million code will run
+// 3-4 second - 4 million code will run
+// 4-5 second - 5 million code will run
+// 5-6 second - 6 million code will run
+// and we have 4 second timer with function
+
+// but after 4 seconds our setTimout function will not work 
+// because for working a setTimeout it stored in TaskQueue, taskqueue only executes when stack becomes empty
+// when 10million line is parsing stack empty at the end of 10 million only 
+// then after 10 sec, setTimeout 4 sec function will work
+
+// taskQueue correct name macro task name
+
+// one more example
+
+console.log("start")
+setTimeout (()=> {
+    console.log("b")
+}, 4000);
+
+setTimeout (() => {
+    console.log("c")
+}, 8000);
+
+console.log("end")
+
 
 // output
-// {name: 'ravi', rollnum: 1, class: '10th', newProperty: 12}
-// class : "10th"
-// name : "ravi"
-// newProperty : 12
-// rollnum : 1
-// [[Prototype]] :  Object
-
-
-
-
-let name = "raviprasaath"
-let key = "subname"
-
-let obj = {
-    name : name,
-    rollnum : 1,
-    class: "10th",
-    [key] : "subname1 subname2"
-}
-console.log(obj, "1st object")
-// get
-console.log(obj.name)
-console.log(obj.rollnum["rollnum"])
-
-// add
-obj ["newProperty"] = 12;
-console.log(obj)
-
-
-// output
-// {
-//     name: 'raviprasaath', rollnum: 1, class: '10th', subname: 'subname1 subname2'
-// }
-// class: "10th"
-// name: "raviprasaath"
-// newProperty: 12
-// rollnum: 1
-// subname: "subname1 subname2"
-// [[Prototype]]: Object '1st object'
-// raviprasaath
-
-
-
-
-
-
-
-
-// Internal implementation of class in HashMap
-
-// while deleting the object values - in a same address oonly it willd delete, it will not create new address
-// delete 
-
-// setTimeout(() => {
-    
-//     console.log(obj)
-// }, 5000)
-
-delete obj.rollNumber
-
-// console.log(obj)
-
-
-// COPY ....... ?
-
-const user = {
-    name: "utse",
-    age: 24,
-}
-
-// This is not how you create a copy
-const userCopy1 = user;
-
-// SHALLOW COPY  -- user created new obj in heap ->new address
-
-const userCopy2 = { ...user }
-
-console.log(user === userCopy1, "user copy 1")
-console.log(user === userCopy2, "user copy 2")
-
-// output
-// true 'user copy 1'
-// false 'user copy 2'
-
-
-
-// 16-05-2023
-// Objects Method
-
-// 1.Object.assign 
-// way 1
-
-// const sourceObject1 = {name: "ravi", class: 10} 
-// const sourceObject2 = {name: "utkarsh", class: 12} 
-// const targetObject = {}
-
-// Object.assign(targetObject, sourceObject1)
-
-// console.log(targetObject)
-
-// above code act as ... which seen previosuly 
-
-
-
-
-// way 2
-const sourceObject1 = {name: "ravi", class: 10} 
-const sourceObject2 = {name1: "utkarsh", class1: 12} 
-const targetObject = {}
-
-Object.assign(targetObject, sourceObject1, sourceObject2)
-
-console.log(targetObject)
-
-// output - > we can copy multiple
-// {name: 'ravi', class: 10, name1: 'utkarsh', class1: 12}
-
-
-
-
-
-
-// way 3
-const obj = {
-    name : "ravi",
-    class : 9,
-    rollNumber : 12,
-
-    name : "ram"
-}
-console.log(obj)
-
-//output -> {name: 'ram', class: 9, rollNumber: 12}
-
-
-
-
-// Object create
-// 1st way to create object {}
-// name and rollNumbers are -> own properties 
-const person = {
-    name : "ravi",
-    rollNumber: 1
-
-}
-
-// 2nd way Object.create
-// inside prototype the function inside values (objects) are created, but they are not own properties
-// Prototype stores extra information 
-//  name and rollNumber -> these created in Prototype, it is not own properties
-const newPerson = Object.create(person);
-
-console.log("person", person)
-console.log("newPerson", newPerson)
-
-// output 
-// person {name: 'ravi', rollNumber: 1}
-// newPerson {}
-
-console.log(person.name, newPerson.name)
-// output
-// ravi ravi
-console.log(person.name, newPerson.name, person.rollNumber, newPerson.rollNumber)
-// output
-// ravi ravi 1 1
-
-
-
-
-// 3.get own property names
-const person1 = {
-    name : "ravi",
-    rollNumber: 1
-
-}
-const newPerson1 = Object.create(person);
-
-const personOwnPropertyArr = Object.getOwnPropertyNames(person1)
-const newPersonOwnPropertyArr = Object.getOwnPropertyNames(newPerson1)
-console.log("personOwnProperty", personOwnPropertyArr, newPersonOwnPropertyArr)
-
-//output-> personOwnProperty (2) ['name', 'rollNumber'] []
-
-
-
-// 4.object.keys()
-const person2 = {
-    name : "ravi",
-    rollNumber: 1
-
-}
-const newPerson2 = Object.create(person);
-
-const keyperson = Object.keys(person2)
-const keyNewPerson = Object.keys(newPerson2)
-
-console.log("keyperson", keyperson, keyNewPerson)
-// output -> keyperson (2) ['name', 'rollNumber'] []
-
-
-// 5.object.values()
-const person3 = {
-    name : "ravi",
-    rollNumber: 1
-
-}
-const newPerson3 = Object.create(person);
-
-const valuePerson = Object.values(person3)
-console.log("valuePerson", valuePerson)
-// output ->   valuePerson (2) ['ravi', 1]
-
-
-// 6.object.entries()
-const person4 = {
-    name : "ravi",
-    rollNumber: 1
-
-}
-const newPerson4 = Object.create(person);
-
-
-const entryPerson = Object.entries(person4)
-console.log("entry", entryPerson);
-// output
-// [Array(2), Array(2)]
-// 0: (2) ['name', 'ravi']
-// 1: (2) ['rollNumber', 1]
-
-for (const [key, value] of entryPerson) {
-    console.log(`${key}: ${value}`)
-}
-// output
-// name: ravi
-// 17 rollNumber: 1
-
-for (const arr of entryPerson) {
-    console.log(`${arr[0]}: ${arr[1]} raviravi`)
-}
-// output
-// name: ravi raviravi
-// rollNumber: 1 raviravi
-
-
-
-
-
-
-
-
-
-// ----Object Destructing -------
-
-const objDes = {
-    namename : "ravi",
-    classes : 10,
-    rollNumber : 90,
-    choiceOfAirways : "Go Airways" 
-}
-
-console.log(objDes.choiceOfAirways)
-
-const {classes, choiceOfAirways} = objDes
-
-// replacing the below 2 lines we use the above one
-// const rollnum = objDes.rollNumber;
-// const choiceOfAirways = objDes.choiceOfAirways;
-
-console.log(classes, choiceOfAirways)
-
-// output
-// Go Airways
-// 10 'Go Airways'
-
-
-// Destructuring ALIAS
-const {rollNumber: rollCall, choiceOfAirways} = objDes;
-console.log(rollCall, choiceOfAirways, "rollCall");
-// output
-// 10 'Go Airways' 'rollCall'
-
-
-// -----------------Array Destructuring------
-const arrDes = [100, 212, 3, 4]
-const [first, second] = arrDes;
-console.log("array destructuring", first, second) 
-
-// output 100 212 
-
-const arrDes = [100, 212, 3, 4]
-const [first, second, , fourth] = arrDes;
-console.log("array destructuring", first, second, fourth) 
-// 100 212 4
-// Array contains only value no key so here it storing how in array
-// if we want to print 4 th one without 3rd one means we can skip like this
-// const first = arrDes[0];
-// const second = arrDes[1];  // this is same as above 
-
-// ----String Literal--------
-const string1 = "asbasc";
-const string2 = "asbasc";
-// these strings are static we can't add anything in dynamically
-const variable = 1;
-
-const string3 = `Hey hi: ${variable}`
-// so in string 3 we added variable 1
+// start
+// end
+// after 4 seconds b will print
+// after 8 seconds c will print
