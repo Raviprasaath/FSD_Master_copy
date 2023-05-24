@@ -69,3 +69,26 @@ console.log("end")
 // end
 // after 4 seconds b will print
 // after 8 seconds c will print
+
+/*
+ Event loop -> algo
+This algo of event loops basically runs again n again
+for ex 1000 times / seconds
+
+1. to ask if task queue has anything 
+NO -> do nothing
+Yes ->
+    1. Ask Question to stack are you EMPTY
+    NO -> do nothing
+    Yes -> 
+        1.Pop the 1st task from MACRO-TASK QUEUE
+        2.Put the task inside the stack
+
+
+
+
+
+
+
+
+*/
