@@ -185,3 +185,7 @@ const promiseOfQuote1 =
 
 
     // now in output -> in HTML page display had the quote in H1 tag
+
+
+
+//----------------- 05-25-2023 -----------------
