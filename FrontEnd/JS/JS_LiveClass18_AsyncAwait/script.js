@@ -118,6 +118,39 @@ fetchQuote();
 
 // Promise changeing  
 
+// console.log('hello')
+// fetch("https://api.kanye.rest/") 
+//     .then(response => {
+//         // response handler
+//         return response.json()    // here .then block is we changing the promise (or) then block returing a promise
+//     }).then (data => {
+//         // data handler
+//         console.log('data handler 0', data)
+        
+//         return '1 output'// -> if i comment it means it give undefined in below data handler 1, if not then give value as 1
+
+//     }).then (data => {
+//         // number 1 handler
+//         console.log('data handler 1', data)        
+//     }).then (data => {
+//         // number 2 handler
+        
+//         console.log('data handler 2', data) //here this give undefined because there is no return value in previous block
+        
+//     }).then (data => {
+//         // number 3 handler
+//     })
+    
+    
+//     .catch (error => {
+//         console.log('error')
+//     }) 
+// console.log('bye');
+
+
+// one more example
+// if server gives correct ans it shown in the then bloc, if its gives a wrong ans its shown in the error block
+
 console.log('hello')
 fetch("https://api.kanye.rest/") 
     .then(response => {
@@ -129,20 +162,26 @@ fetch("https://api.kanye.rest/")
         
         return '1 output'// -> if i comment it means it give undefined in below data handler 1, if not then give value as 1
 
+    }).catch (error => {
+        console.log('error')
     }).then (data => {
         // number 1 handler
-        console.log('data handler 1', data)        
+        console.log('data handler 1', data) //now also data handler gievs output        
     }).then (data => {
-        // number 2 handler
-        
-        console.log('data handler 2', data) //here this give undefined because there is no return value in previous block
-        
+        // number 2 handler        
+        console.log('data handler 2', data)
     }).then (data => {
         // number 3 handler
+    }).finally (()=>{            // it always run after then and catch block
+        console.log('finally block')
     })
     
     
-    .catch (error => {
-        console.log('error')
-    }) 
+    
 console.log('bye');
+
+
+
+
+// Catch - Error handeling
+
