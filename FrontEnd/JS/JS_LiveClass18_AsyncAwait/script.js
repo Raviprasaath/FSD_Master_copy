@@ -151,37 +151,124 @@ fetchQuote();
 // one more example
 // if server gives correct ans it shown in the then bloc, if its gives a wrong ans its shown in the error block
 
-console.log('hello')
-fetch("https://api.kanye.rest/") 
-    .then(response => {
-        // response handler
-        return response.json()    // here .then block is we changing the promise (or) then block returing a promise
-    }).then (data => {
-        // data handler
-        console.log('data handler 0', data)
+// console.log('hello')
+// fetch("https://api.kanye.rest/") 
+//     .then(response => {
+//         // response handler
+//         return response.json()    // here .then block is we changing the promise (or) then block returing a promise
+//     }).then (data => {
+//         // data handler
+//         console.log('data handler 0', data)
         
-        return '1 output'// -> if i comment it means it give undefined in below data handler 1, if not then give value as 1
+//         return '1 output'// -> if i comment it means it give undefined in below data handler 1, if not then give value as 1
 
-    }).catch (error => {
-        console.log('error')
-    }).then (data => {
-        // number 1 handler
-        console.log('data handler 1', data) //now also data handler gievs output        
-    }).then (data => {
-        // number 2 handler        
-        console.log('data handler 2', data)
-    }).then (data => {
-        // number 3 handler
-    }).finally (()=>{            // it always run after then and catch block
-        console.log('finally block')
-    })
+//     }).catch (error => {
+//         console.log('error')
+//     }).then (data => {
+//         // number 1 handler
+//         console.log('data handler 1', data) //now also data handler gievs output        
+//     }).then (data => {
+//         // number 2 handler        
+//         console.log('data handler 2', data)
+//     }).then (data => {
+//         // number 3 handler
+//     }).finally (()=>{            // it always run after then and catch block
+//         console.log('finally block')
+//     })
+
+//     // alwasys finally block in last block position because
+//     // while executing in the queue when its see finally it executes and after final block there is no chance of then block, so only always finally in last poistion
+
     
     
     
-console.log('bye');
+// console.log('bye');
+
+
+
+// instead of using promise we can use call backs but prefereable is promise
+// for example
+// 
 
 
 
 
-// Catch - Error handeling
+// why callbacks are not used 
+// 1. Pyramid of doom
+// 2. Order of execution of inner callbacks is confusing  (out of normal human recognizable pattern)
+// example
+// function googlecall('onbeading mails', (work)=> {
+//     console.log(1);
+//     // 1..work
+//     function googleGetReplies ('func', (playingWithReplies)=> {
+//         // 2..replies
+//         console.log(3)
+//     })
+//     console.log(2);
+//     googleGetReplies()
+// })
+
+
+
+
+
+/*----------- Catch - Error handeling -----------*/
+
+// Every block is level
+// every then block and catch block is level
+// when you get an error in any level, the error Handling will always be below that Level
+// .then -> data handler
+// .catch -> error handler
+
+// default JS engine return undefined
+
+
+console.log("hello")
+fetch('https://api.kanye.rest/')
+        .then(response => {
+            // response handler 
+            // throw Error("Error created by utkarsh ")
+            return response.json()
+        }, 
+        (error) => {
+            console.log("i am error handlor inside the then", error)
+        })
+        .then(data => {
+            // data handler 
+            console.log("data handler 0", data)
+            return "1 output"
+        }).catch(erro => {
+            console.log("error level 2", erro)
+            return 10
+        })
+        .then(data => {
+            // number 1 handler 
+            console.log("data handler 1", data)
+            return 1
+        }).then(data => {
+            // num 2 handler
+            // throw Error("error in down level")
+            console.log("data handler 2", data)
+        }).then(data => {
+            // num3 handler 
+        }).catch(erro => {
+           console.log("errro block Level6", erro) 
+            // code for handling response handler
+            // code for data handler 
+            // code for number 1 handler 
+        })
+
+console.log("bye")
+
+// output
+// if link is correct
+// hi
+// bye
+// data hanler 0 {quote: 'We will be recognized'}
+
+// if link is wrong
+// hi
+// bye
+// I am error handler inside the then block TypeError: Failed to fetch
+// data hanler 0 undefined
 
