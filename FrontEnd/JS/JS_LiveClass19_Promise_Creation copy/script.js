@@ -1,134 +1,187 @@
-fetch("https://api.kanye.restasdsa/").then((data) => {
-    console.log(data)
-})
-// .catch(error => {
-//     console.log(error)
+// Prmomise Api 
+
+// 6 Static Methods....
+
+/* 
+    1. Promise.all
+    All the prmomises needs to get resolved then only i will go to then block.
+*/
+// It takes a array, array of promises
+
+
+// 1. Payer -> 
+
+// API
+// let payerPromise = new Promise((res, rej) => {
+//     res(95)
 // })
 
-// when we forgot this catch block instead we can use the below one window.addEventListener
-
-// If error of promise is unhandeled
-
-
-window.addEventListener("unhandledrejection", () => {
-    console.log("global Error handler ")
-
-    // good screen, beautiful screen 
-})
-
-
-
-//*-----------------------------------------------------
-
-// 1.  Constructor Method 
-
-// const myFetch = new Promise((resolve, reject) => {
-//     // 1 calling the server 
-// //    const data =  XMLHttpRequest() // what 
-
-//     try {
-//         const data = {status: 500, url: "asdasdas", 
-//         data: {
-//             name: "utkarsh",
-//             address: "streets",
-//             rollNumber: 40,
-//         }}
-
-//         // 2. judges the data.... 
-//         if(data.status === 200) {
-//             // good 
-//             resolve(data)
-//         } else if (data.status === 500) {
-//             // error 
-//             reject({errorCode: 500, message: "hey the server is down"})
-//         }
-//     } catch (error) {
-//         reject("asdasdasdasdas")
-//     }
-// });
-
-
-// fetch("asdasda").then
-
-// myFetch.then(data => {
-//     console.log("hey there data");
-//     console.log(data)
+// let shopKeeperPromise = new Promise((res, rej) => {
+//     res(1000 + 5)          // if this is rej then Error will throw
 // })
 
 
-// fetch ? 
-
-// 1.  calling the server 
-// 2. judging the data
-    // 2.1 if data is good, OK, Not error, -> Success (data)
-    // 2.2 if data is bad, not Ok, error, -> Error 
 
 
-
-
-
-//*---------------------
-
-    // 2. To use Async Keyword 
-
-// function abc() {
-//     return 1;
-// }
-
-// const result = abc();
-// console.log(result, "result");
-
-// async function getTheQuotes() {
-//     return 100;
-// }
-
-// const result2 = getTheQuotes();
-// console.log(result2, "promise Object")
-
-
-
-// CONSUME A PROMISE 
-
-// way 1 -> then block.
-// result2.then(data => {
-//     console.log("my marks", data)
+// Promise.all([
+//     payerPromise,
+//     shopKeeperPromise
+// ]).then((data) => {
+//     // rbi take the ledger
+//     console.log("RBI take the ledger, take note", data)
+// }).catch(error => {
+//     // rollback the transaction
+//     console.log("Rollback the transaction")
 // })
-
-// way 2 -> await.. 
-// const result3 = await getTheQuotes();
-// console.log(result3, "result 3")
-
-
 
 
 
 /*
-    MicrotaskQueue vs Macro Task Queue ... 
-
-    If MicroTask Queue HAs tasks then event Loop will not see the macroTask queue 
-    until n unless the MicroTask Queue Finishes 100% (completly)
-
+    2. Promise.race 
+    It will wait till the first promise is settled and then it will be resolved.
 */
 
-// let promise = new Promise((res, rej) => {
-//     res("asdasdadas");
+// let promise1 = new Promise((res, rej) => {
+    
+//     // setTimeout(() => {
+//     //     res(1000);
+//     // }, 5000)
+
+//     rej("errro")
+    
+// })
+
+// let promise2 = new Promise((res, rej) => {
+    
+//     setTimeout(() => {
+//         res(100)
+//     }, 10000)
+    
+// })
+
+// user js file 
+
+// promise1.then(data => {
+//     console.log(data, "data after 5 sec")
 // })
 
 
-// console.log("hello") // 1
+
+// promise2.then(data => {
+//     console.log(data, "immediate")
+// })
 
 
-// setTimeout(() => {
-//     console.log("hello world") //2
-// }, 0)
+// Promise.race([
+//     promise1,
+//     promise2
+// ]).then(data => {
+//     console.log("data", data)
+// }).catch(error => {
+//     console.log("error")
+// })
 
-// promise.then(data => console.log(data, "data")) //3
 
-// console.log("Bye") // 4
 
-// output---------
-// hello
-// bye
-// data
-// hello world
-//--------------------------------------------
+/*
+    3. Promise.any
+    It will take the first promise that is resolved successfully,
+    if 2 promises are resolved in same time then the 1st promise in the order 
+    will be accepted
+*/
+
+
+// const promise1 = new Promise((res, rej) => {
+//     res("live score: 272");
+// })
+
+// const promise2 = new Promise((res, rej) => {
+//     rej("error")
+// })
+
+// const promise3 = new Promise((res, rej) => {
+//     res("dasdasdadas")
+// })
+
+// Promise.any([
+//     promise2,
+//     promise3,
+//     promise1,
+// ]).then(data => {
+//     console.log("data", data)
+// }).catch(error => console.log(error, "error"))
+
+
+
+// so what is the difference b/w race and any 
+// ans -> in race all the promises needs to be fulfilled (not rejected)
+// but in any, promises can be rejected 
+
+
+
+/*
+    4. Promise.reject()
+
+*/
+
+// function callAServer(string) {
+
+//     if(!string) {
+//         return Promise.reject("Asdasdas")
+//     }
+
+//     fetch(string).then(data => {
+//         // beautiful things
+//     })
+// }
+
+// const ans = callAServer()
+
+// if(ans) {
+//     // some error has happened 
+//     // beautiful page
+
+//     ans.catch(data => {
+//         console.log(data)
+//     })
+// }
+// console.log("asns", ans)
+
+
+// const promise1 = new Promise((res, rej) => {
+//     return Promise.resolve("1000")
+// })
+
+
+// promise1.then(data => {
+//     console.log("data", data )
+// })
+
+
+
+/*
+    5. Promise.resolve();
+*/
+
+
+// function callAServer1(string) {
+
+//     if(!string) {
+//         return Promise.resolve("Asdasdas")
+//     }
+
+//     fetch(string).then(data => {
+//         // beautiful things
+//     })
+// }
+
+// const res = callAServer1()
+// res.then(data => {
+//     console.log("callAServer1", data)
+// })
+
+
+
+// 6 Promise.allSettle
+
+// you guys can find out
