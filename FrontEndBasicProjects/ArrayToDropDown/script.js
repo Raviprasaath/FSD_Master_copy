@@ -6,11 +6,21 @@ let selectDrop = document.createElement('select');
 bodyElem.appendChild(selectDrop)
 
 
-for (let i=0; i<array.length; i++) {
+// for (let i=0; i<array.length; i++) {
+//     let optionDrop = document.createElement('option');
+//     optionDrop.textContent = array[i];
+//     selectDrop.appendChild(optionDrop)
+// }
+// console.log(bodyElem)
+
+
+
+// by using forEach loop
+array.forEach(val => {
     let optionDrop = document.createElement('option');
-    optionDrop.textContent = array[i];
+    optionDrop.textContent = val;
     selectDrop.appendChild(optionDrop)
-}
+})
 console.log(bodyElem)
 
 
