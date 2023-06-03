@@ -299,17 +299,9 @@ class Product {
 
 
 
-
+window.Product = Product;
 
 class Storage {
-    constructor(id, title, price, description, category, image) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.description = description;
-        this.category = category;
-        this.image = image;
-    }
   
     static getProducts() {
         let products = [];
