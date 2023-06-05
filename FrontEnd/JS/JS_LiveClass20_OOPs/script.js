@@ -361,22 +361,23 @@ bar(); // global
 
 
 
-// Property Descriptors
-let obj = {
-    name: "ravi",
-    rollNumber: 45,
-    address: "road",
-}
-console.log (obj.propertyIsEnumerable("name")) //true
-console.log (obj.propertyIsEnumerable("rollNumber")) //true
-console.log (obj.propertyIsEnumerable("address")) //true
+//---------- Property Descriptors----------
+// 1. Enumerable
+// let obj = {
+//     name: "ravi",
+//     rollNumber: 45,
+//     address: "road",
+// }
+// console.log (obj.propertyIsEnumerable("name")) //true
+// console.log (obj.propertyIsEnumerable("rollNumber")) //true
+// console.log (obj.propertyIsEnumerable("address")) //true
 
-// propertyIsEnumerable
-console.log(obj)    //{name: 'ravi', rollNumber: 45, address: 'road'}
+// // propertyIsEnumerable
+// console.log(obj)    //{name: 'ravi', rollNumber: 45, address: 'road'}
 
-for(const key in obj) {
-    console.log(key)
-}
+// for(const key in obj) {
+//     console.log(key)
+// }
 // output
 // name
 // rollNumber
@@ -385,3 +386,105 @@ for(const key in obj) {
 // Enumerable -> the properties which are enumerable will be of for in
 // else that property will not be part
 
+
+// ---------06-04-2023--------
+
+
+
+// Object.defineProperty(obj, 'address', {
+//     value: "dadad",
+//     enumerable: false
+// })
+// console.log(obj)    // in console address color was changed into faded
+// for(const key in obj) {
+//     console.log(key)    //here name and rollNumber only print
+// }
+// Object.defineProperty(obj, 'getCash', {
+//     value: "dadad",
+//     enumerable: true
+// })
+// for(const key in obj) {
+//     console.log(key)    //output was name, rollNumber, getCash (because enumerable given has true, so the value was added in the array)
+// }
+
+
+
+
+
+// 2.Writable
+
+// writable basically means the value can be changed...
+
+
+
+
+
+
+
+
+// 3.Configurable
+// Properties of an object can be modified, deleted and new property can add
+
+
+
+
+
+
+
+
+
+// 4.
+// const CarObject = {
+//     canMove : true,
+//     func: function() {
+//         console.log("CarObject", CarObject);
+//     }
+// }
+// console.log(CarObject);     // {canMove: true, func: ƒ}
+// const descriptors = Object.getOwnPropertyDescriptor(CarObject, "canMove");
+// console.log(descriptors, "descriptors")    // {value: true, writable: true, enumerable: true, configurable: true}
+
+// let carAudi = new CarObject();
+// console.log(carAudi, "class car")
+// carAudi.func();
+
+
+// one more example
+
+
+
+
+
+class Car {
+    canmove
+
+   func(){
+    // console.log("car audi");    //car audi
+   }
+}
+
+
+const carObj = {
+    canMove: true,
+    func: function() {
+        // console.log("carObj", carObj);
+    }
+}
+
+// console.log(carObj)     //{canMove: true, func: ƒ}
+
+const descriptors = Object.getOwnPropertyDescriptor(carObj, "func")
+// console.log(descriptors, "descriptors fuc")     //{writable: true, enumerable: true, configurable: true, value: ƒ}'descriptors fuc' 
+
+
+let carAudi = new Car();
+
+// console.log(carAudi) // Car {canmove: undefined}
+
+const descriptors1 = Object.getOwnPropertyDescriptor(carAudi, "func")
+const descriptors2 = Object.getOwnPropertyDescriptor(carAudi, "canmove")
+//console.log(descriptors1, "descriptors fuc")    //undefined 'descriptors fuc'
+// console.log(descriptors2, "descriptors canMove")    //{value: undefined, writable: true, enumerable: true, configurable: true} 'descriptors canMove'
+
+console.log(carAudi, "c;lass car")  //Car {canmove: undefined} 'c;lass car'
+carAudi.func()
