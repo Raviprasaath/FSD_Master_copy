@@ -415,8 +415,28 @@ bar(); // global
 
 // writable basically means the value can be changed...
 
+// let obj3 = {
+//     name : "ravi",
+//     rollNumber:20,
+//     address: "edfa"
+// }
 
+// you can't do this because inside defineProperty, the property is checked
+// Object.defineProperty(obj3, "cash", {
+//     value: 100,
+//     writable: true,
+//     enumerable: true
+// })
+// console.log(obj3)   //{name: 'ravi', rollNumber: 20, address: 'edfa', cash: 100}
+// console.log(obj3.cash) // 100;
+// obj3.cash = 90;
+// console.log(obj3.cash) // 90; // writable must be true, if its a false means then value will be 100 only
 
+/*
+    writable -> cant edit the vlaue of property, but can delete it,
+    Configurable -> cant delete the property but can change the value of the property,
+    enumerable -> to be part of for in loop.
+*/
 
 
 
@@ -425,6 +445,20 @@ bar(); // global
 // 3.Configurable
 // Properties of an object can be modified, deleted and new property can add
 
+// let obj4 = {
+//     name:"ravi"
+// }
+// Object.defineProperty(obj4, "class", {
+//     value: "9th class",
+//     enumerable: true,
+//     writable: true,
+//     configurable: true,
+// })
+// // console.log(obj4, "obj4")   //{name: 'ravi', class: '9th class'} 'obj4'
+// delete obj4.class
+// // console.log(obj4) //{name: 'ravi'}  //for this configurable must be true
+// obj4.class  = "14"
+// console.log(obj4) // {name: 'ravi', class: '14'}    // for this writable must true
 
 
 
@@ -433,7 +467,9 @@ bar(); // global
 
 
 
-// 4.
+// 4.Own Property
+//  the property of an object which is directly in the  object and not in the Prototype.
+
 // const CarObject = {
 //     canMove : true,
 //     func: function() {
@@ -455,36 +491,163 @@ bar(); // global
 
 
 
-class Car {
-    canmove
+// class Car {
+//     canmove
 
-   func(){
-    // console.log("car audi");    //car audi
-   }
-}
-
-
-const carObj = {
-    canMove: true,
-    func: function() {
-        // console.log("carObj", carObj);
-    }
-}
-
-// console.log(carObj)     //{canMove: true, func: ƒ}
-
-const descriptors = Object.getOwnPropertyDescriptor(carObj, "func")
-// console.log(descriptors, "descriptors fuc")     //{writable: true, enumerable: true, configurable: true, value: ƒ}'descriptors fuc' 
+//    func(){
+//     // console.log("car audi");    //car audi
+//    }
+// }
 
 
-let carAudi = new Car();
+// const carObj = {
+//     canMove: true,
+//     func: function() {
+//         // console.log("carObj", carObj);
+//     }
+// }
 
-// console.log(carAudi) // Car {canmove: undefined}
+// // console.log(carObj)     //{canMove: true, func: ƒ}
 
-const descriptors1 = Object.getOwnPropertyDescriptor(carAudi, "func")
-const descriptors2 = Object.getOwnPropertyDescriptor(carAudi, "canmove")
-//console.log(descriptors1, "descriptors fuc")    //undefined 'descriptors fuc'
-// console.log(descriptors2, "descriptors canMove")    //{value: undefined, writable: true, enumerable: true, configurable: true} 'descriptors canMove'
+// const descriptors = Object.getOwnPropertyDescriptor(carObj, "func")
+// // console.log(descriptors, "descriptors fuc")     //{writable: true, enumerable: true, configurable: true, value: ƒ}'descriptors fuc' 
 
-console.log(carAudi, "c;lass car")  //Car {canmove: undefined} 'c;lass car'
-carAudi.func()
+
+// let carAudi = new Car();
+
+// // console.log(carAudi) // Car {canmove: undefined}
+
+// const descriptors1 = Object.getOwnPropertyDescriptor(carAudi, "func")
+// const descriptors2 = Object.getOwnPropertyDescriptor(carAudi, "canmove")
+// //console.log(descriptors1, "descriptors fuc")    //undefined 'descriptors fuc'
+// // console.log(descriptors2, "descriptors canMove")    //{value: undefined, writable: true, enumerable: true, configurable: true} 'descriptors canMove'
+
+// console.log(carAudi, "c;lass car")  //Car {canmove: undefined} 'c;lass car'
+// carAudi.func()
+
+
+
+
+
+
+
+//  Few Derivative() properties of Object
+// Object.seal // it changes the configurable property into false
+
+// Object.seal -> you cant DELETE the existing properties and you cant ADD new Properties.
+//  you can modify the value of existing properties
+
+
+const object1 = {
+    property1: 42
+  };
+  
+Object.seal(object1);   // when seal came config turns into false
+
+
+console.log(Object.getOwnPropertyDescriptor(object1, "property1"))
+
+// delete object1.property1;
+
+// // adding new property not possible in seal
+// object1.abcd = "sdasdas"
+
+// console.log(object1)
+
+
+
+
+// Object.freeze --> both config and writable becomes false
+// freeze is superset of seal -> 
+// no ADDITION, DELETION and EDITION of properties.
+
+// const object1 = {
+//     property1: 42
+//   };
+// Object.freeze(object1)
+
+// console.log(Object.getOwnPropertyDescriptor(object1, "property1"))
+
+
+// // cant add property
+// object1.abcd = "asdasdasdd"
+
+// // cant edit the property
+// object1.property1 = 99;
+
+// // cant delete the property
+
+// delete object1.property1
+
+// console.log(object1)
+
+
+
+/*
+    Date and Time Object.... 
+*/
+// according to program 1970 JAN 1 was date started
+
+// const rightNowDate  = new Date()
+// console.log(rightNowDate)
+
+// Date, 
+
+// console.log(rightNowDate.getTime(), "time") // time in MIlli seconds from 1970 Jan 1 
+// console.log(rightNowDate.getDay(), "Day") 
+// console.log(rightNowDate.getDate(), "Date")
+// console.log(rightNowDate.getFullYear(), "year")
+
+
+// EDITING DATE OBJECT ->  SET 
+
+// date
+// rightNowDate.setDate(15)
+
+// rightNowDate.setFullYear(2099)
+
+// rightNowDate.
+
+// edit the milliseconds
+// minutes, hours, seconds.
+
+// console.log(rightNowDate)
+
+
+//  ------  get UTC time -----------
+
+// const rightNowDate  = new Date() // IST 
+// console.log(rightNowDate, "IST time");
+
+// const utcTime = rightNowDate.toUTCString();
+
+// console.log(utcTime, "utc time");
+
+// // const offset = new Date(utcTime).
+
+// console.log(offset, "offset")
+
+
+// -------- MATH ----------------------
+
+// let date = new Date();
+
+
+// let dateAdd2Hrs = new Date()
+
+// //  added 5 min 
+// dateAdd2Hrs.setTime(date.getTime() + 300000)
+
+// console.log(dateAdd2Hrs, date)
+
+
+// console.log( dateAdd2Hrs - date)
+
+
+
+
+/*
+
+    SUGGESTION: see the MOMENT library .. (need to check)
+*/
+
