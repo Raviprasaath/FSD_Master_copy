@@ -104,6 +104,8 @@ bmwClassC.canIDrive();    // I can drive
 
 */
 
+// in JS there is no private properties
+
 
 // Get the REAL PRIVATE PROPERTIES... 
 /* 
@@ -112,9 +114,8 @@ Getters and Setters ... ?
 READ: MAP VS WEAKMAP..... 
 
 */
-
+// so by creating the outside prooperty is considered as privare property in JS
 // const _radius = new WeakMap() 
-
 
 // class Circle {
 
@@ -150,27 +151,31 @@ READ: MAP VS WEAKMAP.....
 // }
 
 // const circle = new Circle(10);
-// console.log(circle);
+// console.log(circle); //Circle {colourful: true, #Depth: undefined}
 
 // // circle.#Depth = 100; TODO:  how to edit # properties 
-// console.log(circle);
+// console.log(circle); // Circle {colourful: true, #Depth: undefined}
 
 
-// console.log(circle.radius, "radius");
+// console.log(circle.radius, "radius"); //10 'radius'
 
 
 // circle.radius = 1000000;
 
-// console.log(circle.radius, "radius");
+// console.log(circle.radius, "radius"); //1000000 'radius'
 
 
-// console.log(circle.colourful)
+// console.log(circle.colourful) //true
 
 
 
 /*
-Instance Vs Static Methods --- 
+    Static methods are OWN methods -> in JAVA
+    Static method is belong to class and not to the instance
+    Non static method would be belongs to the instance
+    IN JS the above things is opposite
 
+    Instance Vs Static Methods --- 
 */
 
 // class Circle {
@@ -183,21 +188,21 @@ Instance Vs Static Methods ---
 
 //     // THis belongs to the instance
 //     draw() {
-//         console.log("Draw")
+//         console.log("Draw") // Draw
 //     }
 
 //     // This belongs to the class 
 //     static parse() {
-//         console.log("hellow world ")
+//         console.log("hellow world ") // hello world
 //     }
 // }
 
 // // This Cir is the Instance of the class Circle..
 
 // const cir = new Circle(1);
-// console.log(cir)
+// console.log(cir)    //Circle {radius: 1}
 
-// cir.draw()
+// cir.draw() 
 
 
 // // console.log(circle)
@@ -246,13 +251,15 @@ Method Overriding ...
 // }
 
 // const varunSportCaptain = new TeamCaptain("Varun", 12);
-// console.log(varunSportCaptain)
-// varunSportCaptain.playFootball()
-// varunSportCaptain.markAttendance()
+// console.log(varunSportCaptain) //TeamCaptain {name: 'Varun', badge: 12}
+// varunSportCaptain.playFootball() //plays football
+// varunSportCaptain.markAttendance() //Common students Simple marking the attendance for  Varun
+
 
 // const akash = new Student("akash");
-// console.log(akash)
-// akash.markAttendance();
+// console.log(akash) //Student112 {name: 'akash'}
+// akash.markAttendance(); //Common students Simple marking the attendance for  akash
+
 
 
 
@@ -264,70 +271,128 @@ Behind the scenes in INHERITANCE....
 */
 
 class Shape {
-
-constructor(color) {
-    this.color = color;
+    constructor(color) {
+        this.color = color;
+    }
+    move() {
+        console.log("Move");
+    }
 }
-
-move() {
-    console.log("Move");
-}
-}
-
 
 // Object.create -> it will create a new object and the properties of that object will be inside the 
 // Prototype.
 
-
 class Circle extends Shape {
+    constructor(radius, color) {
+        super(color);
+        this.radius = radius;
+    }
+    draw () {
+        console.log("Draw");
 
-constructor(radius, color) {
-    super(color);
-    this.radius = radius;
-}
-
-draw () {
-    console.log("Draw");
-
-}
+    }
 }
 
 const circleObj = new Circle(10, "red")
-console.log(circleObj);
-circleObj.move()
-
-
-
-
-
+console.log(circleObj); //Circle {color: 'red', radius: 10}
+circleObj.move() // Move
 
 function ShapeConstructor(color) {
-this.color = color;
+    this.color = color;
 }
 
 ShapeConstructor.prototype.move = function() {
-console.log("Move");
+    console.log("Move");
 }
-
 
 function CircleConstructor(radius, color) {
-ShapeConstructor.call(this, color) // Mocks the calling of the super keyword
-this.radius = radius;
+    ShapeConstructor.call(this, color) // Mocks the calling of the super keyword
+    this.radius = radius;
 }
-
 
 //1.  By doing this I am setting the Inhertance 
 
 CircleConstructor.prototype = Object.create(ShapeConstructor.prototype)
 
-
 //2 . Now we add the Methods of the Circle.
 CircleConstructor.prototype.draw = function() {
-console.log("Draw");
-
+    console.log("Draw");
 }
 
-
-
 const circleConstObj = new CircleConstructor(1000, "pink")
-console.log(circleConstObj)
+console.log(circleConstObj)     // 
+
+
+
+/*
+    COMPOSITION? -> MIXINS... 
+*/
+
+// JS -> instead of inheritance do Composition ... 
+
+
+// class Person {
+//     name
+// }
+
+// class Eat {
+    // eat
+// }
+
+// class Walk {
+//  walk
+// }
+
+// class Swim {
+//  swim
+// }
+
+// class Person extends Eat, Walk, Swim {
+
+// }
+
+// const perosn = new Person()
+
+// 1. multiple Inheritance is not supported. 
+// 2. All the properties all the methods would go inside the Person class 
+// which makes the object of Person class heavy.
+
+
+// const canSwim = {
+//     swim: function() {
+//         console.log("swim")
+//     }
+// }
+
+// const canEat = {
+//     eat: function() {
+//         console.log("eat")
+//     },
+//     funnywalk: false,
+// }
+
+// const canWalk = {
+//     walk: function() {
+//         console.log("walking nicely")
+//     }
+// }
+
+
+// // constructor Function.
+// function Person() {
+//     this.name = "utkarsh"
+// }
+
+// const utkarsh = new Person()
+// console.log(utkarsh, "utkarsh person")
+
+
+// // taget Person Prototype ..
+// // This is a glimpse of you doing the multiple inheritance . 
+
+// Object.assign(Person.prototype,canWalk,  canEat, canSwim)
+
+// utkarsh.walk()
+// utkarsh.eat()
+
+// utkarsh.swim();
