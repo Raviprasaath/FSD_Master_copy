@@ -220,11 +220,13 @@ Method Overriding ...
 
 // class Student {
 
-//     name;
+//     name;           //-> properity 
 
 //     constructor(name) {
 //         this.name = name;
 //     }
+
+// -----------above is construtor, below is method
 
 //     markAttendance() {
 //         console.log("Common students Simple marking the attendance for ", this.name)
@@ -256,6 +258,7 @@ Method Overriding ...
 // varunSportCaptain.markAttendance() //Common students Simple marking the attendance for  Varun
 
 
+// below is object creation
 // const akash = new Student("akash");
 // console.log(akash) //Student112 {name: 'akash'}
 // akash.markAttendance(); //Common students Simple marking the attendance for  akash
@@ -270,57 +273,248 @@ Behind the scenes in INHERITANCE....
 
 */
 
-class Shape {
-    constructor(color) {
-        this.color = color;
-    }
-    move() {
-        console.log("Move");
-    }
-}
+// class Shape {
+//     constructor(color) {
+//         this.color = color;
+//     }
+//     move() {
+//         console.log("Move");
+//     }
+// }
 
-// Object.create -> it will create a new object and the properties of that object will be inside the 
-// Prototype.
+// // Object.create -> it will create a new object and the properties of that object will be inside the 
+// // Prototype.
 
-class Circle extends Shape {
-    constructor(radius, color) {
-        super(color);
-        this.radius = radius;
-    }
-    draw () {
-        console.log("Draw");
+// class Circle extends Shape {
+//     constructor(radius, color) {
+//         super(color);
+//         this.radius = radius;
+//     }
+//     draw () {
+//         console.log("Draw");
 
-    }
-}
+//     }
+// }
 
-const circleObj = new Circle(10, "red")
-console.log(circleObj); //Circle {color: 'red', radius: 10}
-circleObj.move() // Move
+// const circleObj = new Circle(10, "red")
+// console.log(circleObj); //Circle {color: 'red', radius: 10}
+// circleObj.move() // Move
 
-function ShapeConstructor(color) {
-    this.color = color;
-}
+// function ShapeConstructor(color) {
+//     this.color = color;
+// }
 
-ShapeConstructor.prototype.move = function() {
-    console.log("Move");
-}
+// ShapeConstructor.prototype.move = function() {
+//     console.log("Move");
+// }
 
-function CircleConstructor(radius, color) {
-    ShapeConstructor.call(this, color) // Mocks the calling of the super keyword
-    this.radius = radius;
-}
+// function CircleConstructor(radius, color) {
+//     ShapeConstructor.call(this, color) // Mocks the calling of the super keyword
+//     this.radius = radius;
+// }
 
-//1.  By doing this I am setting the Inhertance 
+// //1.  By doing this I am setting the Inhertance 
+// this is to set the PARENTS PROTOTYPE
+// CircleConstructor.prototype = Object.create(ShapeConstructor.prototype)
 
-CircleConstructor.prototype = Object.create(ShapeConstructor.prototype)
+// //2 . Now we add the Methods of the Circle.
+// CircleConstructor.prototype.draw = function() {
+//     console.log("Draw");
+// }
 
-//2 . Now we add the Methods of the Circle.
-CircleConstructor.prototype.draw = function() {
-    console.log("Draw");
-}
+// const circleConstObj = new CircleConstructor(1000, "pink")
+// console.log(circleConstObj);
 
-const circleConstObj = new CircleConstructor(1000, "pink")
-console.log(circleConstObj)     // 
+// // output
+// // CircleConstructor {color: 'pink', radius: 1000}
+// // color: "pink"
+// // radius: 1000
+// // [[Prototype]]: ShapeConstructor
+// // draw: ƒ ()
+// // [[Prototype]]: Object
+
+
+
+
+
+// There is no direct inheritence in JS
+// JS doing this by Prototype
+
+
+
+
+
+
+// ------------06-06-2023----------
+/*
+    Example
+*/
+
+// let obj = {
+//     name: "utkarsh"
+// }
+
+// function fun1(){
+
+//     // Context -> this -> obj 
+//     console.log(this); // obj
+    
+//     function f2(){
+//         // context -> this -> window
+//         console.log(this);
+//     }
+    
+//     f2();// callsite 
+    
+// }
+    
+// fun1.call(obj) // call site. 
+
+
+    // add(); -> default binding, -> window object .... 
+
+    // obj.add(): -> Implicit Binding 
+
+    // add.apply() -> Explict binding 
+
+    // new -> new 
+
+
+    // function foo2() {
+    //     //context -> this -> window 
+    //     console.log(this) // window obj
+    // }
+
+    // let obj21 = {
+    //     foo: function() {
+    //         // context -> this -> obj21
+    //         console.log(this) // obj21
+            
+    //         foo2(); // call site 2... 
+    //     }
+    // }
+
+    // obj21.foo(); // call site 1
+
+
+
+
+
+
+//     //----------------
+    
+//     function printThis(params) {
+//         // context -> window
+//         console.log(this);
+//     }
+    
+//     let obj = {
+    
+//         a: 10,
+//         b: 20,
+//         c: printThis,
+//         d: function (params) {
+//             console.log(this) // OBJ
+            
+//             printThis(); // 2. 
+            
+//             let x = this.c; // x is nothing but printThis function only 
+//             x(); // 3
+            
+//             this.c(); // 4 -> obj.printThis()
+            
+//             console.log(this.c == printThis);
+//         }
+//     }
+    
+//     obj.d() // 1. Implict binding 
+
+
+// //  1.   Obj  - {a: 10, b: 20, c: ƒ, d: ƒ}
+// // 2. Window. - Window {0: Window, window: Window, self: Window, document: document, name: '', location: Location, …}
+// // 3. Window. - Window {0: Window, window: Window, self: Window, document: document, name: '', location: Location, …}
+// // 4. Obj.  - {a: 10, b: 20, c: ƒ, d: ƒ}
+// // 5. true.
+
+
+//-----------------------------------
+
+/*
+    Normal Function and Arrow Function 
+
+*/
+
+// console.log(" ---------- NOrmal func vs Arrow Function -------- ")
+
+// var a = 100;
+// var b = 99;
+
+// // global scope 
+
+// let obj = {
+//     a: 10,
+//     b: function() {
+//         // context -> this -> obj
+//         console.log(this.a)  //10
+//         console.log(this)    //{a:10, b:f, c:f}
+//     },
+//     c: () => {
+//         // Function scope 
+//         console.log(this.a)  //100
+//         console.log(this)    //window
+//     }
+// }
+
+
+// obj.b() // callsite 
+
+
+// obj.c(); 100 // ? 
+
+// 1. there is no concept of CONTEXT inside the Arrow function 
+
+// 2. this inside the arrow function is nothing but the parents context. 
+
+// in arrow function we can't force to have any context
+
+
+
+
+
+//---------------------------------
+
+/*
+    ARGUMENTS 
+
+*/
+
+// function abc(a, b) {
+//     // this 
+//     const arg = arguments
+//     // console.log(arg, "arg")  //Arguments(2) [100, 299, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+//     // arguments[0]
+
+//     console.log(arg, arg[0], arg[1]); //Arguments(2) [100, 299, callee: ƒ, Symbol(Symbol.iterator): ƒ]0: 1001: 299callee: ƒ abc(a, b)length: 2Symbol(Symbol.iterator): ƒ values()[[Prototype]]: Object 100 299
+// }
+
+// abc(100,299)
+
+
+// -> Arguments inside the Arrow function dosent have vaitage. 
+
+// const abc = (a,b) => {
+//     const arg = arguments; 
+
+//     console.log(arg, arg[0], arg[1])
+// }
+
+// abc(1,2)
+// this will give error only, inside arrow function there is no arguments, and this keyword has no value
+
+
+//---------------------------------
+
+
 
 
 
@@ -358,41 +552,42 @@ console.log(circleConstObj)     //
 // which makes the object of Person class heavy.
 
 
-// const canSwim = {
-//     swim: function() {
-//         console.log("swim")
-//     }
-// }
+const canSwim = {
+    swim: function() {
+        console.log("swim")
+    }
+}
 
-// const canEat = {
-//     eat: function() {
-//         console.log("eat")
-//     },
-//     funnywalk: false,
-// }
+const canEat = {
+    eat: function() {
+        console.log("eat")
+    },
+    funnywalk: false,
+}
 
-// const canWalk = {
-//     walk: function() {
-//         console.log("walking nicely")
-//     }
-// }
-
-
-// // constructor Function.
-// function Person() {
-//     this.name = "utkarsh"
-// }
-
-// const utkarsh = new Person()
-// console.log(utkarsh, "utkarsh person")
+const canWalk = {
+    walk: function() {
+        console.log("walking nicely")
+    }
+}
 
 
-// // taget Person Prototype ..
-// // This is a glimpse of you doing the multiple inheritance . 
+// constructor Function.
+function Person() {
+    this.name = "utkarsh"
+}
 
-// Object.assign(Person.prototype,canWalk,  canEat, canSwim)
+const utkarsh = new Person()
+console.log(utkarsh, "utkarsh person") //Person {name: 'utkarsh'} 'utkarsh person'
 
-// utkarsh.walk()
-// utkarsh.eat()
 
-// utkarsh.swim();
+// taget Person Prototype ..
+// This is a glimpse of you doing the multiple inheritance . 
+
+Object.assign(Person.prototype,canWalk,  canEat, canSwim)
+
+utkarsh.walk()  //walking nicely
+utkarsh.eat() //eat
+
+utkarsh.swim(); //swim
+
