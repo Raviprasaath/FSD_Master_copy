@@ -71,3 +71,37 @@ let p = new Promise( function ( arg1, arg2 ) {
 
 p.then( () => console.log('0.2 or less'))
 p.catch( () => console.log('0.2 or more'))
+
+
+
+
+
+// -------------------05-06-2023
+function Animal() {
+
+}
+Animal.prototype.speak = function() {}
+
+// the above and below are same
+
+class Animal {
+	speak() {
+
+	}
+}
+
+
+//-----------------------------
+function Animal () {
+	this.speak = () => {} // This is a new fn per object, it uses in lot of places	
+}
+
+//-------------------------------
+
+// same soln in 3 different approach
+// approach 1
+const calcualtor = Object.create(addAndSubtract)
+// approach 2
+calcualtor.__proto__ = addAndSubtract;
+// approach 3
+Object.setPrototypeOf(calcualtor, addAndSubtract);
