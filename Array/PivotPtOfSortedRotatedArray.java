@@ -6,7 +6,7 @@ public class PivotPtOfSortedRotatedArray {
         int target = 8;
         int ans = searchinrotatesortedarr(array, target);
         System.out.println(ans);
-    }
+    }    
     public static int searchinrotatesortedarr(int[] nums, int target) {
         int n = nums.length;
         int low = 0;
