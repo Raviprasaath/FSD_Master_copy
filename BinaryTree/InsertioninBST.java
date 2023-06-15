@@ -7,6 +7,8 @@ public class InsertioninBST {
         root.right = new TreeNode(3);
         // root.left.left = new TreeNode(4);
         System.out.println(insertInBST(root,4 ));
+        // TreeNode.head = TreeNode.kAltReverse(TreeNode.head, 3);
+        
     }
     public static TreeNode insertInBST(TreeNode root,int key) {
         if (root == null) {
@@ -22,3 +24,7 @@ public class InsertioninBST {
         return root;
     }
 }
+
+
+// incomplete
+// don't know how to print output

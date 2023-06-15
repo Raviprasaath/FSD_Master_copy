@@ -233,13 +233,16 @@ console.log(setIntevalId, "setIntevalId")
 // } // 0 1 2 3 4 5 6 7
 
 
+
+
+//----------------------------------------------
 var a = 99;
 
 (() => {
     var a = 12;
     console.log(a)
-})()
-
+})()    // this is self invoke function
+//----------------------------------------------
 
 function abc() {
     var a = 0;
@@ -249,3 +252,23 @@ function abc() {
 abc();
 
 console.log(a)
+
+
+// 06-13-2023
+
+// by using var this will not work
+for (var i=0; i<8; i++) {
+    setTimeout(()=> {
+        console.log(i);
+    }, 2000)
+}
+
+// this will work
+for (let i =0; i < 4; i++) {
+    console.log(i);     // o/p -> 0 1 2 3
+    ((index) => {
+        setTimeout(()=> {
+            console.log(index, "hey")   // -> 0 'hey', 1 'hey', 2 'hey', 3 'hey'
+        }, 2000)
+    }) (i);    // here (i) is function invokation
+}
