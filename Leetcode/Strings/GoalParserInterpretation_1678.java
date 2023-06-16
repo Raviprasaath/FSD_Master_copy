@@ -12,7 +12,6 @@ public class GoalParserInterpretation_1678 {
                 if(command.charAt(i+1)==')'){
                     sb.append('o');
                 }
-
             }
             else if(command.charAt(i)!=')'){
                 sb.append(command.charAt(i));

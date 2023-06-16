@@ -10,7 +10,7 @@ public class RepeatedSubstringPattern_459 {
         return idx.substring(1, idx.length()-1).contains(s);
     }
 
-    // public static boolean repeatedSubstringPattern(String s) {
+    // public static boolean repeatedSubstringPattern1(String s) {
     //     StringBuilder sb = new StringBuilder();
     //     StringBuilder delChar = new StringBuilder();
     //     delChar.append(s);

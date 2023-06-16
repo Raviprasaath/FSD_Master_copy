@@ -15,7 +15,6 @@ public class NonRepeatingMethod2 {
         for (char ch1 : ch) {
             if (freq[ch1-'a']==1) {
                 System.out.println(ch1);
-                
             }
         }
     }
