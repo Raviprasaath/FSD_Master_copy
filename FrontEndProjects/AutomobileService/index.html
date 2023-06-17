@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Service</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="headerConatiner">
+        <div id="logo">
+            <img src="image1.jpg" alt="auto-logo">
+        </div>
+        <div id="selectionsInHeader">
+            <ul class="dropDown-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#service">Service</a></li>
+                <li><a href="#prebooking">Pre Booking</a></li>
+                <li><a href="#contactus">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="booking-form">
+        <div id="booking-image">
+            <img id="bookingPic" src="image2.jpg" alt="booking-image-front">
+        </div>
+        <form id="booking-info" action="booking">
+                                   
+            <select name="cars-name" id="cars-name" class="selection-car-details">
+                <option selected disabled value="Select Your Vehicle">Select Your Vehicle</option>
+                <option value="Maruti Suzuki">Maruti Suzuki</option>
+                <option value="TATA">TATA</option>
+                <option value="Honda">Honda</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Volkswagen">Volkswagen</option>
+                <option value="Mahindra & Mahindra">Mahindra & Mahindra</option>
+                <option value="Kia">Kia</option>
+                <option value="MG Motor">MG Motor</option>
+                <option value="Toyota">Toyota</option>
+            </select>
+            <select name="cars-model" id="cars-model" class="selection-car-details">
+                <option selected disabled value="Select Model Number">Select Model Number</option>
+            </select>
+            <select name="fuel-type" id="fuel-type" class="selection-car-details">                
+                <option selected disabled value="Fuel-Type">Fuel Type</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
+                <option value="Gas">Gas</option>
+            </select>
+            <button id="booking-button" type="submit">
+                LETS GO
+            </button>
+        </form>
+        <div id="testing"></div>
+        
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

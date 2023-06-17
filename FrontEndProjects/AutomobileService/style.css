@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+}
+
+#headerConatiner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: wheat;
+}
+
+#logo img{
+    width: 50px;
+}
+
+.dropDown-menu{
+    list-style: none;
+    display: flex;
+}
+.dropDown-menu a {
+    color: black;
+    margin-right: 30px;
+    text-decoration: none;
+}
+
+/* booking form */
+.booking-form {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.532);
+}
+#bookingPic {
+    height: 500px; 
+}
+
+#booking-info {
+    display: flex;
+    flex-direction: column;
+    margin: auto 20px;
+}
+
+.selection-car-details {
+    margin-bottom: 20px;
+    width: 300px;
+    height: 30px;
+    background-color: transparent;
+    border: 0.5px solid black;
+    font-size: 20px;
+    font-weight: 800;
+    font-family:'Courier New', Courier, monospace ;
+}
+.selection-car-details option {
+    background-color: gray;
+    color: white;
+    font-size: 15px;
+    font-weight: 800;
+    font-family:'Courier New', Courier, monospace ;
+}
+
+
+#booking-button {
+    width: 300px;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+}
+#booking-button :hover {
+    background-color: aquamarine;
+}
