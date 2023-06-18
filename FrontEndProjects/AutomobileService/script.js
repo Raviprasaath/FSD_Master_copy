@@ -1,6 +1,4 @@
-document.getElementById('booking-button').addEventListener('click', (event)=> {
-    event.preventDefault()
-})
+
 let modelNumbersDropDown = "";
 
 document.getElementById('cars-name').addEventListener('change', (event) => {
@@ -47,8 +45,7 @@ document.getElementById('cars-name').addEventListener('change', (event) => {
             <option value="Jazz">Jazz</option>
             <option value="CR-V">CR-V</option>
             <option value=""></option>
-            <option value=""></option>
-            
+            <option value=""></option>            
             
             `;
     } else if (nameOfCar === 'Hyundai') {
@@ -121,5 +118,36 @@ document.getElementById('cars-name').addEventListener('change', (event) => {
 });
 
 
-// 
-// 
+
+// login
+document.getElementById('login-button').addEventListener('click', (e)=> {
+    e.preventDefault();
+    document.getElementById('add-detail').innerHTML =
+    `<input type="text" placeholder="Full Name" name="name" id="fname" required>
+    <input type="password" placeholder="Password" name="password" id="password" required>
+    <a href="index_page_2.html" target="_blank">
+        <button id="signup-btn">
+            Click Here
+        </button>
+    </a>
+    
+
+    `
+    
+})
+document.getElementById('signup-btn').addEventListener('click', (e)=> {
+    e.preventDefault();
+    document.getElementById('add-detail').innerHTML =
+    `<input type="text" placeholder="Full Name" name="name" id="fname" required>
+    <input type="password" placeholder="Password" name="password" id="password" required>
+    <input type="password" placeholder="Confirm Password" name="password" id="password" required>
+    <input type="number" placeholder="Mobile Number" name="number" id="mnumber" required>
+    <a href="index_page_2.html" target="_blank">
+        <button id="signup-btn">
+            Click Here
+        </button>
+    </a>
+
+    
+    `
+})
