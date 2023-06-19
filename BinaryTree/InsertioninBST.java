@@ -2,17 +2,17 @@ package BinaryTree;
 
 public class InsertioninBST {
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(2);
-        root.left = new TreeNode(1);
-        root.right = new TreeNode(3);
-        // root.left.left = new TreeNode(4);
+        TreeNodeA root = new TreeNodeA(2);
+        root.left = new TreeNodeA(1);
+        root.right = new TreeNodeA(3);
+        // root.left.left = new TreeNodeA(4);
         System.out.println(insertInBST(root,4 ));
-        // TreeNode.head = TreeNode.kAltReverse(TreeNode.head, 3);
+        // TreeNodeA.head = TreeNodeA.kAltReverse(TreeNodeA.head, 3);
         
     }
-    public static TreeNode insertInBST(TreeNode root,int key) {
+    public static TreeNodeA insertInBST(TreeNodeA root,int key) {
         if (root == null) {
-            root = new TreeNode(key);
+            root = new TreeNodeA(key);
             return root;
         } else {
             if (root.val < key) {

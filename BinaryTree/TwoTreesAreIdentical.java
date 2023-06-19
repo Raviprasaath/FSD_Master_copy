@@ -1,10 +1,10 @@
 package BinaryTree;
-class Node12 {
+class TreeNodeN {
     int val;
-    Node12 left;
-    Node12 right;
-    Node12 (){}
-    Node12(int val) {
+    TreeNodeN left;
+    TreeNodeN right;
+    TreeNodeN (){}
+    TreeNodeN(int val) {
         this.val = val;
         this.left = null;
         this.right = null;
@@ -12,17 +12,17 @@ class Node12 {
 }
 public class TwoTreesAreIdentical {
     public static void main(String[] args) {
-        Node12 root1 = new Node12(1);
-        root1.left = new Node12(2);
-        root1.right = new Node12(3);
+        TreeNodeN root1 = new TreeNodeN(1);
+        root1.left = new TreeNodeN(2);
+        root1.right = new TreeNodeN(3);
         
-        Node12 root2 = new Node12(1);
-        root2.left = new Node12(2);
-        root2.right = new Node12(3);
+        TreeNodeN root2 = new TreeNodeN(1);
+        root2.left = new TreeNodeN(2);
+        root2.right = new TreeNodeN(3);
         System.out.println(isIdentical(root1, root2));
     }
     
-    public static boolean isIdentical(Node12 root1, Node12 root2) {
+    public static boolean isIdentical(TreeNodeN root1, TreeNodeN root2) {
         if(root1 == null && root2 == null) {
             return true;
         } 

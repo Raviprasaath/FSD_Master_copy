@@ -1,10 +1,10 @@
 package BinaryTree;
-class TreeNodeee {
+class TreeNodeA {
     int val;
-    TreeNodeee left;
-    TreeNodeee right;
-    TreeNodeee (){}
-    TreeNodeee(int val) {
+    TreeNodeA left;
+    TreeNodeA right;
+    TreeNodeA (){}
+    TreeNodeA(int val) {
         this.val = val;
         this.left = null;
         this.right = null;
@@ -12,13 +12,13 @@ class TreeNodeee {
 }
 public class CheckforBST {
     public static void main(String[] args) {
-        TreeNodeee root = new TreeNodeee(2);
-        root.left = new TreeNodeee(1);
-        root.right = new TreeNodeee(3);
+        TreeNodeA root = new TreeNodeA(2);
+        root.left = new TreeNodeA(1);
+        root.right = new TreeNodeA(3);
        
         System.out.println(isBST(root));
     }
-    public static boolean isValidBST(TreeNodeee root, Integer minValue, Integer maxValue) {
+    public static boolean isValidBST(TreeNodeA root, Integer minValue, Integer maxValue) {
         if (root == null) {
             return true;
         }
@@ -28,7 +28,7 @@ public class CheckforBST {
         return isValidBST(root.left, minValue, root.val) && isValidBST(root.right, root.val, maxValue); 
     }
 
-    public static boolean isBST(TreeNodeee root) { 
+    public static boolean isBST(TreeNodeA root) { 
         return isValidBST(root, null, null);
     }
 }

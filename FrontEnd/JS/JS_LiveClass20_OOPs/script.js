@@ -394,7 +394,7 @@ bar(); // global
 //     value: "dadad",
 //     enumerable: false
 // })
-// console.log(obj)    // in console address color was changed into faded
+// console.log(obj)    // in console address was changed into faded
 // for(const key in obj) {
 //     console.log(key)    //here name and rollNumber only print
 // }

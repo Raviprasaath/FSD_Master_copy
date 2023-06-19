@@ -2,12 +2,12 @@ package BinaryTree;
 
 import java.util.Stack;
 
-class TreeNode156 {
+class TreeNodeC {
     int val;
-    TreeNode156 left;
-    TreeNode156 right;
-    TreeNode156 (){}
-    TreeNode156(int val) {
+    TreeNodeC left;
+    TreeNodeC right;
+    TreeNodeC (){}
+    TreeNodeC(int val) {
         this.val = val;
         this.left = null;
         this.right = null;
@@ -15,20 +15,20 @@ class TreeNode156 {
 }
 public class FindthekthsmallestelementinBST {
     public static void main(String[] args) {
-        TreeNode156 root = new TreeNode156(50);
-        root.left = new TreeNode156(25);
-        root.left.left = new TreeNode156(12);
-        root.left.right = new TreeNode156(37);
-        root.right = new TreeNode156(75);
-        root.right.left = new TreeNode156(62);
-        root.right.right = new TreeNode156(87);
-        root.right.left.right = new TreeNode156(70);
+        TreeNodeC root = new TreeNodeC(50);
+        root.left = new TreeNodeC(25);
+        root.left.left = new TreeNodeC(12);
+        root.left.right = new TreeNodeC(37);
+        root.right = new TreeNodeC(75);
+        root.right.left = new TreeNodeC(62);
+        root.right.right = new TreeNodeC(87);
+        root.right.left.right = new TreeNodeC(70);
         kthSmallestInBST(root, 3);
     }
     
-    public static void kthSmallestInBST(TreeNode156 root, int k) {
-        Stack <TreeNode156> stack = new Stack<>();
-            TreeNode156 current = root;
+    public static void kthSmallestInBST(TreeNodeC root, int k) {
+        Stack <TreeNodeC> stack = new Stack<>();
+            TreeNodeC current = root;
             int count = 0, ans = 0;
             while (current != null || !stack.empty()) {
                 while (current != null) {

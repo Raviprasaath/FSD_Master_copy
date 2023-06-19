@@ -1,10 +1,10 @@
 package BinaryTree;
-class TreeNode123 {
+class TreeNodeL {
     int val;
-    TreeNode123 left;
-    TreeNode123 right;
-    TreeNode123 (){}
-    TreeNode123(int val) {
+    TreeNodeL left;
+    TreeNodeL right;
+    TreeNodeL (){}
+    TreeNodeL(int val) {
         this.val = val;
         this.left = null;
         this.right = null;
@@ -12,15 +12,15 @@ class TreeNode123 {
 }
 public class SearchingakeyinaBinarySearchTree {
     public static void main(String[] args) {
-        TreeNode123 root = new TreeNode123(4);
-        root.left = new TreeNode123(2);
-        root.right = new TreeNode123(7);
-        root.left.left = new TreeNode123(1);
-        root.left.right = new TreeNode123(3);
+        TreeNodeL root = new TreeNodeL(4);
+        root.left = new TreeNodeL(2);
+        root.right = new TreeNodeL(7);
+        root.left.left = new TreeNodeL(1);
+        root.left.right = new TreeNodeL(3);
         System.out.println(searchInBST(root, 2));
     }
 
-    public static int searchInBST(TreeNode123 root,int key) {
+    public static int searchInBST(TreeNodeL root,int key) {
         if (root == null) {
             return -1;
         }

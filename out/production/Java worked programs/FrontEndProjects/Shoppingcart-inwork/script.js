@@ -196,83 +196,57 @@ function myFunction() {
     }
 }
 
+// 1
+//list products
 
-for (let item of productslist) {
-    // card
-    let productscontainer = document.getElementsByClassName('productscontainer')[0];
-    let product1 = document.createElement('div')
-    product1.classList = 'product';
-    productscontainer.appendChild(product1);
+let productcontainer = document.querySelector(".productscontainer");
 
-    // image
-    let pimage = new Image(250, 350);
-    pimage.classList = 'pimage';
-    pimage.src = `${item.image}`;
-    pimage.alt = "12";
-    product1.appendChild(pimage);
+productslist.map((e) => {
+    productcontainer.innerHTML += `
+      <div class="product">
+          <img class='pimage' width="250px" height="350px" src=" ${e.image} "
+              alt="">
+          <p class='ptitle'>${e.title}</p>
+          <div class="priceandaddtocart">
+              <p class="pprice">${e.price} DH</p>
+              <button class="addtocart" productid=${e.id}>add to cart icon</button>
+          </div>
+      </div>
+  `;
+});
 
-    // name
-    let paraTag = document.createElement('p');
-    paraTag.classList = 'ptitle';
-    paraTag.textContent = `${item.title}`;
-    product1.appendChild(paraTag)
+// 2
+//display cart ui
+let cartui = document.querySelector(".cartui");
+let overlay = document.querySelector(".overlay");
+let carticon = document.querySelector(".carticon");
+let bag = document.querySelector(".carticon");
+carticon.onclick = () => {
+    cartui.classList.add("cartopened");
+};
+document.querySelector(".closecart").onclick = () => {
+    cartui.classList.remove("cartopened");
+};
 
-    // div price and cart
-    let priceandaddtocart = document.createElement('div');
-    priceandaddtocart.classList = 'priceandaddtocart';
-    product1.appendChild(priceandaddtocart);
-
-    // <p class="pprice">${e.price} DH</p>
-    // <button class="addtocart" productid=${e.id}>add to cart icon</button>
-
-    // price 
-    let priceOfItem = document.createElement('p');
-    priceOfItem.classList = 'pprice';
-    priceOfItem.textContent = `${item.price} DH`;
-    priceandaddtocart.appendChild(priceOfItem);
-
-    // button
-    let btn = document.createElement('button');
-    btn.classList = 'addtocart';
-    btn.id = `${item.id}`;
-    btn.textContent = 'add to cart icon';
-    priceandaddtocart.appendChild(btn)
-}
-
-// cart open
-let cartIconSelect = document.getElementsByClassName('carticon')[0];
-cartIconSelect.addEventListener('click', cartOpened);
-function cartOpened() {
-    let cardOpenClass = document.getElementsByClassName('cartui')[0];
-    cardOpenClass.className += ' cartopened';
-}
-
-// cart close
-let closingEvent = document.getElementsByClassName('closecart')[0];
-closingEvent.addEventListener('click', cartRemove);
-function cartRemove() {
-    let closeCart = document.getElementsByClassName('cartui')[0];
-    closeCart.classList.remove('cartopened');
-}
-
-// creating class as Product
+// 3
 class Product {
     constructor(id, title, price, image) {
         this.id = id;
         this.title = title;
         this.price = price;
-        this.image = image
+        this.image = image;
     }
 }
-
 
 window.Product = Product;
 
 class Storage {
     static getproducts() {
-        let products = [];
+        let products;
         if (localStorage.getItem("products")) {
             products = JSON.parse(localStorage.getItem("products"));
+        } else {
+            products = [];
         }
         return products;
     }
@@ -285,9 +259,9 @@ class Storage {
 
     static removeproduct(id) {
         let products = Storage.getproducts();
-        products.forEach((value, index) => {
-            if (value.id == id) {
-                products.splice(index, 1);
+        products.forEach((p, i) => {
+            if (p.id == id) {
+                products.splice(i, 1);
             }
         });
         localStorage.setItem("products", JSON.stringify(products));
@@ -295,47 +269,95 @@ class Storage {
 }
 
 window.Storage=Storage
-
-
-let pccontainer = document.getElementsByClassName('pccontainer')[0];
+// 5
+//class Ui
 class Ui {
     static displayproducts(e) {
-        pccontainer.innerHTML += `<div class="cartproduct">
-                        <div class="pnp">
-                            <div class="img">
-                                <img width="90px" src=" ${e.image} " alt="">
-                            </div>
-                            <div class="nameandprice">
-                                <p> ${e.title} </p>
-                                <p> ${e.price} </p>
-                            </div>
-                        </div>
-
-                        <button class="delete" productid=${e.id}>
-                            X
-                        </button>
-                    </div>`
-        
+        document.querySelector(".pccontainer").innerHTML += `
+                  <div class="cartproduct">
+                  <div class="pnp">
+                      <div class="img">
+                          <img width="90px" src=" ${e.image} " alt="">
+                      </div>
+                      <div class="nameandprice">
+                          <p> ${e.title} </p>
+                          <p> ${e.price} </p>
+                      </div>
+                  </div>
+  
+                  <button class="delete" productid=${e.id}>
+                      X
+                  </button>
+              </div>
+              `;
     }
     static displayproductsLS() {
         let products = Storage.getproducts();
         products.map((e) => {
-
-        pccontainer.innerHTML += `<div class="cartproduct">
-                        <div class="pnp">
-                            <div class="img">
-                                <img width="90px" src=" ${e.image} " alt="">
-                            </div>
-                            <div class="nameandprice">
-                                <p> ${e.title} </p>
-                                <p> ${e.price} </p>
-                            </div>
-                        </div>
-
-                        <button class="delete" productid=${e.id}>
-                            X
-                        </button>
-                    </div>`;
+            document.querySelector(".pccontainer").innerHTML += `
+                  <div class="cartproduct">
+                  <div class="pnp">
+                      <div class="img">
+                          <img width="90px" src=" ${e.image} " alt="">
+                      </div>
+                      <div class="nameandprice">
+                          <p> ${e.title} </p>
+                          <p> ${e.price} </p>
+                      </div>
+                  </div>
+  
+                  <button class="delete" productid=${e.id}>
+                      X
+                  </button>
+              </div>
+              `;
         });
     }
+
+    static removeproduct(e) {
+        e.parentElement.remove();
+    }
+}
+
+window.Ui=Ui
+
+// 6
+document.addEventListener("DOMContentLoaded", function () {
+    Ui.displayproductsLS();
+    bag.setAttribute("items", Storage.getproducts().length);
+});
+
+// 7
+productcontainer.onclick = (e) => {
+    if (!e.target.classList.contains('addtocart')) {
+        return;
+    } else {
+        let id = e.target.getAttribute('productid');
+        let obj = productslist[id - 1];
+        let product = new Product(obj.id, obj.title, obj.price, obj.image);
+        let prodctArray = Storage.getproducts();
+        let ids = Object.values(prodctArray).map((item)=> item.id);
+
+        if (ids.includes(obj.id)) {
+            console.log(ids,"id")
+            return; 
+        } else {
+            Storage.addtolocalstorage(product);
+            Ui.displayproducts(product);
+            bag.setAttribute('item', Storage.getproducts().length);
+        }
+    }
+}
+bag.setAttribute('item', Storage.getproducts().length);
+Ui.displayproductsLS();
+
+// 8
+document.querySelector(".pccontainer").onclick = (e) => {
+    if (!e.target.classList.contains('delete')) {
+        return;
+    }
+    let id  = e.target.getAttribute('productid');
+    let obj = productslist[id-1];
+    Storage.removeproduct(obj.id);
+    Ui.removeproduct(e.target);
 }
