@@ -2,7 +2,7 @@ package Queue;
 import java.util.Stack;
 
 
-class Queue {
+class Queue1 {
    Stack<Integer> s1 = new Stack<Integer>();
    Stack<Integer> s2 = new Stack<Integer>();
 
@@ -31,7 +31,7 @@ class Queue {
 
 public class ImplementingQueueByStack {
    public static void main(String[] args) {
-       Queue q = new Queue();
+       Queue1 q = new Queue1();
        q.enQueue(1);
        q.enQueue(2);
        q.enQueue(3);

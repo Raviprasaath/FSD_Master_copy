@@ -1,10 +1,10 @@
 package BinaryTree;
-class TreeNode12 {
+class TreeNodeB {
     int val;
-    TreeNode12 left;
-    TreeNode12 right;
-    TreeNode12 (){}
-    TreeNode12(int val) {
+    TreeNodeB left;
+    TreeNodeB right;
+    TreeNodeB (){}
+    TreeNodeB(int val) {
         this.val = val;
         this.left = null;
         this.right = null;
@@ -12,18 +12,18 @@ class TreeNode12 {
 }
 public class Checkiftwobinarytreesaremirror {
     public static void main(String[] args) {
-        TreeNode12 root = new TreeNode12(50);
-        root.left = new TreeNode12(25);
-        root.left.left = new TreeNode12(12);
-        root.left.right = new TreeNode12(37);
-        root.right = new TreeNode12(87);
-        root.right.left = new TreeNode12(62);
-        root.right.right = new TreeNode12(90);
-        root.right.right.right = new TreeNode12(93);
+        TreeNodeB root = new TreeNodeB(50);
+        root.left = new TreeNodeB(25);
+        root.left.left = new TreeNodeB(12);
+        root.left.right = new TreeNodeB(37);
+        root.right = new TreeNodeB(87);
+        root.right.left = new TreeNodeB(62);
+        root.right.right = new TreeNodeB(90);
+        root.right.right.right = new TreeNodeB(93);
         System.out.println(isMirror(root, root));
     }
     
-    public static boolean isMirror(TreeNode12 root1, TreeNode12 root2) {
+    public static boolean isMirror(TreeNodeB root1, TreeNodeB root2) {
         if (root1 == null && root2 == null) {
             return true;
         }

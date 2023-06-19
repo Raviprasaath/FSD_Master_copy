@@ -1,10 +1,10 @@
 package BinaryTree;
-class TreeNode15 {
+class TreeNodeF {
     int val;
-    TreeNode15 left;
-    TreeNode15 right;
-    TreeNode15 (){}
-    TreeNode15(int val) {
+    TreeNodeF left;
+    TreeNodeF right;
+    TreeNodeF (){}
+    TreeNodeF(int val) {
         this.val = val;
         this.left = null;
         this.right = null;
@@ -12,17 +12,17 @@ class TreeNode15 {
 }
 public class InorderTraversalFunctional {
     public static void main(String[] args) {
-        TreeNode15 root = new TreeNode15(50);
-        root.left = new TreeNode15(25);
-        root.left.left = new TreeNode15(12);
-        root.left.right = new TreeNode15(37);
-        root.right = new TreeNode15(75);
-        root.right.left = new TreeNode15(62);
-        root.right.right = new TreeNode15(87);
-        root.right.left.right = new TreeNode15(70);
+        TreeNodeF root = new TreeNodeF(50);
+        root.left = new TreeNodeF(25);
+        root.left.left = new TreeNodeF(12);
+        root.left.right = new TreeNodeF(37);
+        root.right = new TreeNodeF(75);
+        root.right.left = new TreeNodeF(62);
+        root.right.right = new TreeNodeF(87);
+        root.right.left.right = new TreeNodeF(70);
         inorderTraversal(root);
     }
-    public static void inorderTraversal(TreeNode15 node) {
+    public static void inorderTraversal(TreeNodeF node) {
         if (node == null) {
             return;
         }

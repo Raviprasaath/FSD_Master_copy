@@ -1,10 +1,10 @@
 package BinaryTree;
-class TreeNode {
+class TreeNodeG {
     int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode (){}
-    TreeNode(int val) {
+    TreeNodeG left;
+    TreeNodeG right;
+    TreeNodeG (){}
+    TreeNodeG(int val) {
         this.val = val;
         this.left = null;
         this.right = null;
@@ -12,13 +12,13 @@ class TreeNode {
 }
 public class LeafSum {
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(3);
-        root.left = new TreeNode(5);
-        root.right = new TreeNode(7);
-        root.left.left = new TreeNode(4);
+        TreeNodeG root = new TreeNodeG(3);
+        root.left = new TreeNodeG(5);
+        root.right = new TreeNodeG(7);
+        root.left.left = new TreeNodeG(4);
         System.out.println(leafSum(root));
     }
-    public static int leafSum(TreeNode root){
+    public static int leafSum(TreeNodeG root){
         if (root == null) {
             return 0;
         }

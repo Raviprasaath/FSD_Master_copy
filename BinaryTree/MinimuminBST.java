@@ -1,12 +1,12 @@
 package BinaryTree;
 
 
-class BinaryTree25 {
+class TreeNodeI {
     int val;
-    BinaryTree25 left;
-    BinaryTree25 right;
+    TreeNodeI left;
+    TreeNodeI right;
 
-    BinaryTree25(int data) {
+    TreeNodeI(int data) {
         val = data;
         left = null;
         right = null;
@@ -16,16 +16,16 @@ class BinaryTree25 {
 
 public class MinimuminBST {
     public static void main(String[] args) {
-        BinaryTree25 root = new BinaryTree25(5);
-        root.left = new BinaryTree25(4);
-        root.right = new BinaryTree25(6);
-        root.left.left = new BinaryTree25(3);
-        root.right.right = new BinaryTree25(7);
-        root.left.left.left = new BinaryTree25(1);
+        TreeNodeI root = new TreeNodeI(5);
+        root.left = new TreeNodeI(4);
+        root.right = new TreeNodeI(6);
+        root.left.left = new TreeNodeI(3);
+        root.right.right = new TreeNodeI(7);
+        root.left.left.left = new TreeNodeI(1);
         System.out.println(minValue(root));
     }
-    public static int minValue(BinaryTree25 node) {
-        BinaryTree25 temp = node;
+    public static int minValue(TreeNodeI node) {
+        TreeNodeI temp = node;
         while (temp.left != null) {
             temp = temp.left;
         }
