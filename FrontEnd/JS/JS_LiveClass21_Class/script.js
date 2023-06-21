@@ -267,14 +267,6 @@ Method Overriding ...
 
 
 
-/*
-
-Behind the scenes in INHERITANCE....
-
-*/
-// class Shape {
-//     constructor(color) {
-//         this.color = color;
 //     }
 //     move() {
 //         console.log("Move");
