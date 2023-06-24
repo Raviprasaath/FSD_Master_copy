@@ -349,6 +349,15 @@ fooBindedFuncMyBind();     //akash 1 2 3 4 mybind
 // sum(1,2); //3
 
 
+let test = function sum (a,b) {
+    return a + b;
+}
+
+let assign = test.bind(this, 1);
+assign(2);
+
+
+
 /*
     Question: How can you get it? 
     sum(1)(2) //3
@@ -365,9 +374,7 @@ function sum(num1) { //1
     //
     }
     
-    
     // const sumWithOne = sum(1); // 
-    
     // // sumWithOne would be InnerSUm + ClosureObj -> {num1: 1}
     
     // const ans = sumWithOne(2)

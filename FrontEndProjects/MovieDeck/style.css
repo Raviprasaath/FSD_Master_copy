@@ -75,10 +75,11 @@ body {
 .heart-icon {
     position: absolute;
     right: 0;
-    top: 230px;
+    top: 370px;
     font-size: 40px;
 }
 .movie-vote {
+    padding-top: 20px;
     padding-bottom: 30px;
 }
 .name-vote-sorting {
