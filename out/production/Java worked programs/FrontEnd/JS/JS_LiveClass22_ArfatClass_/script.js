@@ -105,3 +105,32 @@ const calcualtor = Object.create(addAndSubtract)
 calcualtor.__proto__ = addAndSubtract;
 // approach 3
 Object.setPrototypeOf(calcualtor, addAndSubtract);
+
+
+
+// 06-19-2023
+
+// Interview important question
+/*
+	Interview point-of-view: 
+
+	→ **Debouncing  (V.Imp)**
+
+	→ **Throttling (V.Imp)**
+
+	→ tell the defn
+
+	→ tell why they are necessary (Advantages)
+
+	→ implement the code for each of them (in JS, using setTimeout)
+
+	→ React implementation of each of them (that is slightly diff than JS)
+
+	**→ Currying and Partial Application (Imp.)**
+
+	→ *same three things as above*
+
+	→ Some libraries that implement debouncing and throttling
+
+	→ **lodash**
+*/
