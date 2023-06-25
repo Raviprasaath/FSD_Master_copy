@@ -260,22 +260,13 @@ Method Overriding ...
 
 // below is object creation
 // const akash = new Student("akash");
-// console.log(akash) //Student112 {name: 'akash'}
+// console.log(akash) //Student {name: 'akash'}
 // akash.markAttendance(); //Common students Simple marking the attendance for  akash
 
 
 
 
 
-/*
-
-Behind the scenes in INHERITANCE....
-
-*/
-
-// class Shape {
-//     constructor(color) {
-//         this.color = color;
 //     }
 //     move() {
 //         console.log("Move");

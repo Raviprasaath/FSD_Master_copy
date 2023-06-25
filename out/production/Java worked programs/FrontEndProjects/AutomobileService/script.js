@@ -142,12 +142,10 @@ document.getElementById('signup-btn').addEventListener('click', (e)=> {
     <input type="password" placeholder="Password" name="password" id="password" required>
     <input type="password" placeholder="Confirm Password" name="password" id="password" required>
     <input type="number" placeholder="Mobile Number" name="number" id="mnumber" required>
-    <a href="index_page_2.html" target="_blank">
-        <button id="signup-btn">
-            Click Here
-        </button>
-    </a>
+    
 
+    <button><a href="http://127.0.0.1:5500/FrontEndProjects/AutomobileService/index_page_2.html" id="btnbtn">clikc me</a></button>
     
     `
+
 })
