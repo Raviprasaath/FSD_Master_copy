@@ -5,7 +5,7 @@ public class KadaneMethodArr {
         int [] array = {-1, -2, -3};
         int n = array.length;
         int sum=0;
-        // int prevSum=0;
+
         int max=Integer.MIN_VALUE;
         for(int i=0; i<n; i++){
             sum=array[i]+sum;
@@ -19,7 +19,7 @@ public class KadaneMethodArr {
 }
 
 /*
-Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Input: nums = [-2, 1,-3, 4,-1,2,1,-5,4]
 
 Output: 6
 

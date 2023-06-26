@@ -8,7 +8,26 @@ public class KthMissingPositiveNumber_1539 {
         int k = 5;
         System.out.println(findKthPositive(array, k));
     }
-    public static int findKthPositive(int[] arr, int k) {
+    // 100 beats
+    public static int findKthPositive(int[] arr, int k) {        
+        int count = 0, m = 0;
+        for (int i=1; i<=arr.length+k; i++) {
+            if (arr.length > m && i == arr[m]) {
+                m++;
+            } else {
+                count++;
+            }
+            if (count == k) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+
+
+    // low beats
+    public static int findKthPositive1(int[] arr, int k) {
         if (arr[arr.length-1] >= k && arr[arr.length-1] == arr.length) {
             return arr.length+k;
         }
