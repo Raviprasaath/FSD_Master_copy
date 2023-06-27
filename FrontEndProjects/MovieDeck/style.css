@@ -50,10 +50,10 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
 }
 .movie-cards {
-    width: 250px;
+    width: 300px;
     padding: 10px;
     box-shadow: 0px 0px 15px rgb(36, 35, 35);
     border-radius: 5px;
