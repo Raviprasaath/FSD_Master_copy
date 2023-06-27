@@ -7,7 +7,6 @@ public class RotateArrayKtime {
         int array[]={1,2,3,4,5,6,7,8};
         int n = array.length;
         int kTimes=3;
-
         rotatearraylist(array, n, kTimes);
     }
 

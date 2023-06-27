@@ -1,7 +1,7 @@
 
 
-function movieapi(page) {
 
+function movieapi(page) {
 const options = {
     method: 'GET',
     headers: {
@@ -10,8 +10,7 @@ const options = {
     }
   };
   
-  fetch(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`, options)
-   
+  fetch(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`, options)   
     .then((response)=> {
         return response.json();
     })
@@ -69,10 +68,8 @@ const options = {
         })
     })
     .catch(err => console.error(err));
-    
-    
-    
-    
+
+
     
 }
 let page = 1;

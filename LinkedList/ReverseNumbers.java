@@ -4,13 +4,13 @@ class LinkedLists {
 	Node head;
 	Node tail;
 	
-	public class Node{
+	public class Node {
 		int value;
 		Node next;
 
 		Node(){}
 		
-		Node(int val){
+		Node(int val) {
 			value=val;
 			next=null;
 		}	
@@ -25,14 +25,15 @@ class LinkedLists {
     System.out.print("null");
   }
 
-  public void add(int val){
+  public void add (int val){
     Node newNode = new Node(val);
+
     Node temp = this.head;
 
     if (temp == null) {
       newNode.next=null;
       head = newNode;
-    } else {
+    } else {      
       newNode.next = head;
       head = newNode;
     }
@@ -63,6 +64,8 @@ public class ReverseNumbers {
     list.add(20);
     list.add(30);
     list.add(40);
+    list.add(50);
+    list.add(60);
     list.display(); 
     System.out.println();
 
