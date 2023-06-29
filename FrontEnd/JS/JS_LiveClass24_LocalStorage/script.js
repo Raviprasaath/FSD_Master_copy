@@ -11,6 +11,9 @@ console.log (localStorage.getItem('ravi'))
 const user = {name:"ravi", class:"12"}
 localStorage.setItem("items", user) // this store as ->	items	[object Object]
 
+// storing in Local storage converted into String
+// because local storage doesn't have a capability to store Objects
+
 JSON.stringify(user);
 
 // overcome this issue
@@ -22,5 +25,5 @@ console.log(localStorage.getItem(name)) //this gives null
 // so
 // console.log(localStorage.getItem(name)) //this gives null
 let users = localStorage.getItem("item")
-JSON.parse(users);
-console.log(users);
+JSON.parse(users); //back to Object 
+console.log(users); //{"name":"ravi","class":"12"}
