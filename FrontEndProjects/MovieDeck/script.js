@@ -1,3 +1,8 @@
+let nextBtn = document.getElementById('next');
+let prevBtn = document.getElementById('prev');
+let current = document.getElementById('current');
+
+
 async function callApi(page) {
     const options = {
         method: 'GET',
@@ -6,93 +11,136 @@ async function callApi(page) {
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTQxNzBjNjQ3MjRkMDIyZTkyOTZhNWZhOTg2NDRlYiIsInN1YiI6IjY0OTAyNGE5MjYzNDYyMDBhZTFjZGI1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7il3x7f91baELU8ceqe8OYauvsHEJ-lC34vS3Gslqoc'
         }
     };
-    
+
     let filmObj = await fetch(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`, options)   
     let response = await filmObj.json();
+    console.log(response, " first api");
     return response;
 }
 
+let page = 1;
 
-renderingPage();
+pageControl(page);
 
-async function renderingPage() {
+async function renderingPage(page) {
+    let filmDetail = await callApi(page);
+    let films = await filmDetail.results;
+    
+    films.forEach((item)=> {
+        let {poster_path, name, vote_average, vote_count} = item;   // Destructuring assignment       
+        document.querySelector('.movie-card-container').innerHTML += 
+        `<div class="movie-cards">
+            <div class="poster">
+                <img class="poster-size" src="https://image.tmdb.org/t/p/original${poster_path}" alt="movie-image">
+                <div class="heart-icon">
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+            </div>
+            <div class="name-vote-sorting">
+                <div class="movie-title">
+                    ${name}
+                </div>
+                <div class="movie-vote">
+                    Votes: ${vote_count}
+                    <br>
+                    Rating: ${vote_average}
+                </div>
+            </div>
+        </div>`
+    })
+    if (page === 1) {
+        prevBtn.disabled = true;
+    } else {
+        prevBtn.disabled = false;
+    }
+    let total = filmDetail.total_pages;
+    if (page === total) {
+        nextBtn.disabled = true;
+    } else {
+        nextBtn.disabled = false;
+    }
 
-    let filmDetail = await callApi();
-    console.log(filmDetail.results);
-
-    // filmDetail.forEach((item)=> {
-    //     let {poster_path, name, vote_average, vote_count} = item;         
-    //     document.querySelector('.movie-card-container').innerHTML += 
-    //     `<div class="movie-cards">
-    //         <div class="poster">
-    //             <img class="poster-size" src="https://image.tmdb.org/t/p/original${poster_path}" alt="movie-image">
-    //             <div class="heart-icon">
-    //                 <i class="fa-regular fa-heart"></i>
-    //             </div>
-    //         </div>
-    //         <div class="name-vote-sorting">
-    //             <div class="movie-title">
-    //                 ${name}
-    //             </div>
-    //             <div class="movie-vote">
-    //                 Votes: ${vote_count}
-    //                 <br>
-    //                 Rating: ${vote_average}
-    //             </div>
-    //         </div>
-    //     </div>`
-    // })
+    current.innerHTML = `Current Page : ${page}`;
 }
 
 
+function pageControl(page) {    
+    document.querySelector('.movie-card-container').innerHTML = "";
+    renderingPage(page);    
+}
 
-// async function movieapi(page) {
-    // const options = {
-    //     method: 'GET',
-    //     headers: {
-    //     accept: 'application/json',
-    //     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTQxNzBjNjQ3MjRkMDIyZTkyOTZhNWZhOTg2NDRlYiIsInN1YiI6IjY0OTAyNGE5MjYzNDYyMDBhZTFjZGI1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7il3x7f91baELU8ceqe8OYauvsHEJ-lC34vS3Gslqoc'
-    //     }
-    // };
+nextBtn.onclick = function() {
+    page++;   
+    pageControl(page);
     
-    // fetch(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`, options)   
-    //     .then((response)=> {
-    //         return response.json();
-    //     })
-    //     .then((data)=> {
-            // console.log(data)
-        //     let filmDetail = data.results;
-        //     document.querySelector('.movie-card-container').innerHTML = ""
+}
+prevBtn.onclick = function() {
+    if (page > 1) {
+        page--;   
+        pageControl(page);
+    }
+}
+
+
+let searchBox = document.getElementById('movie-search-box');
+let searchBtn = document.getElementById('movie-search-btn');
+
+searchBtn.addEventListener('click', ()=> {
+    let movieSearch = searchBox.value;
+    // console.log(movieSearch);
+    // console.dir(searchBox.value);
+    searchBox.value = "";
+
+    searchingFilms(movieSearch);
+})
+
+
+async function searchingFilms(movieName) {
+    try {
+        let fetchLink = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movieName}&api_key=494170c64724d022e9296a5fa98644eb`);
+            let response = await fetchLink.json();
+            let searchResults = await response.results;
+        console.log(response)
+        // console.dir(searchResults)
+        document.querySelector('.movie-card-container').innerHTML = ""
+        
+        searchResults.forEach((item)=> {
             
-        //     if (page === 1) {
-        //         document.getElementById('prev').disabled = true;
-        //     } else {
-        //         document.getElementById('prev').disabled = false;
-        //     }
-        //     if (page === data.total_pages) {
-        //         document.getElementById('next').disabled = true;
-        //     } else {
-        //         document.getElementById('next').disabled = false;
-        //     }
-        //     document.getElementById('next').onclick = function() {
-        //         page++;
-        //         movieapi(page);
-        //         document.getElementById('current').innerHTML = `Current Page : ${page}`;
-        //     }
+            if (item.poster_path) {
+
+                let poster = item.poster_path;
+                let title = item.title;
+                let voteCount = item.vote_count;
+                let voteRate = item.vote_average;
+                
+    
+                
+                document.querySelector('.movie-card-container').innerHTML += 
+                `<div class="movie-cards">
+                    <div class="poster">
+                        <img class="poster-size" src="https://image.tmdb.org/t/p/original${poster}" onerror="this.src = 'https://image.tmdb.org/t/p/original/pPB609vfOSIn4bFceyErf03mUFK.jpg'" alt="movie-image">
+                        <div class="heart-icon">
+                            <i class="fa-regular fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="name-vote-sorting">
+                        <div class="movie-title">
+                            ${title}
+                        </div>
+                        <div class="movie-vote">
+                            Votes: ${voteCount}
+                            <br>
+                            Rating: ${voteRate}
+                        </div>
+                    </div>
+                </div>`
+            }
             
-        //     if (page > 1) {
-        //         document.getElementById('prev').onclick = function() {    
-        //             page--;
-        //             movieapi(page);
-        //             document.getElementById('current').innerHTML = `Current Page : ${page}`;
-        //         }
-        //     } 
-        // })
-        // .catch(err => console.error(err));
-// }
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
-
-// let page = 1;
-// movieapi(page);
-// renderingPage();
