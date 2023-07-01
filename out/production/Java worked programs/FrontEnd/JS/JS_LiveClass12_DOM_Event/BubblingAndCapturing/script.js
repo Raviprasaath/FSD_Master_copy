@@ -2,9 +2,9 @@ const grandFather = document.getElementById("grandFather");
 const parent = document.getElementById("parent");
 const child = document.getElementById("child");
 
-console.dir(grandFather);
-console.dir(parent);
-console.dir(child);
+// console.dir(grandFather);
+// console.dir(parent);
+// console.dir(child);
 
 // -------- Capturing -------------- (this is not used most of the times )
 
@@ -30,26 +30,28 @@ console.dir(child);
 //     console.log("child Clicked") 
 // }, true)
 
+//true-> Capturing
+// false -> bubbling
+
+// -------------bubbling---------
+grandFather.addEventListener("click", (e) => {
+    console.log("grandparent clicked")
+}, false );
+
+// wherever you click grandparant count only increase
+
+parent.addEventListener("click", (e) => {  
+    console.log("parent clicked")
+}, false );
+
+// now except granparent box, child and parent count++
 
 
-// // -------------bubbling---------
-// grandFather.addEventListener("click", () => {
-//     console.log("grandparent clicked")
-// }, false );
 
-// // wherever you click grandparant count only increase
-
-// parent.addEventListener("click", () => {
-//     console.log("parent clicked")
-// }, false );
-
-// // now except granparent box, child and parent count++
-
-
-
-// child.addEventListener("click", () => {
-//     console.log("child clicked") 
-// }, false );
+child.addEventListener("click", (e) => {
+    e.stopPropagation();  
+    console.log("child clicked") 
+}, false );
 
 
 //  HOW TO STOP the EVENT  -> event.stopPropogation();
@@ -65,24 +67,24 @@ console.dir(child);
 
 
 //------------- Event Stop propagation-----------
-grandFather.addEventListener("click", (event) => {
-    console.log("grandparent clicked")
-}, false );
+// grandFather.addEventListener("click", (event) => {
+//     console.log("grandparent clicked")
+// }, false );
 
-// wherever you click grandparant count only increase
+// // wherever you click grandparant count only increase
 
-parent.addEventListener("click", (event) => {
-    console.log("parent clicked")
-}, false );
+// parent.addEventListener("click", (event) => {
+//     console.log("parent clicked")
+// }, false );
 
-// now except granparent box, child and parent count++
+// // now except granparent box, child and parent count++
 
 
 
-child.addEventListener("click", (event) => {
-    console.log("child clicked")
-    event.stopPropagation();   //  without this child, parent, grandparaent was clicked shown in the console, but when we put this Child only clicked
-}, false );
+// child.addEventListener("click", (event) => {
+//     console.log("child clicked")
+//     event.stopPropagation();   //  without this child, parent, grandparaent was clicked shown in the console, but when we put this Child only clicked
+// }, false );
 
 
 

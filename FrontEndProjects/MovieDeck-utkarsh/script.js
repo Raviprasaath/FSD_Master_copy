@@ -73,16 +73,13 @@ async function fetchMovieWithId(id) {
 }
 
 
-
-
 async function fetchAllMovie(pageNumber) {
     try {
-
         const options = {
             method: 'GET',
             headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMTMxNDVhOTBkMmQxNzQ4YjhlOWVjMDFlODk1MTA2ZSIsInN1YiI6IjY0OTFkNmJhYzNjODkxMDBhZTUyYjMwZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QpP1DZY3CSd2CRNgf9CSBWOxcaaXupzPo9Wd2r-_G_A'
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMTMxNDVhOTBkMmQxNzQ4YjhlOWVjMDFlODk1MTA2ZSIsInN1YiI6IjY0OTFkNmJhYzNjODkxMDBhZTUyYjMwZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QpP1DZY3CSd2CRNgf9CSBWOxcaaXupzPo9Wd2r-_G_A'
             }
         };
 
@@ -102,7 +99,6 @@ async function fetchAllMovie(pageNumber) {
         
         renderMovies(changedData)
         return changedData;
-
 
     } catch(error) {
         console.log("error iss here");
@@ -148,30 +144,10 @@ function renderMovies(moviesList) {
 
         const isfavMovie = favMovieList.indexOf(id+"") > -1
 
-        
-        //  i want to crate a ui of Card \
         const cardDiv = document.createElement("div");
         cardDiv.classList.add('card')
 
         const posterUrl = 'https://image.tmdb.org/t/p/original' + posterPath
-
-
-        /*
-            Instead of the section in inner html you guys can have this code 
-            I am not doing it bec i can afford this 
-            you cant !!!.
-        */
-        
-        // const posterUrl = 'https://image.tmdb.org/t/p/original' + posterPath
-
-        // const sectionElement =  document.createElement("section")
-        // const posterImageElement = document.createElement("img")
-        // posterImageElement.src = posterUrl
-        // posterImageElement.classList.add('poster')
-        
-        // sectionElement.appendChild(posterImageElement)
-        // cardDiv.appendChild(sectionElement)
-
 
         cardDiv.innerHTML = `
             <section>
@@ -196,9 +172,6 @@ function renderMovies(moviesList) {
                 </section>
         `
 
-
-
-
         // I need to push that UI to the DOM to the Grid container
 
         const gridContainer = document.getElementById("movies-card-container");
@@ -216,11 +189,9 @@ function renderMovies(moviesList) {
             // if it is already fav
             if(favItemButton.classList.contains('fa-solid')){
                 // now you want to mark unfav
-
                 // --- remove the movie from the local storarge
 
                 removeFavMovieFromLocalStorage(id)
-
 
                 //  ------ have the normal heart sign 
 
@@ -236,10 +207,6 @@ function renderMovies(moviesList) {
         })
 
         // console.log(favItemButton, "fav item button")
-
-
-        
-
     })
 }
 
@@ -259,9 +226,7 @@ async function renderFavMovies() {
 
         const response = await fetchMovieWithId(movieId)
 
-        favMovieListData.push(response);
-
-        
+        favMovieListData.push(response);        
     }
 
     console.log(favMovieListData, "favMovieListData debug")
@@ -276,7 +241,6 @@ async function renderFavMovies() {
 
 async function searchMovies(movieName) {
     try {
-
         const url = `https://api.themoviedb.org/3/search/movie?query=${movieName}&api_key=c13145a90d2d1748b8e9ec01e895106e`
 
         const response = await fetch(url)
@@ -312,7 +276,6 @@ function showFav(favMovie) {
 
     const {popularity, posterPath, title, voteAverage} = favMovie
 
-
     const cardDiv = document.createElement("div");
         cardDiv.classList.add('card')
 
@@ -338,11 +301,7 @@ function showFav(favMovie) {
 
                 </section>
         `
-
-
     // Removal of the Card....
-
-
 }
 
 function switchTab(event) {
@@ -373,7 +332,6 @@ nextButton.addEventListener("click", () => {
     // Work 2: update the page number in the HTML
 
     pageNumberButton.innerHTML = ` Current Page: ${currentPage}`
-    
 
     if(currentPage === 1) {
         prevButton.disabled = true;
@@ -382,8 +340,6 @@ nextButton.addEventListener("click", () => {
     } else if(currentPage === lastPage) {
         nextButton.disabled = true;
     }
-    
-
 });
 
 prevButton.addEventListener("click", () => {
@@ -394,7 +350,6 @@ prevButton.addEventListener("click", () => {
 
     pageNumberButton.innerHTML = ` Current Page: ${currentPage}`    
 
-
     if(currentPage === 1) {
         prevButton.disabled = true;
     } else if (currentPage === 2 && currentPage !== lastPage -1) {
@@ -402,7 +357,6 @@ prevButton.addEventListener("click", () => {
     } else if (currentPage === lastPage -1) {
         nextButton.disabled = false;
     }
-
 });
 
 
@@ -410,8 +364,7 @@ const searchButtonCallbackFunction =  () => {
     const query = searchInput.value;
     searchInput.value = "";
 
-    searchMovies(query)
-
+    searchMovies(query);
 }
 
 const debouncedSearchButtonCallbackFunction =  searchButtonCallbackFunction // This is what you need to implement
@@ -440,9 +393,6 @@ sortByRatingButton.addEventListener("click", async () => {
 
 allTabButton.addEventListener("click", switchTab );
 favTabButton.addEventListener("click", switchTab );
-
-
-
 
 movieCardContainer.addEventListener("click", (event) => {
     console.dir(movieCardContainer)

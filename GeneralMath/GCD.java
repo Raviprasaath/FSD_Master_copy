@@ -3,8 +3,8 @@ package GeneralMath;
 
 public class GCD {
     public static void main(String[] args) {
-        int a = 8;
-        int b = 18;
+        int a = 6;
+        int b = 20;
         System.out.println(gcdNum(a,b));        
     }
 		
