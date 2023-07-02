@@ -23,12 +23,14 @@ async function callApiForAllMovie(page) {
                 vote_average: item.vote_average,
                 vote_count: item.vote_count,
                 overview: item.overview,
-                release_date: item.release_date           
+                release_date: item.release_date,
+                id: item.id,           
             }
         objArr.push(movie);
     })
     generateCards(objArr);
     allMovies = objArr;
+    console.log(objArr)
 }
 
 
@@ -54,9 +56,12 @@ prevBtn.onclick = function() {
 
 callApiForAllMovie(page);
 
+
+
+{/* <i class="fa-regular fa-heart ${isfavMovie ? 'fa-solid' : ''}"></i> */}
 function generateCards(film) {
     document.querySelector('.movie-card-container').innerHTML = "";
-
+    
     film.forEach((item)=> {
         document.querySelector('.movie-card-container').innerHTML += 
         `<div class="movie-cards">
@@ -68,6 +73,7 @@ function generateCards(film) {
                 <img class="poster-size" src="https://image.tmdb.org/t/p/original${item.poster_path}" alt="movie-image">
                 <div class="heart-icon">
                     <i class="fa-regular fa-heart"></i>
+                    
                 </div>
             </div>
             <div class="name-vote-sorting">
@@ -98,7 +104,8 @@ async function searchingMovie(movie) {
                 vote_average: item.vote_average,
                 vote_count: item.vote_count,
                 overview: item.overview,
-                release_date: item.release_date           
+                release_date: item.release_date,
+                id: item.id,        
             }
         objArr.push(movie);
     })
@@ -109,4 +116,18 @@ async function searchingMovie(movie) {
 // dateSort.onclick = function() {
 //     console.log(allMovies)
 // }
+
+
+
+let fav = document.querySelector('.movie-card-container');
+fav.addEventListener('click', (e)=> {
+    if (e.target.className === "fa-regular fa-heart")  {
+        if (e.target.style.color === "white") {
+            e.target.style.color = "red";
+            console.log("hi")
+        } else {
+            e.target.style.color = "white";
+        }
+    }
+})
 
