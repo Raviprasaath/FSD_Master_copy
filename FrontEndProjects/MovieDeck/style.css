@@ -129,6 +129,7 @@ body {
     right: 0;
     top: 370px;
     font-size: 40px;
+    color: white;
 }
 .movie-vote {
     padding-top: 20px;
@@ -181,9 +182,4 @@ body {
     border-radius: 8px;
 }
 
-
-.heart-icon-fav {
-    font-size: 40px;
-    color: red;
-}
-            
+     
