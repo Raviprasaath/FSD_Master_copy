@@ -2,7 +2,7 @@
 
 public class InsertionSorting {
     public static void main(String[] args) {
-        int array[]={3,4,6,22,11,5};
+        int array[]={22,11,6,5,3};
         int n = array.length;
         insertionsorting(array, n);
         for (int i = 0; i < n; i++) {
