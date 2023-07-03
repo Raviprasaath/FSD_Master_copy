@@ -56,13 +56,9 @@ prevBtn.onclick = function() {
 
 callApiForAllMovie(page);
 
-// <i class="fa-regular fa-heart"></i>
-// let isfavMovie = false;
-// let fav = document.querySelector('.movie-card-container');
-// fav.addEventListener('click', (e)=> {
-//     isfavMovie = true;
-// })
 
+
+{/* <i class="fa-regular fa-heart ${isfavMovie ? 'fa-solid' : ''}"></i> */}
 function generateCards(film) {
     document.querySelector('.movie-card-container').innerHTML = "";
     
@@ -76,8 +72,8 @@ function generateCards(film) {
             <div class="poster">
                 <img class="poster-size" src="https://image.tmdb.org/t/p/original${item.poster_path}" alt="movie-image">
                 <div class="heart-icon">
-                
-                    <i class="fa-regular fa-heart ${isfavMovie ? 'fa-solid' : ''}"></i>
+                    <i class="fa-regular fa-heart"></i>
+                    
                 </div>
             </div>
             <div class="name-vote-sorting">
@@ -122,4 +118,16 @@ async function searchingMovie(movie) {
 // }
 
 
+
+let fav = document.querySelector('.movie-card-container');
+fav.addEventListener('click', (e)=> {
+    if (e.target.className === "fa-regular fa-heart")  {
+        if (e.target.style.color === "white") {
+            e.target.style.color = "red";
+            console.log("hi")
+        } else {
+            e.target.style.color = "white";
+        }
+    }
+})
 
