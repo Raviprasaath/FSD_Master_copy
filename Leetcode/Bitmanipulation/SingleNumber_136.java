@@ -1,8 +1,8 @@
-package Leetcode.Arrays;
+package Leetcode.Bitmanipulation;
 import java.util.HashMap;
 public class SingleNumber_136 {
     public static void main(String[] args) {
-        int [] arr = {2,2,1};
+        int [] arr = {4,2,2,4,3,5,3,11,5,11,7};
         // System.out.println(singleNumberHashMap(arr));
         System.out.println(singleNumber(arr));
     }
@@ -15,6 +15,8 @@ public class SingleNumber_136 {
         }
         return ans;
     }
+    // & | ^
+    
 
 
     public static int singleNumberHashMap(int[] nums) {

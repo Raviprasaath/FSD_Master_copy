@@ -1,7 +1,7 @@
 let page = 1;
-
 let allMovies = [];
 
+// API Data storage 
 async function callApiForAllMovie(page) {
     const options = {
         method: 'GET',
@@ -15,6 +15,7 @@ async function callApiForAllMovie(page) {
     let response = await filmObj.json();
     let result = response.results;
     let objArr = [];
+
     result.forEach( (item) => {
         let movie = 
             {
@@ -33,31 +34,7 @@ async function callApiForAllMovie(page) {
     console.log(objArr)
 }
 
-
-let searchBtn = document.getElementById('movie-search-btn');
-searchBtn.onclick = function() {
-    let movieName = document.getElementById('movie-search-box').value;        
-    searchingMovie(movieName);
-}
-
-let currentBtn = document.getElementById('current');
-let nextBtn = document.getElementById('next');
-nextBtn.onclick = function() {
-    page++;
-    callApiForAllMovie(page);
-    currentBtn.innerText = "Current Page : "+page;
-}
-let prevBtn = document.getElementById('prev');
-prevBtn.onclick = function() {
-    page--;
-    callApiForAllMovie(page);
-    currentBtn.innerText = "Current Page : "+page;
-}
-
-callApiForAllMovie(page);
-
-
-
+// Card Rendering 
 {/* <i class="fa-regular fa-heart ${isfavMovie ? 'fa-solid' : ''}"></i> */}
 function generateCards(film) {
     document.querySelector('.movie-card-container').innerHTML = "";
@@ -90,6 +67,12 @@ function generateCards(film) {
     })
 }
 
+// Searching
+let searchBtn = document.getElementById('movie-search-btn');
+searchBtn.onclick = function() {
+    let movieName = document.getElementById('movie-search-box').value;        
+    searchingMovie(movieName);
+}
 
 async function searchingMovie(movie) {
     let filmObj = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}&api_key=494170c64724d022e9296a5fa98644eb`)
@@ -112,13 +95,9 @@ async function searchingMovie(movie) {
     generateCards(objArr);
 }
 
-// let dateSort = document.getElementsByClassName('by-date')[0];
-// dateSort.onclick = function() {
-//     console.log(allMovies)
-// }
 
 
-
+// Fav adding 
 let fav = document.querySelector('.movie-card-container');
 fav.addEventListener('click', (e)=> {
     if (e.target.className === "fa-regular fa-heart")  {
@@ -131,3 +110,21 @@ fav.addEventListener('click', (e)=> {
     }
 })
 
+
+// Pages control
+let currentBtn = document.getElementById('current');
+let nextBtn = document.getElementById('next');
+nextBtn.onclick = function() {
+    page++;
+    callApiForAllMovie(page);
+    currentBtn.innerText = "Current Page : "+page;
+}
+let prevBtn = document.getElementById('prev');
+prevBtn.onclick = function() {
+    page--;
+    callApiForAllMovie(page);
+    currentBtn.innerText = "Current Page : "+page;
+}
+
+
+callApiForAllMovie(page);
