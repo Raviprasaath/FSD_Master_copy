@@ -30,18 +30,18 @@ async function callApiForAllMovie(page) {
         objArr.push(movie);
     })
     generateCards(objArr);
-    allMovies = objArr;
-    console.log(objArr)
+    moviesData(objArr);
+
+    // console.log(objArr)
 }
 
 // Card Rendering 
-{/* <i class="fa-regular fa-heart ${isfavMovie ? 'fa-solid' : ''}"></i> */}
-function generateCards(film) {
+function generateCards(films) {
     document.querySelector('.movie-card-container').innerHTML = "";
     
-    film.forEach((item)=> {
+    films.forEach((item)=> {
         document.querySelector('.movie-card-container').innerHTML += 
-        `<div class="movie-cards">
+        `<div class="movie-cards" id="${item.id}">
             <div class="overview active">
                 <div class="plot"> PLOT </div>  
                 ${item.overview}
@@ -65,6 +65,7 @@ function generateCards(film) {
             </div>
         </div>`
     })
+    favMoviesContainerAdding();
 }
 
 // Searching
@@ -101,15 +102,34 @@ async function searchingMovie(movie) {
 let fav = document.querySelector('.movie-card-container');
 fav.addEventListener('click', (e)=> {
     if (e.target.className === "fa-regular fa-heart")  {
-        if (e.target.style.color === "white") {
-            e.target.style.color = "red";
-            console.log("hi")
+        if (e.target.style.color === "red") {
+            e.target.style.color = "white";            
         } else {
-            e.target.style.color = "white";
+            e.target.style.color = "red";
         }
     }
 })
 
+function favMoviesContainerAdding () {
+    let movieCard = document.getElementsByClassName('movie-cards');
+    // console.log(typeof movieCard)
+
+    for (const movieFav of movieCard) {
+        movieFav.addEventListener("click", (e)=> {
+            let idOfMovie = (e.target.closest(".movie-cards").getAttribute('id'));           
+            // console.log(idOfMovie)
+            return idOfMovie;
+        })
+    }
+    console.log(movieCard, " movie")
+    return movieCard;
+}
+
+function moviesData(data) {
+    let allMovieDetails = data;
+    console.log (allMovieDetails, " clikcing");
+    console.log(data);
+}
 
 // Pages control
 let currentBtn = document.getElementById('current');
@@ -125,6 +145,5 @@ prevBtn.onclick = function() {
     callApiForAllMovie(page);
     currentBtn.innerText = "Current Page : "+page;
 }
-
 
 callApiForAllMovie(page);
