@@ -5,36 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Market Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima&display=swap" rel="stylesheet">
+    
 </head>
     <body>
-        <div class="navbar">
-            <div class="logo">
+        <div class="root-body">
+            <div class="left-side-bar">
+                <div class="nav-top">
+                    <div class="logo">
+                        <img id="logo-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS47gpVHovs4b6jy4rjCm4rnny-Gkpg9aapTQ&usqp=CAU" alt="logo" >
+                    </div>
+                    <nav class="nav-bar">
+                        <ul class="user-selection-nav-bar">
+                            
+                            <li>
+                                <a href="#dashBoard" class="ui-selection">
+                                    <i class="fa-sharp fa-solid fa-table-columns"></i>
+                                    Dashboard
+                                </a></li>
+                            <li>
+                                <a href="#charts">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    Charts
+                                </a></li>
+                            <li>
+                                <a href="#news">
+                                    <i class="fa-sharp fa-solid fa-newspaper"></i>
+                                    News</a>
+                                </li>
+                            <li>
+                                <a href="#trends">
+                                    <i class="fa-sharp fa-solid fa-arrow-trend-up"></i>
+                                    Trends</a>
+                                </li>            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="nav-bottom">
+                    <ul class="user-selection-nav-bar">
+                        <li>
+                            <a href="#settings">
+                                <i class="fa-sharp fa-solid fa-gear"></i>
+                                    Settings
+                            </a>
+                        </li>   
+                                                 
+                    </ul>
+                </div>
 
             </div>
-            <div class="navbar-selection">
 
+            <div class="middle-page-data">
+                <h1>Dashboard</h1>                                        
+                <h3>Watch List</h3>
+                <div class="data-graph-splitting">
+                    <div class="random-data-main-page">
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+                        <div class="stock">
+                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+                            <span class="stock-name">AMAZ </span>
+                            <span class="stock-price">$145,25</span>
+                            <span class="trade-type">Intraday</span>
+                        </div>
+    
+                    </div>
+                    <div>
+                        <div class="trade-type-selection">
+                            <span class="trade-selection active">Intraday</span>
+                            <span class="trade-selection">Daily</span>
+                            <span class="trade-selection">Weekly</span>
+                            <span class="trade-selection">Monthly</span>
+                        </div>
+                        <!-- <canvas id="myChart"></canvas> -->
+                        <div class="result-of-stock">
+                            <span>
+                                1. open: 134.2400,
+                            </span>
+                            <span>
+                                2. high: 134.2400,
+                            </span>
+                            <span>
+                                3. low: 133.9700,
+                            </span>
+                            <span>
+                                4. close: 133.9700,
+                            </span>
+                            <span>
+                                5. volume: 41
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rights-side-data">
+                <div class="searching-option">
+                    <input id="search-bar" onkeydown="searchHandler(event)" type="text" placeholder="Search">
+                    <div class="searching-option-li active">
+                        <li>
+                            <div>
+                                <h3>Tesco Company</h3>
+                                <h5>TESCO PLC ADR/1</h5>
+                            </div>
+                            <h4>
+                                +0.57
+                            </h4>
+                            <i class="fa-solid fa-eye"></i>
+                        </li>
+                        <li>
+                            <div>
+                                <h3>Tesco Company</h3>
+                                <h5>TESCO PLC ADR/1</h5>
+                            </div>
+                            <h4>
+                                +0.57
+                            </h4>
+                            <i class="fa-solid fa-eye"></i>
+                        </li>
+                        <li>
+                            <div>
+                                <h3>Tesco Company</h3>
+                                <h5>TESCO PLC ADR/1</h5>
+                            </div>
+                            <h4>
+                                +0.57
+                            </h4>
+                            <i class="fa-solid fa-eye"></i>
+                        </li>
+                        
+                        
+                    </div>
+                </div>
             </div>
         </div>
 
-        <details>
-            <summary>
-                view 
-            </summary>
-                <p>ravi</p>
-                <p>aravinth</p>
-                <p>arjun</p>
-                <p>gautham</p>
-        </details>
-        <details>
-            <summary>
-                view 
-            </summary>
-                <button>bac</button>
-                <button>abc</button>
-                <button>asdd</button>
-                <button>srfsi</button>
-        </details>
-
+       
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <script src="script.js"></script>
+        
     </body>
 </html>
