@@ -6,7 +6,6 @@
     <title>Stock Market Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Agdasima&display=swap" rel="stylesheet">
     
 </head>
@@ -58,84 +57,20 @@
             </div>
 
             <div class="middle-page-data">
-                <h1>Dashboard</h1>                                        
-                <h3>Watch List</h3>
+                <div class="heading-portion">
+                    <h1>Dashboard</h1>                                        
+                    <h3>Watch List</h3>
+                </div>
                 <div class="data-graph-splitting">
                     <div class="random-data-main-page">
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-                        <div class="stock">
-                            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-                            <span class="stock-name">AMAZ </span>
-                            <span class="stock-price">$145,25</span>
-                            <span class="trade-type">Intraday</span>
-                        </div>
-    
+                        
                     </div>
                     <div>
                         <div class="trade-type-selection">
-                            <span class="trade-selection active">Intraday</span>
-                            <span class="trade-selection">Daily</span>
-                            <span class="trade-selection">Weekly</span>
-                            <span class="trade-selection">Monthly</span>
+                            <button class="trade-selection active">Intraday</button>
+                            <button class="trade-selection">Daily</button>
+                            <button class="trade-selection">Weekly</button>
+                            <button class="trade-selection">Monthly</button>
                         </div>
                         <!-- <canvas id="myChart"></canvas> -->
                         <div class="result-of-stock">
@@ -160,38 +95,16 @@
             </div>
             <div class="rights-side-data">
                 <div class="searching-option">
-                    <input id="search-bar" onkeydown="searchHandler(event)" type="text" placeholder="Search">
+                    <div id="searching-section">
+                        <input style=" width: 70%;"  id="search-bar" type="text" placeholder="Search">
+                        <button id="fetchStart">
+                            
+                            Search
+                        </button>
+
+                    </div>
                     <div class="searching-option-li active">
-                        <li>
-                            <div>
-                                <h3>Tesco Company</h3>
-                                <h5>TESCO PLC ADR/1</h5>
-                            </div>
-                            <h4>
-                                +0.57
-                            </h4>
-                            <i class="fa-solid fa-eye"></i>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>Tesco Company</h3>
-                                <h5>TESCO PLC ADR/1</h5>
-                            </div>
-                            <h4>
-                                +0.57
-                            </h4>
-                            <i class="fa-solid fa-eye"></i>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>Tesco Company</h3>
-                                <h5>TESCO PLC ADR/1</h5>
-                            </div>
-                            <h4>
-                                +0.57
-                            </h4>
-                            <i class="fa-solid fa-eye"></i>
-                        </li>
+                        
                         
                         
                     </div>
