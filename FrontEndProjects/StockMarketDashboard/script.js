@@ -2,6 +2,9 @@ let searchEvent = document.getElementById('search-bar');
 let searchBtn = document.getElementById('fetchStart');
 const keyForApi = 'AO48IFCXLA3BX1O9'
 
+
+
+
 searchBtn.onclick = function () {
   let searchingKeyWords = searchEvent.value;
   let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchingKeyWords}&apikey=${keyForApi}`
@@ -28,15 +31,13 @@ async function fetchApiData(apiUrl = "https://www.alphavantage.co/query?function
   }
 }
 
-
-
 function searchBarRender(searchValue) {
   console.log(searchValue, " search value")
   searchResultData = searchValue;
 
   for (const item of searchValue) {
     document.querySelector('.searching-option-li').innerHTML +=
-        `
+      `
           <li>
               <div>
                   <h3>${item["2. name"]}</h3>
@@ -51,12 +52,13 @@ function searchBarRender(searchValue) {
   }
 }
 
-
-
 function symboltesting(e) {
+  let watchListObject = [];
+
   console.log(e, " symboll")
-  let watchListObject=[];
-  searchResultData.forEach((item)=> {
+  localStorage.setItem('wishList', JSON.stringify(searchResultData));
+  searchResultData = localStorage.getItem('wishList');
+  searchResultData.forEach((item) => {
     if (item["1. symbol"] == e) {
       watchListObject.push({
         name: item["2. name"],
@@ -66,11 +68,49 @@ function symboltesting(e) {
       );
     }
   })
+  
   watchListCardRender(watchListObject);
-  typeOfTrade(e);
+
+  watchListDataContainer(e);
 }
 
 
+function watchListCardRender(searchResultData) {
+  // let searchResultData = JSON.parse(localStorage.getItem('wishList'));
+
+  for (const item of searchResultData) {
+    document.getElementsByClassName('random-data-main-page')[0].innerHTML =
+      `
+      <div class="stock">
+        <div>
+            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+            <span class="stock-name">${item.name} </span>
+        </div>
+        <div class="stock-region"> 
+            <span class="stock-symbol"> ${item.symbol} </span>            
+            <span class="region-heading">Region</span>
+            <span class="region">${item.region}</span>
+            
+        </div>
+        <span>
+            <button class="trade-data remove">Take off</button>
+            <button class="trade-data analytics">Data Analytics</button>
+        </span>
+      </div>
+    `
+  + document.getElementsByClassName('random-data-main-page')[0].innerHTML
+  }
+}
+
+function watchListDataContainer(e) {
+  let tradeDataAttachingInDataContainer = document.querySelectorAll('.analytics');
+  tradeDataAttachingInDataContainer.forEach((item) => {
+    item.addEventListener('click', () => {
+      console.log(e, 'hi');
+    });
+  });
+  typeOfTrade(e);
+}
 
 function typeOfTrade(entry) {
   let keyWordOfTrade;
@@ -89,32 +129,25 @@ function typeOfTrade(entry) {
       console.log(tradeUrl, " urkllllllllllllllll")
     })
   })
-  
 }
 
 
 
-function watchListCardRender(searchResultData) {  
-  for (const item of searchResultData) {
-  document.getElementsByClassName('random-data-main-page')[0].innerHTML =
-    `
-    <div class="stock">
-        <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
-        <span class="stock-name">${item.name} </span>
-        <span class="stock-symbol">${item.symbol} </span>
-        <span class="stock-price"><span class>Region</span> <span class="region">${item.region}</span></span>
-        <button class="trade-remove">Remove From Watchlist</button>
-    </div>
-  `+document.getElementsByClassName('random-data-main-page')[0].innerHTML
-  }
-}
+// Search Result toggle
 
 
-function watchListDataContainer() {
+// const searchToggle = document.querySelectorAll('body :not(#search-bar)');
 
-}
+// searchToggle.forEach(element => {
+//   element.addEventListener('click', () => {
+//     document.getElementsByClassName('searching-option-li')[0].style.display = "none";
+//   });
+// });
 
-
+// const searchBtn2 = document.getElementById('searchBtn');
+// searchBtn2.addEventListener('click', () => {
+//   document.getElementsByClassName('searching-option-li')[0].style.display = "block";
+// });
 
 // graph
 function graph() {
