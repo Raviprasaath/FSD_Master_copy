@@ -1,14 +1,14 @@
 let searchEvent = document.getElementById('search-bar');
 let searchBtn = document.getElementById('fetchStart');
 const keyForApi = 'AO48IFCXLA3BX1O9'
-
-
-
+let tableDataTrigger=false;
 
 searchBtn.onclick = function () {
   let searchingKeyWords = searchEvent.value;
   let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchingKeyWords}&apikey=${keyForApi}`
   fetchApiData(url);
+  
+
 }
 
 
@@ -24,16 +24,21 @@ async function fetchApiData(apiUrl = "https://www.alphavantage.co/query?function
     const result = await data.bestMatches;
 
     document.querySelector('.searching-option-li').innerHTML = "";
-    searchBarRender(result);
+    if (!tableDataTrigger) {
+      searchBarRender(result);
+    }
 
   } catch (error) {
     console.log(error);
   }
 }
 
+
+let searchResultData = [];
+
 function searchBarRender(searchValue) {
   console.log(searchValue, " search value")
-  searchResultData = searchValue;
+  searchResultData = (searchValue);
 
   for (const item of searchValue) {
     document.querySelector('.searching-option-li').innerHTML +=
@@ -50,14 +55,20 @@ function searchBarRender(searchValue) {
           </li>
         `;
   }
+
 }
 
 function symboltesting(e) {
   let watchListObject = [];
 
-  console.log(e, " symboll")
-  localStorage.setItem('wishList', JSON.stringify(searchResultData));
-  searchResultData = localStorage.getItem('wishList');
+  // console.log(e, " symbol");
+  // console.log(searchResultData);
+
+  // let storedData = JSON.parse(localStorage.getItem('wishList'));
+  // if (storedData) {
+    // searchResultData = storedData;
+  // }
+
   searchResultData.forEach((item) => {
     if (item["1. symbol"] == e) {
       watchListObject.push({
@@ -69,6 +80,8 @@ function symboltesting(e) {
     }
   })
   
+  // localStorage.setItem('wishList', JSON.stringify(watchListObject));
+
   watchListCardRender(watchListObject);
 
   watchListDataContainer(e);
@@ -76,7 +89,6 @@ function symboltesting(e) {
 
 
 function watchListCardRender(searchResultData) {
-  // let searchResultData = JSON.parse(localStorage.getItem('wishList'));
 
   for (const item of searchResultData) {
     document.getElementsByClassName('random-data-main-page')[0].innerHTML =
@@ -116,20 +128,46 @@ function typeOfTrade(entry) {
   let keyWordOfTrade;
   document.querySelectorAll(".trade-selection").forEach((item) => {
     item.addEventListener('click', (e) => {
-      if (e.target.innerHTML === 'Intraday') {
+      if (e.target.innerHTML === 'INTRADAY') {
         keyWordOfTrade = "TIME_SERIES_INTRADAY&interval=5min";
-      } else if (e.target.innerHTML === 'Daily') {
+      } else if (e.target.innerHTML === 'DAILY') {
         keyWordOfTrade = "TIME_SERIES_DAILY_ADJUSTED"
-      } else if (e.target.innerHTML === 'Weekly') {
+      } else if (e.target.innerHTML === 'WEEKLY') {
         keyWordOfTrade = "TIME_SERIES_WEEKLY"
-      } else if (e.target.innerHTML === 'Monthly') {
+      } else if (e.target.innerHTML === 'MONTHLY') {
         keyWordOfTrade = "TIME_SERIES_MONTHLY"
       }
       let tradeUrl = `https://www.alphavantage.co/query?function=${keyWordOfTrade}&symbol=${entry}&apikey=${keyForApi}`;
       console.log(tradeUrl, " urkllllllllllllllll")
+      
+      tableDataFill(tradeUrl);
+      fetchApiData(tradeUrl);
+      tableDataTrigger = true;
     })
   })
 }
+
+
+
+
+// Table data filling
+
+function tableDataFill(e) {
+  console.log(e)
+  document.getElementsByClassName('table-data-filling-in-scrit')[0].innerHTML +=
+  `<tr>
+    <td>7/7/2023 19:55</td>
+    <td>130.1</td>
+    <td>130.16</td>
+    <td>130.16</td>
+    <td>130.16</td>
+    <td>10705</td>
+    </tr>
+    <tr>
+    </tr>
+  `;
+}
+
 
 
 
