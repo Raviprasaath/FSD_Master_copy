@@ -1,55 +1,23 @@
+const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&interval=5min&symbol=NE&apikey=AO48IFCXLA3BX1O9';
 
-const allCategoryUrl = "https://content.newtonschool.co/v1/pr/64806cf8b7d605c99eecde47/news";
-
-const cardContainer = document.getElementsByClassName("news-bar")[0];
-let alldata=[];
-async function getApiData(url) {
+async function fetchData() {
   try {
     const response = await fetch(url);
-    const data =  await response.json();
-    alldata=data;     // this will return object ,but outside it will return promise
-    return data;
+    const data = await response.json();
+
+    if (data.hasOwnProperty('Time Series (5min)')) {
+      const timeSeries = data['Time Series (5min)'];
+      console.log(timeSeries)
+      const latestEntry = Object.keys(timeSeries)[0];
+      const latestPrice = timeSeries[latestEntry]['4. close'];
+
+      console.log('Latest price:', latestPrice);
+    } else {
+      console.log('Time series data not found in the API response.');
+    }
   } catch (error) {
-    console.log("Error is:" + error);
+    console.log('Error:', error);
   }
 }
 
-
-
-function createCards(dataArray) {
-  // console.log(dataArray);
-  dataArray.map((item) => {
-    cardContainer.innerHTML += `<div class="news-item">
-        <div class="news-title">
-        <p>by ${item[" author"]}</p>
-        <p>category ${item[" category"]}</p>
-        </div>
-        <div class="news-content">
-                ${item.content}
-                <a href="${item.url}">Read More</a></div>
-                <i class="fa-regular fa-heart"></i>
-                </div>
-                </div>`;
-  });
-}
-
-async function fetchAndGenerate(url, myFunction) {
-  const data = await getApiData(url);
-  myFunction(data);
-}
-
-fetchAndGenerate(allCategoryUrl, createCards);
-// ------------
-
-const categoryselect=document.querySelectorAll(".business");
-console.log(categoryselect)
-
-// categoryselect.addEventListener('click', () =>{
-//   // console.log(alldata)
-//   let filtereddata= alldata.filter((item)=>{
-//         // console.log(item[" category"])
-//       item[" category"]=="sports";
-//       // return 1;
-//   })
-//  console.log(filtereddata)
-// })
+fetchData();
