@@ -25,5 +25,29 @@
 
 
 
+// 07-09-2023
 
+function outer() {
+    console.log('First', a);
+    var a = 2;
+    function inner() {
+        a++;
+        console.log('Second', a);
+        var a = 4;
+        console.log('Third', a);
+    }
+    inner();
+}
+outer();
+
+// output
+// First undefined
+// Second NaN
+// Third 4
+
+
+// -------------------
+console.log (true + 1)  //2
+// true = 1
+// false = 0
 

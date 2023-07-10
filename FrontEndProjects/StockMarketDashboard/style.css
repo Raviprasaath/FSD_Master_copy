@@ -64,7 +64,7 @@ body {
     font-family:Verdana, Geneva, Tahoma, sans-serif ;
 }
 .heading-portion>h1 {
-    font-size: 22px;
+    font-size: 24px;
 }
 
 .table-of-data {
@@ -94,7 +94,7 @@ body {
     font-size: 15px;
 }
 .table-heading > th{
-    padding: 2px 10px;
+    padding: 5px 20px;
 }
 .table-heading {
     background-color: rgb(72, 70, 70) !important;
