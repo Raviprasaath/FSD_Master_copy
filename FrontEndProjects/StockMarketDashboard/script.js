@@ -1,17 +1,36 @@
 let searchEvent = document.getElementById('search-bar');
 let searchBtn = document.getElementById('fetchStart');
-const keyForApi = 'AO48IFCXLA3BX1O9'
-let tableDataTrigger = false;
-let choosingTradeDetails="";
+let tableBody = document.getElementsByClassName('table-data-filling-in-script')[0];
+let searchingOptionLi = document.querySelector('.searching-option-li');
 
+let apiArray = ["AO48IFCXLA3BX1O9", "T4Y29QFCCCFF7V03", "7V18I4NFIV62Z5ZP", "IPW3ZIJPAL09OOPG", "IPW3ZIJPAL09OOPG", "3YI9UO1YNH2VBACE"];
+
+let keyForApi ="AO48IFCXLA3BX1O9";
+
+let apiIndex = 0;
+function keyForApiFn() {
+  keyForApi = apiArray[apiIndex];
+  apiIndex++;
+  if (apiIndex==apiArray.length-1) {
+    apiIndex = 0;
+  }
+}
+
+let choosingTradeDetails = "";
+
+// Searching Function
 searchBtn.onclick = function () {
+  keyForApiFn();
   let searchingKeyWords = searchEvent.value;
   let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchingKeyWords}&apikey=${keyForApi}`
-  fetchApiData(url);
+  // console.log(keyForApi);
+  
+  fetchApiDataForsearch(url);
 }
 
 
-async function fetchApiData(apiUrl = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=ama&apikey=7U9C9UPR93ZJ0KTP") {
+async function fetchApiData(apiUrl = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=ama&apikey=${keyForApi}`) {
+  keyForApiFn();
   try {
     const response = await fetch(apiUrl);
 
@@ -19,26 +38,58 @@ async function fetchApiData(apiUrl = "https://www.alphavantage.co/query?function
       throw new Error("Error occurs");
     }
     const data = await response.json();
+    console.log(data, " table fetch")
 
-    
+    // if (data["Error Message"]) {
+    //   alert ("No Data in API");
+    // } 
+    // else if ("Note".includes("Standard API call frequency is 5 calls per minute")) {
+    //   alert("Please try after some time - Standard API call frequency is 5 calls per minute and 500 calls per day")
+    // }
 
-    document.querySelector('.searching-option-li').innerHTML = "";
-    if (!tableDataTrigger) {
-      const result = await data.bestMatches;
-      searchBarRender(result);
-    } else {
-      if (data.hasOwnProperty(choosingTradeDetails)) {
-        const timeSeries = data[choosingTradeDetails];
-        tableDataFill(timeSeries);
-      }      
-    }
-
+    if (data.hasOwnProperty(choosingTradeDetails)) {
+      const timeSeries = data[choosingTradeDetails];
+      tableDataFill(timeSeries);
+    }    
   } catch (error) {
-    document.getElementsByClassName('table-data-filling-in-script')[0].innerHTML = "";
-  
-    console.log(error, " Error is here");
+    tableBody.innerHTML = "";
+    console.log(error, " Error is here");   
   }
 }
+
+
+async function fetchApiDataForsearch(apiUrl = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=ama&apikey=${keyForApi}`) {
+  keyForApiFn();
+  try {
+    const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error("Error occurs");
+    }
+    const data = await response.json();
+    console.log(data, " searching fetch")
+
+    if (data["Error Message"]) {
+      alert ("No Data in API");
+    } 
+    else if ("Note".includes("Standard API call frequency is 5 calls per minute")) {
+      alert("Please try after some time - Standard API call frequency is 5 calls per minute and 500 calls per day")
+    }
+
+    searchingOptionLi.innerHTML = "";
+    
+    let result = await data.bestMatches;
+    if (result === undefined || result.length === 0) {
+      searchingOptionLi.innerText = "No Result Found";
+    }
+    searchBarRender(result);
+    
+  } catch (error) {
+    tableBody.innerHTML = "";
+    console.log(error, " Error is here");    
+  }
+}
+
 
 
 let searchResultData = [];
@@ -48,7 +99,7 @@ function searchBarRender(searchValue) {
   searchResultData = (searchValue);
 
   for (const item of searchValue) {
-    document.querySelector('.searching-option-li').innerHTML +=
+    searchingOptionLi.innerHTML +=
       `
         <li>
             <div>
@@ -64,38 +115,45 @@ function searchBarRender(searchValue) {
   }
 }
 
-getWatchListObjectstore = JSON.parse(localStorage.getItem('wishList'));
-(getWatchListObjectstore && getWatchListObjectstore.length > 0) && (watchListCardRender(getWatchListObjectstore))
+if (localStorage.length > 0) {
+  for (let i = 0; i < localStorage.length; i++) {    
+    const key = localStorage.key(i);
+    const value = JSON.parse(localStorage.getItem(key));
+    (value[0].wishList) && watchListCardRender(value);
+  }
+}
 
 function symboltesting(e) {
   let watchListObject = [];
   searchResultData.forEach((item) => {
     if (item["1. symbol"] == e) {
-      const objtopush = {
+      const objToPush = {
         name: item["2. name"],
         symbol: item["1. symbol"],
-        region: item["4. region"]
+        region: item["4. region"],
+        wishList: true
       };
 
       let getWatchListObject = [];
-      let getWatchListObjectstore = JSON.parse(localStorage.getItem('wishList'));
+      let getWatchListObjectstore = JSON.parse(localStorage.getItem(e));
       (getWatchListObjectstore && getWatchListObjectstore.length > 0) && (getWatchListObject = getWatchListObjectstore)
-      getWatchListObject.push(objtopush);
-      localStorage.setItem('wishList', JSON.stringify(getWatchListObject));
+      getWatchListObject.push(objToPush);
+      localStorage.setItem(e, JSON.stringify(getWatchListObject));
       watchListObject = getWatchListObject;
+
     }
   })
-
   watchListCardRender(watchListObject);
   watchListDataContainer(e);
+  intiallyCallingWatchListDataContainer();
 }
 
+
 function watchListCardRender(searchResultData) {
-  document.getElementsByClassName('random-data-main-page')[0].innerHTML = "";
   for (const item of searchResultData) {
     document.getElementsByClassName('random-data-main-page')[0].innerHTML =
       `
-      <div class="stock">
+      <div class="stock" id="${item.symbol}">
         <div>
             <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
             <span class="stock-name">${item.name} </span>
@@ -107,40 +165,39 @@ function watchListCardRender(searchResultData) {
             
         </div>
         <span>
-            <button class="trade-data remove">Take off</button>
+            <button class="trade-data remove" value="${item.symbol}">Take off</button>
             <button class="trade-data analytics">Data Analytics</button>
         </span>
       </div>
     `
       + document.getElementsByClassName('random-data-main-page')[0].innerHTML
-  }
+    }
+    removingData();
 }
 
 
-// testing
-intiallyCallingWatchListDataContainer()
+// when directly see the data from watch list container
+intiallyCallingWatchListDataContainer();
 function intiallyCallingWatchListDataContainer() {
-  let symbol = "";
   let tradeDataAttachingInDataContainer = document.querySelectorAll('.analytics');
+
   tradeDataAttachingInDataContainer.forEach((item) => {
-    item.addEventListener('click', (e) => {      
-      symbol = (e.target.parentElement.parentElement.childNodes[3].innerText.split(" ")[0],'hi');
+    item.addEventListener('click', (e) => {
+      let itemName = document.getElementsByClassName('stock');
+      for (let i=0; i<itemName.length; i++) {
+        itemName[i].style.backgroundColor = "";
+      }
+      
+      const container = e.target.parentElement.parentElement;
+
+      const tradeType = container.childNodes[3].innerText.split(" ")[0];
+      typeOfTrade(tradeType);
+      container.style.backgroundColor = '#B7B7B7';
     });
   });
-  console.log(symbol)
-  typeOfTrade(symbol);
 }
 
-
-
 function watchListDataContainer(e) {
-  // let tradeDataAttachingInDataContainer = document.querySelectorAll('.analytics');
-  // tradeDataAttachingInDataContainer.forEach((item) => {
-  //   item.addEventListener('click', () => {
-  //     typeOfTrade(e);
-  //     console.log(e, 'hi');
-  //   });
-  // });
   typeOfTrade(e);
 }
 
@@ -150,44 +207,63 @@ function typeOfTrade(entry) {
     item.addEventListener('click', (e) => {
       if (e.target.innerHTML === 'INTRADAY') {
         keyWordOfTrade = "TIME_SERIES_INTRADAY&interval=5min";
-        choosingTradeDetails="Time Series (5min)";
+        choosingTradeDetails = "Time Series (5min)";
+        document.querySelector('.trading-type-heading').innerHTML="Time Series (5min)";
+        (e.target.parentElement.children[0].classList.add('active'));
+        (e.target.parentElement.children[1].classList.remove('active'));
+        (e.target.parentElement.children[2].classList.remove('active'));
+        (e.target.parentElement.children[3].classList.remove('active'));
+        keyForApiFn()
       } else if (e.target.innerHTML === 'DAILY') {
+        document.querySelector('.trading-type-heading').innerHTML="Time Series (Daily)";
         keyWordOfTrade = "TIME_SERIES_DAILY_ADJUSTED"
-        choosingTradeDetails="Time Series (Daily)";
+        choosingTradeDetails = "Time Series (Daily)";
+        (e.target.parentElement.children[0].classList.remove('active'));
+        (e.target.parentElement.children[1].classList.add('active'));
+        (e.target.parentElement.children[2].classList.remove('active'));
+        (e.target.parentElement.children[3].classList.remove('active'));
+        keyForApiFn()
       } else if (e.target.innerHTML === 'WEEKLY') {
+        document.querySelector('.trading-type-heading').innerHTML="Weekly Time Series";
         keyWordOfTrade = "TIME_SERIES_WEEKLY"
-        choosingTradeDetails="Weekly Time Series";
+        choosingTradeDetails = "Weekly Time Series";
+        (e.target.parentElement.children[0].classList.remove('active'));
+        (e.target.parentElement.children[1].classList.remove('active'));
+        (e.target.parentElement.children[2].classList.add('active'));
+        (e.target.parentElement.children[3].classList.remove('active'));
+        keyForApiFn()
       } else if (e.target.innerHTML === 'MONTHLY') {
+        document.querySelector('.trading-type-heading').innerHTML="Monthly Time Series";
         keyWordOfTrade = "TIME_SERIES_MONTHLY"
-        choosingTradeDetails="Monthly Time Series";
+        choosingTradeDetails = "Monthly Time Series";
+        (e.target.parentElement.children[0].classList.remove('active'));
+        (e.target.parentElement.children[1].classList.remove('active'));
+        (e.target.parentElement.children[2].classList.remove('active'));
+        (e.target.parentElement.children[3].classList.add('active'));
+        keyForApiFn()
       }
       let tradeUrl = `https://www.alphavantage.co/query?function=${keyWordOfTrade}&symbol=${entry}&apikey=${keyForApi}`;
       console.log(tradeUrl, " urllllllllllllllll")
 
-      tableDataTrigger = true;
-      fetchApiData(tradeUrl);  
-
+      fetchApiData(tradeUrl);
     });
   });
 }
 
 
 // Table data filling
-
 function tableDataFill(e) {
   console.log(e)
-  tableDataTrigger = false;
-
-  let tableBody = document.getElementsByClassName('table-data-filling-in-script')[0];
   
+  // let tableBody = document.getElementsByClassName('table-data-filling-in-script')[0];
   tableBody.innerHTML = '';
- 
   let count = 0;
 
   for (let date in e) {
     if (e.hasOwnProperty(date)) {
-      var rowData = e[date];
-      var row = `
+      let rowData = e[date];
+      let row =
+        `
         <tr>
           <td>${date}</td>
           <td>${rowData['1. open']}</td>
@@ -199,7 +275,7 @@ function tableDataFill(e) {
       tableBody.innerHTML += row;
       count++;
 
-      if (count >= 100) {
+      if (count >= 20) {
         break;
       }
     }
@@ -212,6 +288,24 @@ function tableDataFill(e) {
 
 
 
+// local storage delete
+
+function removingData() {
+  let tradeDataAttachingInDataContainer = document.querySelectorAll('.remove');
+  tradeDataAttachingInDataContainer.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      localStorage.removeItem(e.target.value);
+      let item = document.getElementById(e.target.value);
+      item.remove();
+    });
+  });
+}
+
+
+
+
+// Search key add
+// Search bar hide and add control
 
 
 
@@ -222,7 +316,6 @@ function tableDataFill(e) {
 
 
 // Search Result toggle
-
 
 // const searchToggle = document.querySelectorAll('body :not(#search-bar)');
 
