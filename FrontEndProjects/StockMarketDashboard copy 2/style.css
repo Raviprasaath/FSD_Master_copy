@@ -1,25 +1,42 @@
 :root {    
-    --leftbar-bg: #96BB7C;
+    --primary-color-dark :#57459a;
+    --primary-color-medium : #7e68af9e;
+    --primary-color-lite : #fbfbfc;
+    --primary-color-litest:rgb(126, 104, 175, 0.6);
+    --secondary-color-dark : #daab6c;
+    /* --secondary-color-lite : #f7eee4; */
+    --secondary-color-lite : #ffffff;
+    --background: #ffffff;
+    --text-gray: rgb(214, 207, 207);
+    
+
+
+    --leftbar-bg: var(--primary-color-dark);
+    
     --leftbar-color: #000000;
-    --table-bg: #fdcedfb9;
+    --table-bg: var(--secondary-color-lite);
+   
     /* --table-trade-btn-bg: #9376E0; */
-    --table-trade-btn-bg: #C07F00;
+    --table-trade-btn-bg: var(--primary-color-medium);
 
 
 
-    --table-head-bg: #99A98F;
-    --table-data-odd-bg: #d14d727b;
-    --table-data-even-bg: #e9a17860;
-    --table-brade-btn-color: #ffffff;
-    --table-data-odd-color: #000000;
-    --table-data-even-color: #000000;
-    --stocks-bg: #6b728eb8;
-    --stock-card-bg: #F2EAD3;
-    --stock-card-company: #712B75;
-    --stock-card-symbol: #A68DAD;
-    --search-result-bg: #ADE792;
-    --search-result-color: #3A1078;
-    --search-result-symbol: #9BE8D8;
+    --table-head-bg: var(--primary-color-dark);
+    --table-data-odd-bg: var(--primary-color-litest);
+    --table-data-even-bg: var(--secondary-color-lite);
+    --table-brade-btn-color: var(--secondary-color-lite);
+    --table-data-odd-color:black;
+    --table-data-even-color: black;
+   
+
+
+    --stocks-bg: var(--primary-color-lite);
+    --stock-card-bg: var(--primary-color-dark);
+    --stock-card-company: white;
+    --stock-card-symbol: rgb(171, 166, 166);
+    --search-result-bg: rgba(121, 102, 177, 0.2);
+    --search-result-color: var(--primary-color-dark);
+    --search-result-symbol: var(--secondary-color-dark);
 
     --quote-bg:#EDFFEC;
     --quote-author-color: #FCAEAE;
@@ -33,27 +50,15 @@
 }
 
 body {
+    background-color: var(--primary-color-dark);
     /* background-color: #BDCDD6; */
     /* background: linear-gradient(rgb(169, 144, 126), rgb(243, 222, 186)) */
     /* background: radial-gradient(#59dbc5, #c0b7b7); */
     position: relative;
+    
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
-  body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1514810771018-276192729582?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.5;
-    z-index: -1;
-  }
-  
+
   
   
 
@@ -89,14 +94,26 @@ body {
 }
 .user-selection-nav-bar li {
     list-style: none;
-    padding-top: 5px;
+    padding: 15px;
+    margin: 5px;
+    border-radius: 40px;
+
 }
 .user-selection-nav-bar li a {
     text-decoration: none;
-    color: var(--leftbar-color);
+    color: var(--secondary-color-lite);
     font-weight: 750;
     font-size: 17px;
 }
+
+.user-selection-nav-bar > li:nth-child(1) {
+    background-color: var(--secondary-color-lite); 
+}
+
+.user-selection-nav-bar > li:nth-child(1) > a {
+    color: var(--primary-color-dark);
+}
+
 .fa-solid {
     padding-right: 10px;
 }
@@ -109,6 +126,7 @@ body {
 }
 .heading-portion>h1 {
     font-size: 24px;
+    color: white;
 }
 .error-message {
     font-size: 18px;
@@ -119,10 +137,10 @@ body {
 .table-of-data {
     margin: auto;
     width: 95%;
-    height: 60vh;
+    height: 50vh;
     background-color: var(--table-bg);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
 }
 
 .table-of-data {
@@ -137,6 +155,8 @@ body {
 #table-main {
     /* margin-left: 15px; */
     margin: auto;
+    border: 3px solid black;
+    border-radius: 8px;
 }
 .table-heading {
     font-weight: 800;
@@ -148,7 +168,7 @@ body {
 }
 .table-heading {
     background-color: var(--table-head-bg) !important;
-    color: var(--table-head-color);
+    color: white !important; 
 }
 
 .table-data-filling-in-script {
@@ -158,9 +178,11 @@ body {
 #table-main tr:nth-child(even) {
     background-color: var(--table-data-even-bg);
     color: var(--table-data-even-color);
+    font-size: 16px;
 }
 #table-main tr:nth-child(odd) {
     background-color: var(--table-data-odd-bg);
+    font-size: 16px;
     color: var(--table-data-odd-color);
 }
 
@@ -173,15 +195,33 @@ body {
     align-items: center;
     width: 95%;
     padding: 10px;
-    border-bottom-left-radius: 8px; 
-    border-bottom-right-radius: 8px; 
-    height: 30vh;
+    border-bottom-left-radius: 30px; 
+    border-bottom-right-radius: 30px; 
+    height: 45vh;
     overflow: scroll; 
+    overflow-x: hidden;
     background-color: var(--stocks-bg);
 }
 
-.random-data-main-page::-webkit-scrollbar {
-    display: none;
+/* Track */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary-color-dark); /* Color of the scrollbar handle */
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color-dark); /* Color of the scrollbar handle when hovered */
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: var(--primary-color-litest); /* Color of the scrollbar track */
+    background-color: rgb(247, 247, 247, 0);
 }
 
 .stock {    
@@ -193,20 +233,30 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     transition: 0.3s ease;
     margin: 10px;
     text-align: center;
     box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.403);
 }
+.stock > span {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
 .stock-name {
+    /* width: 80%; */
     color: var(--stock-card-company);
     font-family: 'Agdasima', sans-serif;
     font-size: 16px;
     font-weight: 800;
+    /* border: 3px solid red;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; */
 }
 .stock-symbol {
-    color: var(--stock-card-symbol);
+    color: var(--text-gray);
     font-size: 14px;
     font-weight: 400;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -220,26 +270,30 @@ body {
     font-family: 'Agdasima', sans-serif;
     font-size: 14px;
     padding-left: 15px;
+    color: var(--text-gray);
     
 }
 .region {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    color: rgb(38, 37, 37);
+    color: var(--text-gray);
     font-size: 15px;
 }
 
 .trade-selection {
-    background-color: var(--table-trade-btn-bg);
+    /* background-color: var(--table-trade-btn-bg); */
+    background-color: var(--primary-color-litest);
     color: var(--table-brade-btn-color);
     padding: 5px 10px;
     border-radius: 5px;
     border: none;
     font-size: 14px;
+    font-weight: 600;
     margin-left: 10px;
+    /* opacity: 0.7; */
 }
 .trade-selection.active {
-    background-color: rgba(12, 149, 241, 0.673);
-    color: black;
+    background-color: var(--primary-color-dark);
+    color: var(--primary-color-lite);
     font-size: 15px;
     font-weight: 700;
 }
@@ -257,7 +311,7 @@ body {
 .trade-data.analytics {
     font-size: 12px;
     width: 97px;
-    background-color: orange;
+    background-color: var(--secondary-color-dark);
 }
 
 .trade-type-selection {
@@ -309,6 +363,7 @@ body {
     border: none;
     width: 70%;
     padding-left: 10px;
+    outline: none;
 }
 #searching-section button {
     border: none;
@@ -316,7 +371,6 @@ body {
 }
 
 #searching-section {
-    border: 1px solid black;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -328,7 +382,6 @@ body {
     font-size: 18px;
     padding: 8px 10px;
     margin: 0;
-    
 }
 
 .searching-option {
@@ -340,10 +393,11 @@ body {
     right: 30px;
     top: 8px;
     background-color: white;
+    border-radius: 30px;
+    padding: 2px 18px;
 }
 
 .searching-option-li {
-    box-shadow: 0px 10px 15px 5px rgb(46, 37, 37);
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -422,7 +476,6 @@ body {
     padding: 5px;
     width: 70%;
     transition: 0.5s ease-out;
-    box-shadow: 0px 15px 10px 0px #206A5D;
     border-radius: 0.5rem;
     background-color: white;
 }
@@ -500,7 +553,7 @@ body {
     .table-of-data {
         margin: auto;
         width: 95%;
-        height: 60vh;
+        height: 30vh;
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
     }
@@ -527,7 +580,7 @@ body {
         padding: 10px;
         border-bottom-left-radius: 6px; 
         border-bottom-right-radius: 6px; 
-        height: 30vh;
+        height: 50vh;
         overflow: scroll; 
     }
 
@@ -865,13 +918,13 @@ body {
         border: none;
         width: 70%;
         padding-left: 8px;
+        outline: none;
     }
     #searching-section button {
         border: none;
     }
 
     #searching-section {
-        border: 1px solid black;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
