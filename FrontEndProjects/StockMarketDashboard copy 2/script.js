@@ -161,15 +161,17 @@ function symboltesting(e) {
 //   stockPrice.innerHTML = latestPriceOfStock;
 // }
 
+{/* <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i> */}
 
 function watchListCardRender(searchResultData) {
+
 
   for (const item of searchResultData) {
     document.getElementsByClassName('random-data-main-page')[0].innerHTML =
       `
       <div class="stock" id="${item.symbol}">
         <div>
-            <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i>
+
             <span class="stock-name">${item.name} </span>
         </div>
         <div class="stock-region"> 
@@ -202,14 +204,15 @@ function intiallyCallingWatchListDataContainer() {
     item.addEventListener('click', (e) => {
       let itemName = document.getElementsByClassName('stock');
       for (let i = 0; i < itemName.length; i++) {
-        itemName[i].style.backgroundColor = "";
+        itemName[i].style.border = "";
       }
 
       const container = e.target.parentElement.parentElement;
 
       const tradeType = container.childNodes[3].innerText.split(" ")[0];
       typeOfTrade(tradeType);
-      container.style.backgroundColor = '#B7B7B7';
+      container.style.border = '8px solid var(--secondary-color-dark)';
+      container.style.scale = "1.05";
     });
   });
 }
@@ -297,7 +300,7 @@ function tableDataFill(e) {
       tableBody.innerHTML += row;
       count++;
 
-      if (count >= 20) {
+      if (count >= 10) {
         break;
       }
     }

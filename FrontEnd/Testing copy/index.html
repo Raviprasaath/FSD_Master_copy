@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Title section -->
+    <header id="title-card">
+        <a href="./sample.html" style="text-decoration: none">
+            <h1 style="color: rgb(42, 21, 181)">Movie App</h1>
+        </a>
+        <div class="type-btn">
+            <input type="text" id="search" placeholder="Search..">
+            <button type="submit" id="submit">Submit</button>
+        </div>
+    </header>
+    <!-- container section -->
+    <section class="container">
+        <div class="movie-list">
+            <!-- Genere section -->
+            <h1 style="color:darkblue;">Geners</h1>
+            <ul class="list" onclick="filterMovie(event)">
+                <li data-genereid="28">Action</li>
+                <li data-genereid="12">Adventure</li>
+                <li data-genereid="16">Animation</li>
+                <li data-genereid="35">Comedy</li>
+                <li data-genereid="80">Crime</li>
+                <li data-genereid="99">Documentry</li>
+                <li data-genereid="18">Drama</li>
+                <li data-genereid="10751">Family</li>
+                <li data-genereid="14">Fantasy</li>
+                <li data-genereid="36">History</li>
+                <li data-genereid="27">Horror</li>
+                <li data-genereid="10402">Music</li>
+                <li data-genereid="9648">Mystery</li>
+                <li data-genereid="10749">Romance</li>
+                <li data-genereid="878">Science Fiction</li>
+                <li data-genereid="10770">Tv Movie</li>
+                <li data-genereid="53">Thriller</li>
+                <li data-genereid="10752">War</li>
+                <li data-genereid="37">Western</li>
+            </ul>
+        </div>
+        <!-- Now Playing section -->
+        <div class="card-container">
+
+            <h1 style="color: chocolate; padding-left: 10px;">Now Playing</h1>
+
+            <div class="movie-details" id="movie-details">
+                <!-- <div class="card">
+        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg" class="card-image">
+        <h3 class="card-title">the avathar</h3>
+        <div class="card-details">
+            <div class="card-detail-lang">dfk</div>
+            <div class="card-detail-rating">kdfjhjds</div>
+        </div>
+    </div> -->
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Select card description section -->
+
+    <section class="container-moviedescription">
+
+        <!-- <div class="Movie-Description">
+    <div class="movie-detail-image">    
+    <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg" class="card-image">
+    </div>
+    <div class="movie-description-details">
+    <h2 style="display: inline-block;">Title</h2>
+    <i class="fa-solid fa-xmark fa-2xl"></i>
+
+    <div class="moviedescription-icon">
+        <i class="fa-solid fa-star"></i>
+        <div style="display: block;">rating</div>
+    </div>
+
+    <div class="moviedetail-des">
+    <div class="moviedetail-lan" style="display: inline-block;">EN </div>
+    <i class="fa-solid fa-circle fa-2xs" style="display:inline-block;"> </i>
+    <div class="moviedetail-genere" style="display:inline-block;"> Action</div>
+    </div>
+    <div class="moviedetail-para">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus dolores delectus, quas corrupti deserunt perferendis vero, molestiae accusamus temporibus impedit maxime natus quia provi.
+    </div>
+    <div class="moviedetail-price">
+        <i class="fa-solid fa-rupee-sign fa-xs"></i>
+        <div style="display: inline-block;">250</div>
+    </div>
+    <button class="moviedetails-ticketbtn" type="submit">Book Ticket</button>
+</div>
+</div>-->
+    </section>
+
+
+    <!-- Payment section -->
+    <!-- <section class="">
+
+</section> -->
+    <!-- Button -->
+    <button id="prev">Prev</button>
+    <button id="current">Current</button>
+    <button id="next">Next</button>
+
+    <!-- Footer section -->
+
+    <footer class="footer">
+        <div class="copyright">
+            <i class="fa-solid fa-copyright"> copy right: 1992 Movie App </i>
+        </div>
+
+        <div class="contacts">
+            <i class="fa-solid fa-phone"> Phone: 7729044697</i>
+        </div>
+    </footer>
+
+
+
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
