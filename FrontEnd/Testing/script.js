@@ -23,26 +23,56 @@
 
 
 
-const fetchQuotesByCategory = async (category) => {
+// const url = 'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=COIN,CRYPTO:BTC,FOREX:USD&time_from=20220410T0130&limit=1000&apikey=AO48IFCXLA3BX1O9';
+
+// async function closingPointfetchData(url) {
+//   try {
+//     const response = await fetch(url);
+//     const data = await response.json();
+//     console.log(data)
+
+
+//   } catch (error) {
+//     console.log('Error:', error);
+//   }
+// }
+
+// closingPointfetchData(url);
+
+
+
+
+let newsFeed = document.getElementsByClassName('news-feed')[0];
+let newsFeedBanner = document.getElementsByClassName('news-feed-banner')[0];
+let newsFeedTitle = document.getElementsByClassName('news-feed-title')[0];
+let newsFeedAnchorLink = document.getElementsByClassName('newsfeed-anchor-link')[0];
+
+const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=COIN,CRYPTO:BTC,FOREX:USD&time_from=20220410T0130&limit=1000&apikey=${keyForApi}`;
+async function newsFeedApi(url) {
   try {
-    const response = await fetch(`https://api.api-ninjas.com/v1/quotes?category=${category}`, {
-      method: 'GET',
-      headers: {
-        'X-Api-Key': 'E8PgODjCuHl37Fg9L1GDIg==j4zCl9yImLIk9l8b',
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error('Error: ' + response.status);
+    const response = await fetch(url);
+    const data = await response.json();
+    let dataStore =(data.feed)
+    for(let i=0; i<dataStore.length-1; i++) {
+      let {banner_image, title, url} = dataStore[i];
+      newsFeed.innerHTML = 
+      `
+      <img class="news-feed-banner"  src="${banner_image}" alt="news-img">
+      <div class="news-feed-a-title">
+          <p class="news-feed-title">${title}</p>
+          <a class="newsfeed-anchor-link" href="${url}">Read More</a>
+      </div>
+      `
     }
-
-    const result = await response.json();
-    console.log(result);
   } catch (error) {
-    console.error('Error: ', error);
+    console.log('Error:', error);
   }
-};
+}
 
-const category = 'business';
-fetchQuotesByCategory(category);
+newsFeedApi(url);
+
+
+
+
+
+

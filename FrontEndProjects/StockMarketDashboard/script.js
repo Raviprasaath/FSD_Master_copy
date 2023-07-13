@@ -3,7 +3,7 @@ let searchBtn = document.getElementById('fetchStart');
 let tableBody = document.getElementsByClassName('table-data-filling-in-script')[0];
 let searchingOptionLi = document.querySelector('.searching-option-li');
 
-let apiArray = ["AO48IFCXLA3BX1O9", "T4Y29QFCCCFF7V03", "T4Y29QFCCCFF7V03", "7V18I4NFIV62Z5ZP", "IPW3ZIJPAL09OOPG", "IPW3ZIJPAL09OOPG", "3YI9UO1YNH2VBACE"];
+let apiArray = ["AO48IFCXLA3BX1O9", "T4Y29QFCCCFF7V03", "T4Y29QFCCCFF7V03", "7V18I4NFIV62Z5ZP", "HDW0XJ41JMQO936Y", "VU787JW5IOP6PXFZ", "IPW3ZIJPAL09OOPG", "IPW3ZIJPAL09OOPG", "3YI9UO1YNH2VBACE", "WKHEQRWNMJUGI3HG"];
 
 let keyForApi = "AO48IFCXLA3BX1O9";
 
@@ -156,11 +156,6 @@ function symboltesting(e) {
   intiallyCallingWatchListDataContainer();
 }
 
-// function stockpriceUpdate() {
-//   let stockPrice = document.querySelector('.stock-latest-price');
-//   stockPrice.innerHTML = latestPriceOfStock;
-// }
-
 
 function watchListCardRender(searchResultData) {
 
@@ -297,17 +292,12 @@ function tableDataFill(e) {
       tableBody.innerHTML += row;
       count++;
 
-      if (count >= 20) {
+      if (count >= 15) {
         break;
       }
     }
   }
 }
-
-
-
-
-
 
 
 // local storage delete
@@ -362,26 +352,13 @@ window.addEventListener('resize', () => {
 })
 
 
-let imageScroll = document.getElementById('images-container');
-let imageArr = ['image-1.jpg', 'image-2.jpg', 'image-3.jpg', 'image-4.jpg', 'image-5.jpeg', 'image-6.jpeg', 'image-7.jpeg', 'image-8.jpeg'];
-
-let i = 0;
-setInterval(() => {
-  imageScroll.innerHTML = `<img class="img-right-side" src="${imageArr[i]}" alt="img">`;
-
-  i++;
-  if (i >= imageArr.length) {
-    i = 0;
-  }
-}, 4000);
-
-
 const category = 'business';
-// fetchQuotesByCategory(category);
 
 setInterval(() => {
   fetchQuotesByCategory(category);
+
 }, 5000)
+
 
 const fetchQuotesByCategory = async (category) => {
   try {
@@ -407,72 +384,53 @@ const fetchQuotesByCategory = async (category) => {
 
 
 
+// news feed
+
+let newsFeed = document.getElementsByClassName('news-feed')[0];
+let newsFeedBanner = document.getElementsByClassName('news-feed-banner')[0];
+let newsFeedTitle = document.getElementsByClassName('news-feed-title')[0];
+let newsFeedAnchorLink = document.getElementsByClassName('newsfeed-anchor-link')[0];
+
+const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=COIN,CRYPTO:BTC,FOREX:USD&time_from=20220410T0130&limit=1000&apikey=${keyForApi}`;
+
+newsFeedApi(url);
+let k =0;
+async function newsFeedApi(url) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    let dataStore = (data.feed);
+
+    
+      let timerFn = setInterval(() => {
+          newFeedRender(dataStore[k], dataStore.length);
+        }, 5000);      
+  } catch (error) {
+    console.log('Error:', error);
+  }
+}
+
+function newFeedRender(dataStore, len) {
+
+  let { banner_image, title, url } = dataStore;
+  console.log(dataStore)
+  let banner = dataStore.banner_image;
+  if (dataStore.banner_image === null) {
+    banner = "https://www.fisdom.com/wp-content/uploads/2021/11/shutterstock_191449442.webp";
+  }
+  newsFeed.innerHTML =
+        `
+      <img class="news-feed-banner"  src="${banner}" alt="news-img">
+      <div class="news-feed-a-title">
+          <p class="news-feed-title">${dataStore.title}</p>
+          <a target="_blank" class="newsfeed-anchor-link" href="${dataStore.url}">Read More</a>
+      </div>
+      `
+      k++;
+      if (k==len-1) {
+        k=0;
+      }
+}
 
 
 
-// graph
-// function graph() {
-//   const xValues = [20, 10, 70, 10, 90, 100, 110, 120, 130, 140, 150];
-//   const yValues = [7, 15, 8, 9, 9, 9, 10, 11, 14, 14, 15];
-
-//   new Chart("myChart", {
-//     type: "line",
-//     data: {
-//       labels: xValues,
-//       datasets: [{
-//         fill: false,
-//         lineTension: 0,
-//         backgroundColor: "rgba(0,0,0,1.0)",
-//         borderColor: "rgba(0,0,0,0.5)",
-//         data: yValues
-//       }]
-//     },
-//     options: {
-//       legend: { display: false },
-//       scales: {
-//         yAxes: [{
-//           ticks: {
-//             min: 6,
-//             max: 16
-//           }
-//         }]
-//       }
-//     }
-//   });
-// }
-
-// graph()
-
-
-// my code
-// function symboltesting(e) {
-//   let watchListObject = [];
-
-//   // console.log(e, " symbol");
-//   // console.log(searchResultData);
-
-//   // let storedData = JSON.parse(localStorage.getItem('wishList'));
-//   // if (storedData) {
-//     // searchResultData = storedData;
-//   // }
-
-//   searchResultData.forEach((item) => {
-//     if (item["1. symbol"] == e) {
-//       watchListObject.push({
-//         name: item["2. name"],
-//         symbol: item["1. symbol"],
-//         region: item["4. region"]
-//       }
-//       );
-//     }
-//   })
-
-//   // localStorage.setItem('wishList', JSON.stringify(watchListObject));
-
-//   watchListCardRender(watchListObject);
-
-//   watchListDataContainer(e);
-// }
-
-// getWatchListObjectstore = JSON.parse(localStorage.getItem('wishList'));
-// (getWatchListObjectstore && getWatchListObjectstore.length > 0) && (watchListCardRender(getWatchListObjectstore))
