@@ -1,5 +1,38 @@
 let page = 1;
+let lastPage = 5;
 let allMovies = [];
+let prevBtn = document.getElementById('prev');
+// Pages control
+let currentBtn = document.getElementById('current');
+let nextBtn = document.getElementById('next');
+if (page === 1) {
+    prevBtn.disabled = true;
+    prevBtn.style.backgroundColor = "gray";
+}
+if (page === lastPage) {
+    nextBtn.disabled = true;
+    nextBtn.style.backgroundColor = "gray";
+}
+
+nextBtn.onclick = function() {
+    if (page !== lastPage) {
+        page++;
+    }
+    callApiForAllMovie(page);
+    currentBtn.innerText = "Current Page : "+page;
+}
+
+
+prevBtn.onclick = function() {
+    if (page !== 1) {
+        prevBtn.style.backgroundColor = "orange";
+        page--;
+    }
+    callApiForAllMovie(page);
+    currentBtn.innerText = "Current Page : "+page;
+}
+
+callApiForAllMovie(page);
 
 // API Data storage 
 async function callApiForAllMovie(page) {
@@ -15,6 +48,8 @@ async function callApiForAllMovie(page) {
     let response = await filmObj.json();
     let result = response.results;
     let objArr = [];
+    // lastPage = (response.total_pages);
+    lastPage = 4;
 
     result.forEach( (item) => {
         let movie = 
@@ -32,7 +67,6 @@ async function callApiForAllMovie(page) {
     generateCards(objArr);
     moviesData(objArr);
 
-    // console.log(objArr)
 }
 
 // Card Rendering 
@@ -68,12 +102,14 @@ function generateCards(films) {
     favMoviesContainerAdding();
 }
 
+
 // Searching
 let searchBtn = document.getElementById('movie-search-btn');
 searchBtn.onclick = function() {
     let movieName = document.getElementById('movie-search-box').value;        
     searchingMovie(movieName);
 }
+
 
 async function searchingMovie(movie) {
     let filmObj = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}&api_key=494170c64724d022e9296a5fa98644eb`)
@@ -131,19 +167,3 @@ function moviesData(data) {
     console.log(data);
 }
 
-// Pages control
-let currentBtn = document.getElementById('current');
-let nextBtn = document.getElementById('next');
-nextBtn.onclick = function() {
-    page++;
-    callApiForAllMovie(page);
-    currentBtn.innerText = "Current Page : "+page;
-}
-let prevBtn = document.getElementById('prev');
-prevBtn.onclick = function() {
-    page--;
-    callApiForAllMovie(page);
-    currentBtn.innerText = "Current Page : "+page;
-}
-
-callApiForAllMovie(page);

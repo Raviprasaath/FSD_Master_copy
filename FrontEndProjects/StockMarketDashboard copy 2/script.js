@@ -412,70 +412,65 @@ const fetchQuotesByCategory = async (category) => {
 
 
 
+//--------
+document.addEventListener('DOMContentLoaded', function() {
+  const stockData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [{
+      label: 'Stock Price',
+      data: [200, 300, 450, 500, 550, 400],
+      // backgroundColor: 'rgb(87, 69, 154)',
+      backgroundColor: 'rgb(255, 255, 255, 0.1)',
+      borderColor: 'rgb(87, 69, 154)',
+      borderWidth: 2,
+      pointBackgroundColor: 'rgb(87, 69, 154)',
+      pointRadius: 5,
+      pointBorderWidth: 5,
+      tension: 0.4,
+    }]
+  };
 
-// graph
-// function graph() {
-//   const xValues = [20, 10, 70, 10, 90, 100, 110, 120, 130, 140, 150];
-//   const yValues = [7, 15, 8, 9, 9, 9, 10, 11, 14, 14, 15];
-
-//   new Chart("myChart", {
-//     type: "line",
-//     data: {
-//       labels: xValues,
-//       datasets: [{
-//         fill: false,
-//         lineTension: 0,
-//         backgroundColor: "rgba(0,0,0,1.0)",
-//         borderColor: "rgba(0,0,0,0.5)",
-//         data: yValues
-//       }]
-//     },
-//     options: {
-//       legend: { display: false },
-//       scales: {
-//         yAxes: [{
-//           ticks: {
-//             min: 6,
-//             max: 16
-//           }
-//         }]
-//       }
-//     }
-//   });
-// }
-
-// graph()
-
-
-// my code
-// function symboltesting(e) {
-//   let watchListObject = [];
-
-//   // console.log(e, " symbol");
-//   // console.log(searchResultData);
-
-//   // let storedData = JSON.parse(localStorage.getItem('wishList'));
-//   // if (storedData) {
-//     // searchResultData = storedData;
-//   // }
-
-//   searchResultData.forEach((item) => {
-//     if (item["1. symbol"] == e) {
-//       watchListObject.push({
-//         name: item["2. name"],
-//         symbol: item["1. symbol"],
-//         region: item["4. region"]
-//       }
-//       );
-//     }
-//   })
-
-//   // localStorage.setItem('wishList', JSON.stringify(watchListObject));
-
-//   watchListCardRender(watchListObject);
-
-//   watchListDataContainer(e);
-// }
-
-// getWatchListObjectstore = JSON.parse(localStorage.getItem('wishList'));
-// (getWatchListObjectstore && getWatchListObjectstore.length > 0) && (watchListCardRender(getWatchListObjectstore))
+  // Create the chart
+  const ctx = document.getElementById('stockChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: stockData,
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(0, 0, 0, 0.1)',
+          },
+          ticks: {
+            font: {
+              family: 'Arial',
+              size: 12,
+              weight: 'bold',
+            },
+            color: 'rgba(0, 0, 0, 0.5)',
+          },
+        },
+        x: {
+          grid: {
+            color: 'rgba(0, 0, 0, 0.1)',
+          },
+          ticks: {
+            font: {
+              family: 'Arial',
+              size: 12,
+              weight: 'bold',
+            },
+            color: 'rgba(0, 0, 0, 0.5)',
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+    },
+  });
+});
