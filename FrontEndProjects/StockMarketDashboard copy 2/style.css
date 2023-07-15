@@ -3,6 +3,7 @@
     --primary-color-medium : #7e68af9e;
     --primary-color-lite : #fbfbfc;
     --primary-color-litest:rgb(126, 104, 175, 0.6);
+    --primary-color-litest2:rgba(168, 152, 203, 0.8);
     --secondary-color-dark : #daab6c;
     /* --secondary-color-lite : #f7eee4; */
     --secondary-color-lite : #ffffff;
@@ -92,18 +93,38 @@ body {
 .user-selection-nav-bar > li:nth-child(1) {
     background-color: var(--secondary-color-lite); 
 }
+.nav-bottom > ul{
+    list-style: none;
+}
+
 
 .user-selection-nav-bar > li:nth-child(1) > a {
     color: var(--primary-color-dark);
 }
 
-.fa-solid {
+
+.fa-solid, .fa-user {
     padding-right: 10px;
 }
 
 /* -------------- Main Page --------------- */
 .middle-page-data {
     margin-top: 1.5%;
+}
+.instruction {
+    font-size: 18px;
+    text-align: center;
+    margin-left: 30%;
+    margin-right: 10%;
+    margin-bottom: 50px;
+    line-height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    text-align: justify;
+    padding: 5px;
+}
+.highlights {
+    background-color: var(--secondary-color-dark);
 }
 
 .error-message {
@@ -112,6 +133,7 @@ body {
     font-weight: 800;
 }
 .graph-table {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -123,8 +145,11 @@ body {
     height: 400px;
 }
 .graph {
-    width: 400px;
-    /* background-color: red; */
+    width: 480px;
+    height: 270px;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .table-of-data {
@@ -147,7 +172,7 @@ body {
 
 #table-main {
     margin: auto;
-    border: 3px solid black;
+    /* border: 2px solid black; */
     border-radius: 8px;
 }
 .table-heading {
@@ -167,12 +192,12 @@ body {
     font-size: 15px;
 }
 
-#table-main tr:nth-child(even) {
+#table-main tr:nth-child(even), .table-balanceSheet tr:nth-child(even) {
     background-color: var(--table-data-even-bg);
     color: var(--table-data-even-color);
     font-size: 16px;
 }
-#table-main tr:nth-child(odd) {
+#table-main tr:nth-child(odd), .table-balanceSheet tr:nth-child(odd) {
     background-color: var(--table-data-odd-bg);
     font-size: 16px;
     color: var(--table-data-odd-color);
@@ -191,7 +216,7 @@ body {
     height: 45vh;
     overflow: scroll; 
     overflow-x: hidden;
-    background-color: var(--stocks-bg);
+    background-color: var(--primary-color-litest2);
 }
 
 /* Track */
@@ -279,9 +304,30 @@ body {
     border: none;
     font-size: 14px;
     font-weight: 600;
-    margin-left: 10px;
+    margin-left: 20px;
     /* opacity: 0.7; */
 }
+
+@keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.09);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .trade-selection {
+    animation: heartbeat 1.5s infinite;
+  }
+
+
+
+
+
 .trade-selection.active {
     background-color: var(--primary-color-dark);
     color: var(--primary-color-lite);
@@ -321,12 +367,15 @@ body {
     
 }
 
+
+
 #myChart {
     width: 400px;
     height: 400px;
     background-color: white;
     padding: 10px;
     border-radius: 10px;
+    
 }
 
 /* ----------right side data------------ */
@@ -441,9 +490,6 @@ body {
     font-family:monospace;
 }
 
-.searching-option-li li i{
-    opacity: 0.8;
-}
 
 .searching-option-li button {
     height: 30px;
@@ -455,45 +501,44 @@ body {
     display: none;
 }
 
-#images-container {
-    display: flex;
-    justify-content: center;
-}
-.img-right-side {
-    padding: 5px;
-    width: 70%;
-    transition: 0.5s ease-out;
-    border-radius: 0.5rem;
+/* Balance Sheet */
+#balanceSheet {
     background-color: white;
+    height: 95%;
+    margin-left: 32px;
+    margin-right: 3%;
+    border-radius: 30px;
 }
-#quote-random {
+.company-name {
+    padding-top: 30px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 70%;
-    border-radius: 0.7rem;
-    padding: 15px;
-    margin-top: 30px;
-    height: fit-content;
-    background-color: var(--quote-bg);
+    gap: 20px;
 }
-.quote {
+.company-name > p {
     border: 1px solid black;
-    margin: 10px;
     padding: 10px;
-    font-family: monospace;
-    font-size: 12px;
+    font-size: 13px;
 }
-.author {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 12px;
+
+#nameBS {
     font-weight: 800;
+}
+
+.company-name > button {
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: var(--primary-color-dark);
+    color: var(--primary-color-lite);
+    border-radius: 10px;
+}
+.table-balanceSheet {
+    margin: auto;
+    margin-top: 20px;
+    width: 80%;
     text-align: center;
-    background-color: var(--quote-author-color);
-    width: fit-content;
-    padding: 10px;
-    border-radius: 0.3rem;
 }
 
 

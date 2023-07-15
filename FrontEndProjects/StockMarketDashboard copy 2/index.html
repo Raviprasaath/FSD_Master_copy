@@ -38,9 +38,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#charts">
+                            <a href="#BalanceSheet">
                                 <i class="fa-solid fa-chart-line"></i>
-                                Charts
+                                Balance Sheet
                             </a>
                         </li>
                         <li>
@@ -49,17 +49,24 @@
                                 News</a>
                         </li>
                         <li>
-                            <a href="#trends">
+                            <a href="#inflation">
                                 <i class="fa-sharp fa-solid fa-arrow-trend-up"></i>
-                                Trends</a>
+                                Inflation</a>
+                        </li>
+                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>                        
+                        <li>
+                            <a href="user">
+                                <i class="fa-regular fa-user"></i>
+                                User
+                            </a>
                         </li>
                     </ul>
                 </nav>
             </div>
+            
         </div>
 
-        <div class="middle-page-data">            
-            
+        <div class="middle-page-data">                        
             <div class="table-of-data">
                 <!-- slection of trade type -->
                 <div class="trade-type-selection">
@@ -70,17 +77,11 @@
                 </div>
                 <!-- Table of Content -->
                 <div class="graph-table">
+                    <p class="instruction">Please choose a required <span class="highlights">STOCKS</span> by using the <span class="highlights">SEARCH</span> option and add it to your <span class="highlights">Watch List BELOW</span>. Use the <span class="highlights">ABOVE</span> buttons to select the <span class="highlights">TYPE OF TRADE</span> and see the details.</p>
                     <div id="table-data">
                         <table id="table-main">         
-                            <thead>
-                                <tr class="table-heading">
-                                    <th class="trading-type-heading">Type of Trade</th>
-                                    <th>OPEN</th>
-                                    <th>HIGH</th>
-                                    <th>LOW</th>
-                                    <th>CLOSE</th>
-                                    <th>VOLUME</th>
-                                </tr>    
+                            <thead class="table-heading-main">
+                                
                             </thead>
                             <tbody class="table-data-filling-in-script">
                                 
@@ -89,21 +90,112 @@
                     </div>
                     <div class="graph">
                         <canvas id="stockChart"></canvas>
-                        hi hel
+                        
                     </div>
                 </div>
                 
                 <div>
 
                 </div>
-            </div>
-                
+            </div>                
             
             <div class="data-graph-splitting">
                 <div class="random-data-main-page">
+                   
                 </div>
             </div>
+
+            <div id="balanceSheet">
+                <div>
+                    <div class="company-name">
+                        <p>Company Name : <span id="nameBS">IBM</span></p>
+                        <button>Fetch Data</button>
+                    </div>
+                    <table class="table-balanceSheet">
+                        <thead>
+                            <tr class="table-heading">
+                                <th>Total Assets</th>
+                                <th>Total Current Assets</th>
+                                <th>Cash and Cash Equivalents at Carrying Value</th>
+                                <th>Inventory</th>
+                                <th>Current Net Receivables</th>
+                                <th>Total Non-Current Assets</th>
+                                <th>Property, Plant, and Equipment</th>
+                                <th>Intangible Assets</th>
+                                <th>Goodwill</th>
+                                <th>Total Liabilities</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bsheet">
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
         </div>
+
+
         <div class="rights-side-data">
             <div class="searching-option">
                 <div id="searching-section">

@@ -391,7 +391,7 @@ let newsFeedBanner = document.getElementsByClassName('news-feed-banner')[0];
 let newsFeedTitle = document.getElementsByClassName('news-feed-title')[0];
 let newsFeedAnchorLink = document.getElementsByClassName('newsfeed-anchor-link')[0];
 
-const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=COIN,CRYPTO:BTC,FOREX:USD&time_from=20220410T0130&limit=1000&apikey=${keyForApi}`;
+const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=${keyForApi}`;
 
 newsFeedApi(url);
 let k =0;

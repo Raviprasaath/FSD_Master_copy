@@ -1,369 +1,410 @@
-let cards = document.querySelector('.cards');
-let card_container = document.querySelector('.card-container');
-let input = document.getElementById('search');
-let sbtn = document.querySelector('.submit');
-let removesearch = document.querySelector(".result button");
-let watchcontainer = document.querySelector('.watchlistgroups')
-let result = document.getElementById('hline');
-let newscontainer = document.querySelector('.news-feed');
-let datetime = document.getElementById('datetime')
+const basePath = 'https://image.tmdb.org/t/p/w220_and_h330_face/';
+let cardResults;
+let Movie;
+let page = 1;
 
+let searchFn;
+let genereFilter;
+let AllMovies;
+let work;
 
+const btnPrev = document.getElementById("prev");
+const btnCurrent = document.getElementById("current");
+const btnNext = document.getElementById("next");
 
-let apiArray = ["865DLLK5P0MD6MVP", "UZUT9SLX3B80XXCL", "EKY7LIH1LT1WB1BO",
-  "5AFK0YIWM9AL9JQF", "P44XVYYIWNQYMIQW", "FJFVCT5Z9CC9HL4I", "YT4X7CD6KBOLTHKH", "J4YZY2TSAID1TRKQ"];
-
-let keyForApi = "865DLLK5P0MD6MVP";
-let k = 0;
-let apiIndex = 0;
-let watchlist = [];
-let key;
-let mbtn = 'intra';
-
-let modetype = 'INTRADAY';
-function keyForApiFn() {
-  keyForApi = apiArray[apiIndex];
-  apiIndex++;
-
-  if (apiIndex == apiArray.length - 1) {
-    apiIndex = 0;
-  }
-}
-// let watchlistarr=[];
-
-
-async function geturl(urlkey, work) {
-  console.log(keyForApi, 'line32');
-  try {
-    let url = await fetch(urlkey);
-    let response = await url.json();
-    keyForApiFn()
-    console.log(response, 'line36');
-    if (work === "search" && response.bestMatches.length === 0) {
-      cards.innerHTML = `<h2>No such result found</h2>`
-
-    }
-    else if (work === "search" && response.bestMatches.length !== 0) {
-
-      let data = await response.bestMatches;
-      showSearchresult(data);
-    }
-    else if (work === "showdetails") {
-      if (modetype === 'INTRADAY') {
-        if (response.hasOwnProperty('Time Series (5min)')) {
-          const timeSeries = response['Time Series (5min)'];
-          const latestEntry = Object.keys(timeSeries)[1];
-          const latestPrice = timeSeries[latestEntry]['4. close'];
-          watchlist[2] = latestPrice;
+function btnPrevPage(page) {
+    btnPrev.addEventListener('click', () => {
+        if (page === 1) {
+            btnPrev.disabled = true;
         }
-        result.innerHTML = `${watchlist[0]} Intraday Detailts`
-        let data = await response["Time Series (5min)"];
-        showInformation(data, modetype);
-      }
-      else if (modetype === 'DAILY_ADJUSTED') {
-        if (response.hasOwnProperty('Time Series (Daily)')) {
-          const timeSeries = response['Time Series (Daily)'];
-          const latestEntry = Object.keys(timeSeries)[1];
-          const latestPrice = timeSeries[latestEntry]['4. close'];
-          watchlist[2] = latestPrice;
+        else {
+            btnPrev.disabled = false;
+            page--;
         }
-        result.innerHTML = `${watchlist[0]} Daily Detailts`
-        let data = await response["Time Series (Daily)"];
-        showInformation(data, modetype);
-      }
-      else if (modetype === 'WEEKLY') {
-        console.log(response)
-        if (response.hasOwnProperty('Weekly Time Series')) {
-          const timeSeries = response['Weekly Time Series'];
-          const latestEntry = Object.keys(timeSeries)[1];
-          const latestPrice = timeSeries[latestEntry]['4. close'];
-          watchlist[2] = latestPrice;
+        btnCurrent.innerHTML = page;
+    })
+}
+console.log(btnCurrent)
+btnNextPage();
+function btnNextPage() {
+    btnNext.addEventListener('click', () => {
+        console.log("hai")
+
+        page = page + 1;
+        btnCurrent.innerHTML = page;
+        btnPrevPage(page)
+        getNowplayingMovies(page)
+    })
+}
+//-----------------Nowplaying---------
+function getNowplayingMovies(page) {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OWRhNmNlYzRjMGIyZTllNWYzMjJjNTA3Yjk3MjU3YyIsInN1YiI6IjY0YTU1OWM3ZGExMGYwMDEzOTdjNjM0OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lJGjYugk9yrfEfE8Hw9jKed4GdMvcEuzUjo4gjyTGF4'
         }
-        result.innerHTML = `${watchlist[0]} Weekly Detailts`
-        let data = await response["Weekly Time Series"];
-        showInformation(data, modetype);
-
-      }
-      else if (modetype === 'MONTHLY') {
-        console.log(response)
-        if (response.hasOwnProperty('Monthly Time Series')) {
-          const timeSeries = response['Monthly Time Series'];
-          const latestEntry = Object.keys(timeSeries)[1];
-          const latestPrice = timeSeries[latestEntry]['4. close'];
-          watchlist[2] = latestPrice;
-        }
-        result.innerHTML = `${watchlist[0]} Monthly Detailts`
-        let data = await response["Monthly Time Series"];
-        showInformation(data, modetype);
-      }
+    };
 
 
-    }
-    else if (work === 'treanding') {
-
-      let data = await response.most_actively_traded;
-
-      showtrendinggroup(data);
-    }
-    else if (work === 'newsfeed') {
-      let data = await response.feed
-      console.log(data, 'response');
-      let timerFn = setInterval(() => {
-        showNewsfeed(data[k], data.length);
-      }, 15000);
-
-    }
-  }
-  catch (error) {
-    console.log('Error:', error);
-  }
-
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`, options)
+        .then(response => response.json())
+        .then(response => {
+            console.log(response)
+            console.log(response.total_pages)
+            rendingCard(response.results);
+            cardResults = response.results;
+            work = "globalMovie";
+        })
+        .catch(err => console.error(err));
 }
+getNowplayingMovies();
 
-function showNewsfeed(data, len) {
-  let { banner_image, title, url } = data;
-  newscontainer.innerHTML =
-    `<img class="news-feed-banner"  src="${data.banner_image}" alt="news-img">
-        <div class="news-feed-a-title">
-            <p class="news-feed-title">${data.title}</p>
-            <a class="newsfeed-anchor-link" href="${data.url}" target="_blank">Read More</a>
-        </div>`;
+//-----------------------displaycards function-----
 
 
-  k++;
-  if (k == len - 1) {
-    k = 0;
-  }
-}
-function gettime() {
+function rendingCard(results) {
+    let cardDisplay = "";
+    document.getElementById("movie-details").innerHTML = "";
+    results.map((d) => {
 
-  let date = new Date()
-  let getdate = "" + date;
-  let val = getdate.substring(0, 15);
-  datetime.innerHTML = val;
-}
-gettime()
-function showtrendinggroup(data) {
-
-  data.sort((a, b) => {
-    b = parseInt(b.change_amount)
-    a = parseInt(a.change_amount)
-
-    return b - a;
-  })
-
-  console.log(data[1].ticker, "ticker")
-  document.getElementById('grp1').innerHTML = `<h1>${data[0].ticker}</h1><h2>$ ${data[0].price}</h2><h3><i class="fa-solid fa-arrow-trend-up"></i> ${data[0].change_percentage}</h3>`
-  document.getElementById('grp2').innerHTML = `<h1>${data[1].ticker}</h1><h2>$ ${data[1].price}</h2><h3><i class="fa-solid fa-arrow-trend-up"></i> ${data[1].change_percentage}</h3>`
-  document.getElementById('grp3').innerHTML = `<h1>${data[2].ticker}</h1><h2>$ ${data[2].price}</h2><h3><i class="fa-solid fa-arrow-trend-up"></i> ${data[2].change_percentage}</h3>`
-
-
-
-}
-function trendinggroup() {
-  let urlkey = `https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=P44XVYYIWNQYMIQW`;
-  console.log(urlkey, "urlkey")
-  geturl(urlkey, "treanding");
-}
-trendinggroup();
-
-
-
-
-function removefromlist(e) {
-
-  // e.parentElement.parentElement.remove();
-  let id = e.id;
-  let watchlistarr = JSON.parse(localStorage.getItem('products'))
-  watchlistarr.forEach((element, index) => {
-    if (element[0] === id) {
-      watchlistarr.splice(index, 1);
-    }
-  })
-  localStorage.setItem('products', JSON.stringify(watchlistarr));
-  addTowatchlist();
-}
-
-if (localStorage.length > 0) {
-  addTowatchlist();
-}
-
-function addTowatchlist() {
-
-  let list = JSON.parse(localStorage.getItem('products'));
-  console.log(list)
-  watchcontainer.innerHTML = '';
-  list.forEach(element => {
-    watchcontainer.innerHTML +=
-      ` <div class="wgroup">
-        <h1 id="syml">${element[0]}</h1><h4>${element[1]}</h4>
-        <h2>${element[2]}</h2>
-        <button id="view" onclick="viewcard(this)">View</button>
-        <button class="delete" id=${element[0]} onclick="removefromlist(this)"><i class="fa-solid fa-circle-xmark"></i></button>
-        </div>`;
-  });
-}
-
-
-
-function addtolocalstorage() {
-  let listproducts;
-  if (localStorage.getItem("products")) {
-    listproducts = JSON.parse(localStorage.getItem("products"))
-  }
-  else {
-    listproducts = []
-  }
-  if (watchlist.length > 2) {
-    listproducts.push(watchlist);
-  }
-  localStorage.setItem('products', JSON.stringify(listproducts));
-
-  addTowatchlist();
-}
-
-function showInformation(data) {
-  cards.innerHTML = "";
-  cards.innerHTML += `<div id="modebtn">
-    <button id="intra" onclick='viewmodedetails("intra","INTRADAY")'>Intraday</button>
-    <button id="daily" onclick='viewmodedetails("daily","DAILY_ADJUSTED")'>Daily</button>
-    <button id="weekly" onclick='viewmodedetails("weekly","WEEKLY")'>Weekly</button>
-    <button id="monthly" onclick='viewmodedetails("monthly","MONTHLY")'>Monthly</button>
+        cardDisplay += ` <div class="card" style="background-color:beige" onclick="ShowMovie(this)">
+    <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${d.poster_path}" class="card-image">
+    <h3 class="card-title">${d.title}</h3>
+    <div class="card-details">
+        <div class="card-detail-lang">${d.original_language}</div>
+        <div class="card-detail-rating">${d.vote_average}</div>
     </div>
-    <table style="width:100%">
-    <tr>
-        <th>DATE</th>
-        <th>OPEN</th>
-        <th>HIGH</th>
-        <th>LOW</th>
-        <th>CLOSE</th>
-        <th>VOLUME</th>
-    </tr>
-    </table>`;
+</div>`;
+    })
+    document.getElementById("movie-details").innerHTML = cardDisplay;
+}
 
-  let count = 0;
-  console.log(count);
-  for (let item in data) {
 
-    if (data.hasOwnProperty(item)) {
-      let info = data[item]
+async function getGenersFilter(genereid) {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTQxNzBjNjQ3MjRkMDIyZTkyOTZhNWZhOTg2NDRlYiIsInN1YiI6IjY0OTAyNGE5MjYzNDYyMDBhZTFjZGI1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7il3x7f91baELU8ceqe8OYauvsHEJ-lC34vS3Gslqoc'
+        }
+    };
 
-      if (modetype === 'DAILY_ADJUSTED') {
-        let detail = `<tr>
-                    <td>${item}</td>
-                    <td>${info["1. open"]}</td>
-                    <td>${info["2. high"]}</td>
-                    <td>${info["3. low"]}</td>
-                    <td>${info["4. close"]}</td>
-                    <td>${info["6. volume"]}</td>
-                </tr>`
+    let res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=99da6cec4c0b2e9e5f322c507b97257c&with_genres=${genereid}`)
+    let response = await res.json();
+    let data = await response;
+    console.log(data)
+    rendingCard(data.results);
+    genereFilter = data.results;
+    work = "genreMovie";
+}
 
-        document.querySelector('table').innerHTML += detail;
-      }
-      else {
-        let detail = `<tr>
-                         <td>${item}</td>
-                         <td>${info["1. open"]}</td>
-                         <td>${info["2. high"]}</td>
-                         <td>${info["3. low"]}</td>
-                         <td>${info["4. close"]}</td>
-                         <td>${info["5. volume"]}</td>
-                        </tr>`
-        document.querySelector('table').innerHTML += detail;
-      }
-      count++;
-      if (count > 4) {
-        break;
-      }
+// movieFilter();
+
+
+function filterMovie(e) {
+    btnPrev.disabled = true;
+    btnCurrent.disabled = true;
+    btnNext.disabled = true;
+    console.log(cardResults);
+    console.log(e.target.dataset.genereid)
+    let id = e.target.dataset.genereid;
+    getGenersFilter(id);
+
+}
+
+//-------------------------search --------------------------
+const submitBtn = document.getElementById("submit");
+const searchInput = document.getElementById("search");
+submitBtn.addEventListener('click', () => {
+    let getSearchValue = searchInput.value.toLowerCase();
+    searchMovie(getSearchValue)
+})
+
+function searchMovie(movie) {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OWRhNmNlYzRjMGIyZTllNWYzMjJjNTA3Yjk3MjU3YyIsInN1YiI6IjY0YTU1OWM3ZGExMGYwMDEzOTdjNjM0OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lJGjYugk9yrfEfE8Hw9jKed4GdMvcEuzUjo4gjyTGF4'
+        }
+    };
+
+    fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}&api_key=99da6cec4c0b2e9e5f322c507b97257c`, options)
+        .then(response => response.json())
+        .then(response => {
+            console.log(response, "search")
+            Movie = response;
+
+            searchFn = response.results;
+            work = "searchingMovie";
+            rendingCard(response.results);
+
+        })
+        .catch(err => console.error(err));
+}
+
+let containerMovieDes = document.getElementById('container-moviedescription');
+
+
+function ShowMovie(e) {
+    // document.getElementById("card-container").style.filter="brightness(75%)";
+    containerMovieDes.style.display = "block";
+    document.getElementById("container").style.filter = "blur(10px)";
+
+    console.log(e.innerText.split("\n")[0]);
+    let MovieTitle = e.innerText.split("\n")[0].toLowerCase();
+
+    let moviedetail;
+
+    // All movie
+    if (work === "globalMovie") {
+        moviedetail = cardResults.filter((d) => {
+           console.log(d);
+           if (d.title.toLowerCase().includes(MovieTitle)) {
+               return d;
+           }
+           // return d.title.toLowerCase().includes(MovieTitle);
+       })
+    } else if (work === "searchingMovie") {
+        // search
+         moviedetail = searchFn.filter((d) => {
+            console.log(d);
+            if (d.title.toLowerCase().includes(MovieTitle)) {
+                return d;
+            }
+            // return d.title.toLowerCase().includes(MovieTitle);
+        })
+    } else if (work === "genreMovie") {
+        // Genre
+         moviedetail = genereFilter.filter((d) => {
+            console.log(d);
+            if (d.title.toLowerCase().includes(MovieTitle)) {
+                return d;
+            }
+            // return d.title.toLowerCase().includes(MovieTitle);
+        })
     }
-  }
-  console.log(watchlist, "watch");
-  cards.innerHTML += `<button class="addtowatchlist">ADD TO WATCHLIST</button>`
-  if (mbtn !== '') {
-    document.getElementById(mbtn).style.backgroundColor = '#008CBA'
-  }
-  let addtowatch = document.querySelector('.addtowatchlist')
-
-  addtowatch.onclick = () => {
-
-    addtolocalstorage();
-  }
+    
 
 
-}
-function showSearchresult(data) {
-  cards.innerHTML = "";
-  for (let item of data) {
-
-    cards.innerHTML += `<div class="search-symbol" onclick="viewdetails(this)">
-        <h3>${item["1. symbol"]}</h3>
-        <h5>${item["2. name"]}</h5>
-        </div>`
-
-
-  };
+    console.log(moviedetail)
+    console.log(moviedetail[0].vote_average)
+    movieDescription(moviedetail)
 }
 
+function movieDescription(moviedetail) {
+    let cardDescription = "";
+    document.getElementById("container-moviedescription").innerHTML = "";
+    console.log(moviedetail[0].original_title)    
+    sessionStorage.setItem('key', (moviedetail[0].original_title));
+    cardDescription = `<div class="Movie-Description">
+          <div class="movie-detail-image">    
+          <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${moviedetail[0].poster_path}" class="card-image">
+          </div>
+          <div class="movie-description-details">
+          <h2 style="display: inline-block;">${moviedetail[0].original_title}</h2>
+          <i class="fa-solid fa-xmark fa-2xl" onclick="closebtn()"></i>
+      
+          <div class="moviedescription-icon">
+              <i class="fa-solid fa-star"></i>
+              <div class="movie-des-average" style="display: block;">${moviedetail[0].vote_average}</div>
+          </div>
+      
+          <div class="moviedetail-des">
+          <div class="moviedetail-lan" style="display: inline-block;">${moviedetail[0].original_language.toUpperCase()} </div>
+          <i class="fa-solid fa-circle fa-2xs" style="display:inline-block;"> </i>
+          <div class="moviedetail-genere" style="display:inline-block;"> Action</div>
+          </div>
+          <div class="moviedetail-para">
+          ${moviedetail[0].overview}
+              </div>
+          <div class="moviedetail-price">
+              <i class="fa-solid fa-rupee-sign fa-xs"></i>
+              <div style="display: inline-block;">250</div>
+          </div>
+          <button class="moviedetails-ticketbtn" onclick="redirectpage()" type="submit">Book Ticket</button>
+      </div>
+      </div>`;
 
-sbtn.onclick = (e) => {
 
-  cards.innerHTML = "";
-  result.innerHTML = 'Search Results'
-  card_container.style.visibility = "visible";
-  let urlkey = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${input.value}&apikey=${keyForApi}`
-  input.value = '';
-  console.log(urlkey, "uralk")
-  geturl(urlkey, "search");
-
-  document.querySelector(".left").style.visibility = "hidden";
+    document.getElementById("container-moviedescription").innerHTML = cardDescription;
 }
 
-removesearch.onclick = (e) => {
-  cards.innerHTML = "";
-  result.innerHTML = '';
-  card_container.style.visibility = "hidden";
-  document.querySelector(".left").style.visibility = "visible";
-}
 
-function viewmodedetails(e, value) {
-  mbtn = e;
-  console.log(key, "key")
-  let urlkey = `https://www.alphavantage.co/query?function=TIME_SERIES_${value}&symbol=${key}&interval=5min&apikey=${keyForApi}`;
-  modetype = value;
-  geturl(urlkey, "showdetails");
 
-}
-function viewcard(e) {
 
-  card_container.style.visibility = "visible";
 
-  console.log(e.parentElement.firstChild.nextSibling.innerHTML, "viewcard")
-  console.log(e.parentElement.firstChild.nextSibling.nextSibling.innerHTML, "viewcard")
-  key = e.parentElement.firstChild.nextSibling.innerHTML;
-  watchlist[0] = key;
-  watchlist[1] = e.parentElement.firstChild.nextSibling.nextSibling.innerHTML
-  let urlkey = `https://www.alphavantage.co/query?function=TIME_SERIES_${modetype}&symbol=${key}&interval=5min&apikey=${keyForApi}`;
-  document.querySelector(".left").style.visibility = "hidden";
+//-------------------geners-------------------
+// function getGenersFilter(){
+// const options = {
+//   method: 'GET',
+//   headers: {
+//     accept: 'application/json',
+//     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OWRhNmNlYzRjMGIyZTllNWYzMjJjNTA3Yjk3MjU3YyIsInN1YiI6IjY0YTU1OWM3ZGExMGYwMDEzOTdjNjM0OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lJGjYugk9yrfEfE8Hw9jKed4GdMvcEuzUjo4gjyTGF4'
+//   }
+// };
 
-  geturl(urlkey, "showdetails");
-}
+  // let results=response;
+    // const cardResultsTitle=cardResults;
+    // console.log(cardResultsTitle)
+    // const updateResults=cardResults.filter((d)=>{
+    //   console.log(d.title.toLowerCase().includes(results))
+    
+    //    return d.title.toLowerCase().includes(results);
+    // });
+  // let closebtn=document.getElementById("close-btn");
+  // console.log(closebtn)
+  // // closebtn.onclick = function(){
+  // //   console.log("hai");
 
-function viewdetails(e) {
-  watchlist = [];
-  key = e.firstChild.nextSibling.innerHTML;
-  let keyname = e.lastChild.previousSibling.innerHTML
-  watchlist[0] = key;
-  watchlist[1] = keyname;
+  // // };
+  // closebtn.addEventListener('click',(e)=>{
+  //   console.dir(e);
+  // })
+  // / filterMovie();
+  // function filterMovie(results)
+  // {
+  //  console.log(results,"hello"); 
+  //  results.forEach(element => {
+  //   const updateResults=element.filter((d)=>{
+  //     return d.id.includes(id);
+  //    })
+  //    rendingCard(updateResults);
+  //  });
+  // }
+  
+  // function filterMovie(id)
+  // {
+  //  console.log(id,cardResults); 
+  //  const updateResults=cardResults.filter((d)=>{
+  //   return d.genre_ids.includes(id);
+  //  })
+  //  rendingCard(updateResults);
+  // }
+  // function filterMovie(name)
+  // {
+  //  console.log(id,response.genres); 
+  //  const updateResults=response.genres.filter((d)=>{
+  //   return d.name.includes(name);
+  //  })
+  //  rendingCard(updateResults);
+  // }
+  
+  
 
-  let urlkey = `https://www.alphavantage.co/query?function=TIME_SERIES_${modetype}&symbol=${key}&interval=5min&apikey=${keyForApi}`;
-  console.log(urlkey, "urlkey")
-  geturl(urlkey, "showdetails");
+// fetch(`https://api.themoviedb.org/3/genre/movie/list?language=en`, options)
+//   .then(response => response.json())
+//   .then(response => {
+//     console.log(response.genres)
+   
+//   })
+//   .catch(err => console.error(err));
+// }
 
-}
 
-function newsFeedApi() {
-  let urlkey = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=${keyForApi}`;
-  console.log(urlkey, "urlkey")
-  geturl(urlkey, "newsfeed");
-}
-newsFeedApi();
+
+
+
+
+
+
+
+
+// -----------My coding----------
+// submitBtn.addEventListener('click',()=>{
+// const getSearchValue=searchInput.value.toLowerCase();
+// console.log(getSearchValue)
+// // console.log(cardResults[0].title.toLowerCase())
+
+
+// const cardResultsTitle=cardResults;
+// console.log(cardResultsTitle)
+// const updateResults=cardResults.filter((d)=>{
+//  // console.log(d.title.toLowerCase().includes(getSearchValue))
+
+//    return d.title.toLowerCase().includes(getSearchValue);
+// });
+// rendingCard(updateResults)
+//    })
+ //console.log(e.target.getAttribute("data-genereid"))
+  //  const updateResults=cardResults.filter((d)=>{
+  //   console.log(d.genre_ids.includes(Number(id)));
+  //    return d.genre_ids.includes(Number(id));
+     
+    //  })
+     
+    // rendingCard(updateResults);
+    //  console.log(updateResults);
+  
+  //console.log(e.innerHTML.toLowerCase());
+
+   
+
+// let filteredSearch=cardResults.filter(()=>{
+//   for(let i=0;i<cardResults.length;i++)
+//   {
+//   if(cardResults[i].title.toLowerCase()===getSearchValue){
+//   console.log("true");
+//   }
+//   }
+  
+// });
+// console.log(filteredSearch)
+
+// -------------------------------
+
+// function ShowMovie(e)
+// {
+//      console.log(e.innerText.split("\n")[0]);
+// let MovieTitle=e.innerText.split("\n")[0].toLowerCase();
+// console.log(MovieTitle)
+
+
+// const updateResults=Movie.filter((d)=>{
+//   console.log(d.title.toLowerCase().includes(MovieTitle))
+
+//    return d.title.toLowerCase().includes(MovieTitle);
+   
+// });
+// MovieDescription(updateResults);
+// }
+
+// function MovieDescription(updateResults){
+  
+//     let cardDescription="";
+//      document.getElementsByClassName("container-moviedescription").innerHTML="";
+//    updateResults.map((d)=>{
+    
+//       cardDescription= `<div class="Movie-Description" style>
+//       <div class="movie-detail-image">    
+//       <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${d.poster_path}" class="card-image">
+//       </div>
+//       <div class="movie-description-details">
+//       <h2 style="display: inline-block;">${d.title}</h2>
+//       <i class="fa-solid fa-xmark fa-2xl"></i>
+  
+//       <div class="moviedescription-icon">
+//           <i class="fa-solid fa-star"></i>
+//           <div style="display: block;">rating</div>
+//       </div>
+  
+//       <div class="moviedetail-des">
+//       <div class="moviedetail-lan" style="display: inline-block;">EN </div>
+//       <i class="fa-solid fa-circle fa-2xs" style="display:inline-block;"> </i>
+//       <div class="moviedetail-genere" style="display:inline-block;"> Action</div>
+//       </div>
+//       <div class="moviedetail-para">
+//           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus dolores delectus, quas corrupti deserunt perferendis vero, molestiae accusamus temporibus impedit maxime natus quia provi.
+//       </div>
+//       <div class="moviedetail-price">
+//           <i class="fa-solid fa-rupee-sign fa-xs"></i>
+//           <div style="display: inline-block;">250</div>
+//       </div>
+//       <button class="moviedetails-ticketbtn" type="submit">Book Ticket</button>
+//   </div>
+//   </div>`;
+//     })
+//     document.getElementsByClassName("container-moviedescription").innerHTML=cardDescription;
+   
+//   }

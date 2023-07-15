@@ -3,7 +3,7 @@ let searchBtn = document.getElementById('fetchStart');
 let tableBody = document.getElementsByClassName('table-data-filling-in-script')[0];
 let searchingOptionLi = document.querySelector('.searching-option-li');
 
-let apiArray = ["AO48IFCXLA3BX1O9", "T4Y29QFCCCFF7V03", "T4Y29QFCCCFF7V03", "7V18I4NFIV62Z5ZP", "IPW3ZIJPAL09OOPG", "IPW3ZIJPAL09OOPG", "3YI9UO1YNH2VBACE"];
+let apiArray = ["AO48IFCXLA3BX1O9", "T4Y29QFCCCFF7V03", "T4Y29QFCCCFF7V03", "7V18I4NFIV62Z5ZP", "HDW0XJ41JMQO936Y", "VU787JW5IOP6PXFZ", "IPW3ZIJPAL09OOPG", "IPW3ZIJPAL09OOPG", "3YI9UO1YNH2VBACE", "WKHEQRWNMJUGI3HG"];
 
 let keyForApi = "AO48IFCXLA3BX1O9";
 
@@ -89,7 +89,13 @@ async function fetchApiDataForsearch(apiUrl) {
     if (result === undefined || result.length === 0) {
       searchingOptionLi.innerText = "No Result Found";
     }
-    searchBarRender(result);
+    
+    if (searchingKey === "allData") {
+      searchBarRender(result);
+    } else if (searchingKey === "balanceSheet") {
+      searchingBalaceSheet(result);
+    }
+    
 
   } catch (error) {
     tableBody.innerHTML = "";
@@ -114,10 +120,8 @@ function searchBarRender(searchValue) {
                 <h3>${item["2. name"]}</h3>
                 <h5>${item["1. symbol"]}</h5>
             </div>
-            <h4>
-                ${item["9. matchScore"]}
-            </h4>
-            <i id="eye" onclick="symboltesting(this.getAttribute('symbol'))" symbol=${item["1. symbol"]} class="fa-solid fa-eye"></i>
+            
+            <i id="eye" onclick="symboltesting(this.getAttribute('symbol'))" symbol=${item["1. symbol"]} class="fa-solid fa-plus"></i>
         </li>
       `;
   }
@@ -129,42 +133,63 @@ if (localStorage.length > 0) {
     const value = JSON.parse(localStorage.getItem(key));
     (value[0].wishList) && watchListCardRender(value);
   }
+  innitallDataShowing(localStorage.key(0));
 }
 
+function innitallDataShowing(companyKey) {
+  let key = companyKey;
+  let value = JSON.parse(localStorage.getItem(key))
+  console.log(value);
+}
+
+
 function symboltesting(e) {
-  let watchListObject = [];
-  searchResultData.forEach((item) => {
-    if (item["1. symbol"] == e) {
-      const objToPush = {
-        name: item["2. name"],
-        symbol: item["1. symbol"],
-        region: item["4. region"],
-        wishList: true
-      };
-
-      let getWatchListObject = [];
-      let getWatchListObjectstore = JSON.parse(localStorage.getItem(e));
-      (getWatchListObjectstore && getWatchListObjectstore.length > 0) && (getWatchListObject = getWatchListObjectstore)
-      getWatchListObject.push(objToPush);
-      localStorage.setItem(e, JSON.stringify(getWatchListObject));
-      watchListObject = getWatchListObject;
-
+  let flag = false;
+  if (localStorage.length > 0) {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key === e) {
+        flag = true;
+        break;
+      } else {
+        flag = false;
+      }
     }
-  })
-  watchListCardRender(watchListObject);
+  }
+
+
+  console.log(e);
+  console.log(localStorage.key(e));
+  console.log(e === localStorage.key(e));
+  if (!flag) {
+
+    let watchListObject = [];
+    searchResultData.forEach((item) => {
+      if (item["1. symbol"] == e) {
+        const objToPush = {
+          name: item["2. name"],
+          symbol: item["1. symbol"],
+          region: item["4. region"],
+          wishList: true
+        };
+
+        let getWatchListObject = [];
+        let getWatchListObjectstore = JSON.parse(localStorage.getItem(e));
+        (getWatchListObjectstore && getWatchListObjectstore.length > 0) && (getWatchListObject = getWatchListObjectstore)
+        getWatchListObject.push(objToPush);
+        localStorage.setItem(e, JSON.stringify(getWatchListObject));
+        watchListObject = getWatchListObject;
+
+      }
+    })
+    watchListCardRender(watchListObject);
+  }
   watchListDataContainer(e);
   intiallyCallingWatchListDataContainer();
 }
 
-// function stockpriceUpdate() {
-//   let stockPrice = document.querySelector('.stock-latest-price');
-//   stockPrice.innerHTML = latestPriceOfStock;
-// }
-
-{/* <i class="fa-sharp fa-solid fa-money-bill-trend-up"></i> */}
 
 function watchListCardRender(searchResultData) {
-
 
   for (const item of searchResultData) {
     document.getElementsByClassName('random-data-main-page')[0].innerHTML =
@@ -228,64 +253,90 @@ function typeOfTrade(entry) {
       if (e.target.innerHTML === 'INTRADAY') {
         keyWordOfTrade = "TIME_SERIES_INTRADAY&interval=5min";
         choosingTradeDetails = "Time Series (5min)";
-        document.querySelector('.trading-type-heading').innerHTML = "Time Series (5min)";
+        // document.querySelector('.trading-type-heading').innerHTML = "Time Series (5min)";
         (e.target.parentElement.children[0].classList.add('active'));
         (e.target.parentElement.children[1].classList.remove('active'));
         (e.target.parentElement.children[2].classList.remove('active'));
         (e.target.parentElement.children[3].classList.remove('active'));
-        keyForApiFn()
+        keyForApiFn();
+        document.getElementsByClassName('instruction')[0].style.display = 'none';
       } else if (e.target.innerHTML === 'DAILY') {
-        document.querySelector('.trading-type-heading').innerHTML = "Time Series (Daily)";
+        // document.querySelector('.trading-type-heading').innerHTML = "Time Series (Daily)";
         keyWordOfTrade = "TIME_SERIES_DAILY_ADJUSTED"
         choosingTradeDetails = "Time Series (Daily)";
         (e.target.parentElement.children[0].classList.remove('active'));
         (e.target.parentElement.children[1].classList.add('active'));
         (e.target.parentElement.children[2].classList.remove('active'));
         (e.target.parentElement.children[3].classList.remove('active'));
-        keyForApiFn()
+        keyForApiFn();
+        document.getElementsByClassName('instruction')[0].style.display = 'none';
       } else if (e.target.innerHTML === 'WEEKLY') {
-        document.querySelector('.trading-type-heading').innerHTML = "Weekly Time Series";
+        // document.querySelector('.trading-type-heading').innerHTML = "Weekly Time Series";
         keyWordOfTrade = "TIME_SERIES_WEEKLY"
         choosingTradeDetails = "Weekly Time Series";
         (e.target.parentElement.children[0].classList.remove('active'));
         (e.target.parentElement.children[1].classList.remove('active'));
         (e.target.parentElement.children[2].classList.add('active'));
         (e.target.parentElement.children[3].classList.remove('active'));
-        keyForApiFn()
+        keyForApiFn();
+        document.getElementsByClassName('instruction')[0].style.display = 'none';
       } else if (e.target.innerHTML === 'MONTHLY') {
-        document.querySelector('.trading-type-heading').innerHTML = "Monthly Time Series";
+        // document.querySelector('.trading-type-heading').innerHTML = "Monthly Time Series";
         keyWordOfTrade = "TIME_SERIES_MONTHLY"
         choosingTradeDetails = "Monthly Time Series";
         (e.target.parentElement.children[0].classList.remove('active'));
         (e.target.parentElement.children[1].classList.remove('active'));
         (e.target.parentElement.children[2].classList.remove('active'));
         (e.target.parentElement.children[3].classList.add('active'));
-        keyForApiFn()
+        keyForApiFn();
+        document.getElementsByClassName('instruction')[0].style.display = 'none';
       }
       let tradeUrl = `https://www.alphavantage.co/query?function=${keyWordOfTrade}&symbol=${entry}&apikey=${keyForApi}`;
       console.log(tradeUrl, " urllllllllllllllll")
-
+      
       fetchApiData(tradeUrl);
     });
   });
 }
 
+let tableHeading = document.getElementsByClassName('table-heading-main')[0];
+
+let tableY = [];
+let tableX = [];
 
 // Table data filling
 function tableDataFill(e) {
   console.log(e)
+  document.getElementById('table-main').style.border = "2px solid black";
+  tableHeading.innerHTML =
+    `
+  <tr class="table-heading">
+      <th class="trading-type-heading">Type of Trade</th>
+      <th>OPEN</th>
+      <th>HIGH</th>
+      <th>LOW</th>
+      <th>CLOSE</th>
+      <th>VOLUME</th>
+  </tr>  
+  `
 
   // let tableBody = document.getElementsByClassName('table-data-filling-in-script')[0];
   tableBody.innerHTML = '';
   let count = 0;
+  tableY.length = 0;
+  tableX.length = 0;
 
   for (let date in e) {
     if (e.hasOwnProperty(date)) {
+      tableY.push(date);
+
       let rowData = e[date];
       let volume = (rowData['5. volume']);
+
       if (volume === undefined) {
         volume = (rowData['6. volume']);
       }
+      tableX.push(rowData['4. close']);
       let row =
         `
         <tr>
@@ -305,11 +356,10 @@ function tableDataFill(e) {
       }
     }
   }
+  console.log(tableX);
+  console.log(tableY);
+  graph();
 }
-
-
-
-
 
 
 
@@ -365,60 +415,28 @@ window.addEventListener('resize', () => {
 })
 
 
-let imageScroll = document.getElementById('images-container');
-let imageArr = ['image-1.jpg', 'image-2.jpg', 'image-3.jpg', 'image-4.jpg', 'image-5.jpeg', 'image-6.jpeg', 'image-7.jpeg', 'image-8.jpeg'];
-
-let i = 0;
-setInterval(() => {
-  imageScroll.innerHTML = `<img class="img-right-side" src="${imageArr[i]}" alt="img">`;
-
-  i++;
-  if (i >= imageArr.length) {
-    i = 0;
-  }
-}, 4000);
 
 
-const category = 'business';
-// fetchQuotesByCategory(category);
 
-setInterval(() => {
-  fetchQuotesByCategory(category);
-}, 5000)
 
-const fetchQuotesByCategory = async (category) => {
-  try {
-    const response = await fetch(`https://api.api-ninjas.com/v1/quotes?category=${category}`, {
-      method: 'GET',
-      headers: {
-        'X-Api-Key': 'E8PgODjCuHl37Fg9L1GDIg==j4zCl9yImLIk9l8b',
-        'Content-Type': 'application/json',
-      },
-    });
 
-    if (!response.ok) {
-      throw new Error('Error: ' + response.status);
-    }
 
-    const result = await response.json();
-    document.getElementsByClassName('quote')[0].innerHTML = result[0].quote;
-    document.getElementsByClassName('author')[0].innerHTML = result[0].author;
-  } catch (error) {
-    console.error('Error: ', error);
-  }
-};
 
 
 
 
 
 //--------
-document.addEventListener('DOMContentLoaded', function() {
+
+function graph () {
+  document.getElementsByClassName('graph')[0].style.border = "2px solid black"
   const stockData = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    // labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    labels: tableY,
     datasets: [{
-      label: 'Stock Price',
-      data: [200, 300, 450, 500, 550, 400],
+      label: '[Y axis - Stock Closing rate]  [X axis - Trade duration]',
+      // data: [200, 300, 450, 500, 550, 400],
+      data: tableX,
       // backgroundColor: 'rgb(87, 69, 154)',
       backgroundColor: 'rgb(255, 255, 255, 0.1)',
       borderColor: 'rgb(87, 69, 154)',
@@ -473,4 +491,100 @@ document.addEventListener('DOMContentLoaded', function() {
       },
     },
   });
-});
+};
+
+
+
+let uiSelection = document.getElementsByClassName('user-selection-nav-bar')[0];
+let searchingKey;
+uiSelection.addEventListener('click', (e)=> {
+  let selection = e.target.innerText;
+  if (selection.includes("Dashboard")) {
+    document.getElementsByClassName('table-of-data')[0].style.display = "block";
+    document.getElementsByClassName('data-graph-splitting')[0].style.display = "flex";
+    document.getElementsByClassName('rights-side-data')[0].style.display = 'flex';
+    document.getElementById('balanceSheet').style.display = 'none';
+    searchingKey = "allData";
+
+  } else if (selection.includes("Balance Sheet")) {
+    document.getElementsByClassName('table-of-data')[0].style.display = "none";
+    document.getElementsByClassName('data-graph-splitting')[0].style.display = "none";
+    document.getElementsByClassName('rights-side-data')[0].style.display = 'flex';
+    document.getElementById('balanceSheet').style.display = 'block';
+    searchingKey = "balanceSheet";
+
+    
+  } else if (selection.includes("News")) {
+    
+  } else if (selection.includes("Inflation")) {
+    
+  } 
+})
+
+let searchResultData12 = [];
+let bsName;
+function searchingBalaceSheet(result) {
+  console.log(result);
+  searchResultData12 = (result);
+  for (const item of result) {
+    
+    bsName = item["2. name"];
+    searchingOptionLi.innerHTML +=
+      `
+        <li>
+            <div>
+                <h3>${item["2. name"]}</h3>
+                <h5>${item["1. symbol"]}</h5>
+            </div>
+            
+            <i id="eye" onclick="symbolforBalanceSheet(this.getAttribute('symbol'))" symbol=${item["1. symbol"]} class="fa-solid fa-plus }"></i>
+        </li>
+      `;
+  }
+}
+
+function symbolforBalanceSheet(e) {
+  console.log(e);
+  document.getElementById('nameBS').innerHTML = bsName;
+  apiUrlBS = `https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${e}&apikey=${keyForApi}`;
+  balanceSheetApi(apiUrlBS);
+  console.log(apiUrlBS)
+}
+
+keyForApiFn();
+
+
+async function balanceSheetApi(apiUrl) {
+  try {
+    const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error("Error occurred");
+    }
+
+    const data = await response.json();
+    console.log(data, "table fetch");
+
+    const balanceSheet = data?.quarterlyReports?.[0] || {}; // Access the first quarterly report (you can modify this based on your requirements)
+    console.log(balanceSheet);
+    console.log(balanceSheet["Total Assets"]);
+    
+    document.getElementById('bsheet').innerHTML += 
+    `<tr>
+      <td>${balanceSheet?.totalAssets}</td>
+      <td>${balanceSheet?.totalCurrentAssets}</td>
+      <td>${balanceSheet?.cashAndCashEquivalentsAtCarryingValue}</td>
+      <td>${balanceSheet?.inventory}</td>
+      <td>${balanceSheet?.currentNetReceivables}</td>
+      <td>${balanceSheet?.totalNonCurrentAssets}</td>
+      <td>${balanceSheet?.propertyPlantEquipment}</td>
+      <td>${balanceSheet?.intangibleAssets}</td>
+      <td>${balanceSheet?.goodwill}</td>
+      <td>${balanceSheet?.totalLiabilities}</td>
+      </tr>
+    `;
+  } catch (error) {
+    console.log(error, "Error occurred");
+  }
+}
+
