@@ -30,37 +30,36 @@
                         alt="logo">
                 </div>
                 <nav class="nav-bar">
-                    <ul class="user-selection-nav-bar">
-                        <li>
-                            <a href="#dashBoard" class="ui-selection">
-                                <i class="fa-sharp fa-solid fa-table-columns"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#BalanceSheet">
-                                <i class="fa-solid fa-chart-line"></i>
-                                Balance Sheet
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#news">
-                                <i class="fa-sharp fa-solid fa-newspaper"></i>
-                                News</a>
-                        </li>
-                        <li>
-                            <a href="#inflation">
-                                <i class="fa-sharp fa-solid fa-arrow-trend-up"></i>
-                                Inflation</a>
-                        </li>
-                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>                        
-                        <li>
-                            <a href="user">
-                                <i class="fa-regular fa-user"></i>
-                                User
-                            </a>
-                        </li>
-                    </ul>
+                    <div>
+                        <ul class="user-selection-nav-bar">
+                            <li >
+                                <a href="#dashBoard.html" class="ui-selection">
+                                    <i class="fa-sharp fa-solid fa-table-columns"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#news">
+                                    <i class="fa-sharp fa-solid fa-newspaper"></i>
+                                    News</a>
+                            </li>
+                            <li>
+                                <a href="#inflation">
+                                    <i class="fa-sharp fa-solid fa-arrow-trend-up"></i>
+                                    Inflation</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="user-selection-nav-bar" id="userClass">
+                            <li >
+                                <a  href="#user">
+                                    <i class="fa-regular fa-user"></i>
+                                    User
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
             </div>
             
@@ -105,25 +104,15 @@
                 </div>
             </div>
 
-            <div id="balanceSheet">
+            <!-- <div id="balanceSheet">
                 <div>
-                    <div class="company-name">
-                        <p>Company Name : <span id="nameBS">IBM</span></p>
-                        <button>Fetch Data</button>
-                    </div>
+                    
                     <table class="table-balanceSheet">
                         <thead>
                             <tr class="table-heading">
-                                <th>Total Assets</th>
-                                <th>Total Current Assets</th>
-                                <th>Cash and Cash Equivalents at Carrying Value</th>
-                                <th>Inventory</th>
-                                <th>Current Net Receivables</th>
-                                <th>Total Non-Current Assets</th>
-                                <th>Property, Plant, and Equipment</th>
-                                <th>Intangible Assets</th>
-                                <th>Goodwill</th>
-                                <th>Total Liabilities</th>
+                                <th>Date</th>
+                                <th>Value</th>
+                                
                             </tr>
                         </thead>
                         <tbody id="bsheet">
@@ -131,64 +120,56 @@
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
+
                             </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
+                </div>
+            </div> -->
+
+            <div id="newsFeed">
+                <div id="newsContainer">
+                                        
+                </div>
+            </div>
+
+            <div id="inflation">
+                <table class="table-balanceSheet inflTable">
+                    <thead>
+                        <tr class="table-heading">
+                            <th>Date</th>
+                            <th>Value</th>                            
+                        </tr>
+                    </thead>
+                    <tbody id="inflationTbody">
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="user">
+                <div id="userArea">
+                    <div class="containerss">
+                        <div class="forms">
+                            <form id="signup-form">
+                                <h2>Sign up</h2>
+                                <input type="text" placeholder="Username" required>
+                                <input type="email" placeholder="Email" required>
+                                <input type="password" placeholder="Password" required>
+                                <button type="submit">Sign up</button>
+                            </form>
+                            <form id="signin-form">  
+                                <h2>Sign in</h2>
+                                <input type="email" placeholder="Email" required>
+                                <input type="password" placeholder="Password" required>
+                                <button type="submit">Sign in</button>
+                            </form>
+                        </div>
+                        <div class="toggle">
+                            <button id="toggle-btn">Already have an account? Sign In!</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
