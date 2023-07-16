@@ -90,11 +90,8 @@ async function fetchApiDataForsearch(apiUrl) {
       searchingOptionLi.innerText = "No Result Found";
     }
     
-    if (searchingKey === "allData") {
-      searchBarRender(result);
-    } else if (searchingKey === "balanceSheet") {
-      searchingBalaceSheet(result);
-    }
+    searchBarRender(result);
+
     
 
   } catch (error) {
@@ -406,24 +403,13 @@ barClose.addEventListener('click', () => {
   leftSideBar.style.transition = "2s ease";
 })
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 590) {
+  if (window.innerWidth > 767) {
     leftSideBar.style.display = 'flex';
   } else {
     leftSideBar.style.display = 'none';
     barClose.style.display = 'none';
   }
 })
-
-
-
-
-
-
-
-
-
-
-
 
 
 //--------
@@ -434,7 +420,7 @@ function graph () {
     // labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     labels: tableY,
     datasets: [{
-      label: '[Y axis - Stock Closing rate]  [X axis - Trade duration]',
+      label: '[Y axis - Stock Closing rate]  [X axis - Time Intervals]',
       // data: [200, 300, 450, 500, 550, 400],
       data: tableX,
       // backgroundColor: 'rgb(87, 69, 154)',
@@ -495,96 +481,218 @@ function graph () {
 
 
 
+
+
+
 let uiSelection = document.getElementsByClassName('user-selection-nav-bar')[0];
-let searchingKey;
+
 uiSelection.addEventListener('click', (e)=> {
   let selection = e.target.innerText;
   if (selection.includes("Dashboard")) {
     document.getElementsByClassName('table-of-data')[0].style.display = "block";
     document.getElementsByClassName('data-graph-splitting')[0].style.display = "flex";
     document.getElementsByClassName('rights-side-data')[0].style.display = 'flex';
-    document.getElementById('balanceSheet').style.display = 'none';
-    searchingKey = "allData";
+    // document.getElementById('balanceSheet').style.display = 'none';
+    document.getElementById('newsFeed').style.display = 'none';
+    document.getElementById('inflation').style.display = 'none';
+    document.getElementById('user').style.display = 'none';
 
-  } else if (selection.includes("Balance Sheet")) {
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(1)").style.backgroundColor = "var(--primary-color-lite)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(1) > a").style.color = 'var(--primary-color-dark)';
+    // document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2)").style.backgroundColor = 'var(--primary-color-dark)';
+    // document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2) > a").style.color = "var(--primary-color-lite)";
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2) > a").style.color = "var(--primary-color-lite)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(3)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(3) > a").style.color = "var(--primary-color-lite)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(20)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(20) > a").style.color = "var(--primary-color-lite)"
+
+
+
+  }
+    
+  // } 
+  else if (selection.includes("News")) {
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(1)").style.backgroundColor = "var(--primary-color-dark)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(1) > a").style.color = 'var(--primary-color-lite)';
+    // document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2)").style.backgroundColor = 'var(--primary-color-dark)';
+    // document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2) > a").style.color = "var(--primary-color-lite)";
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2)").style.backgroundColor = 'var(--primary-color-lite)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2) > a").style.color = "var(--primary-color-dark)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(3)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(3) > a").style.color = "var(--primary-color-lite)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(20)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(20) > a").style.color = "var(--primary-color-lite)"
+    
     document.getElementsByClassName('table-of-data')[0].style.display = "none";
     document.getElementsByClassName('data-graph-splitting')[0].style.display = "none";
-    document.getElementsByClassName('rights-side-data')[0].style.display = 'flex';
-    document.getElementById('balanceSheet').style.display = 'block';
-    searchingKey = "balanceSheet";
+    document.getElementsByClassName('rights-side-data')[0].style.display = 'none';
+    // document.getElementById('balanceSheet').style.display = 'none';
+    document.getElementById('newsFeed').style.display = 'block';
+    document.getElementById('inflation').style.display = 'none';
+    document.getElementById('user').style.display = 'none';
 
-    
-  } else if (selection.includes("News")) {
-    
   } else if (selection.includes("Inflation")) {
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(1)").style.backgroundColor = "var(--primary-color-dark)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(1) > a").style.color = 'var(--primary-color-lite)';
+    // document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2)").style.backgroundColor = 'var(--primary-color-dark)';
+    // document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2) > a").style.color = "var(--primary-color-lite)";
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2) > a").style.color = "var(--primary-color-lite)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(3)").style.backgroundColor = 'var(--primary-color-lite)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(3) > a").style.color = "var(--primary-color-dark)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(20)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(20) > a").style.color = "var(--primary-color-lite)"
     
-  } 
+    document.getElementsByClassName('table-of-data')[0].style.display = "none";
+    document.getElementsByClassName('data-graph-splitting')[0].style.display = "none";
+    document.getElementsByClassName('rights-side-data')[0].style.display = 'none';
+    // document.getElementById('balanceSheet').style.display = 'none';
+    document.getElementById('newsFeed').style.display = 'none';
+    document.getElementById('inflation').style.display = 'block';
+    document.getElementById('user').style.display = 'none';
+
+  } else if (selection.includes("User")) {
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(1)").style.backgroundColor = "var(--primary-color-dark)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(1) > a").style.color = 'var(--primary-color-lite)';
+    // document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2)").style.backgroundColor = 'var(--primary-color-dark)';
+    // document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2) > a").style.color = "var(--primary-color-lite)";
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2) > a").style.color = "var(--primary-color-lite)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(3)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(3) > a").style.color = "var(--primary-color-lite)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(20)").style.backgroundColor = 'var(--primary-color-lite)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(20) > a").style.color = "var(--primary-color-dark)"
+    
+    document.getElementsByClassName('table-of-data')[0].style.display = "none";
+    document.getElementsByClassName('data-graph-splitting')[0].style.display = "none";
+    document.getElementsByClassName('rights-side-data')[0].style.display = 'none';
+    // document.getElementById('balanceSheet').style.display = 'none';
+    document.getElementById('newsFeed').style.display = 'none';
+    document.getElementById('inflation').style.display = 'none';
+    document.getElementById('user').style.display = 'flex';
+  
+  }
 })
 
-let searchResultData12 = [];
-let bsName;
-function searchingBalaceSheet(result) {
-  console.log(result);
-  searchResultData12 = (result);
-  for (const item of result) {
-    
-    bsName = item["2. name"];
-    searchingOptionLi.innerHTML +=
-      `
-        <li>
-            <div>
-                <h3>${item["2. name"]}</h3>
-                <h5>${item["1. symbol"]}</h5>
-            </div>
-            
-            <i id="eye" onclick="symbolforBalanceSheet(this.getAttribute('symbol'))" symbol=${item["1. symbol"]} class="fa-solid fa-plus }"></i>
-        </li>
-      `;
-  }
-}
 
-function symbolforBalanceSheet(e) {
-  console.log(e);
-  document.getElementById('nameBS').innerHTML = bsName;
-  apiUrlBS = `https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${e}&apikey=${keyForApi}`;
-  balanceSheetApi(apiUrlBS);
-  console.log(apiUrlBS)
-}
+// user
+// javascript code goes here
+let signupForm = document.getElementById('signup-form');
+let signinForm = document.getElementById('signin-form');
+let toggleBtn = document.getElementById('toggle-btn');
 
-keyForApiFn();
+signupForm.style.display = 'block';
+signinForm.style.display = 'none';
 
+toggleBtn.addEventListener('click', function() {
+    if (signupForm.style.display === 'block') {
+        signupForm.style.display = 'none';
+        signinForm.style.display = 'block';
+        toggleBtn.textContent = "Don't have an account? Sign Up!"
 
-async function balanceSheetApi(apiUrl) {
-  try {
-    const response = await fetch(apiUrl);
+    } else {
+        signinForm.style.display = 'none';
+        signupForm.style.display = 'block';
+        toggleBtn.textContent = "Already have an account? Sign In!"
 
-    if (!response.ok) {
-      throw new Error("Error occurred");
     }
+})
 
+
+
+
+//---------------------------------------
+// news
+
+let container = document.getElementById('newsContainer');
+newsFeedAnchorLink = document.getElementsByClassName('newsfeed-anchor-link')[0];
+
+const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=${keyForApi}`;
+async function newsFeedApi(url) {
+  try {
+    const response = await fetch(url);
     const data = await response.json();
-    console.log(data, "table fetch");
-
-    const balanceSheet = data?.quarterlyReports?.[0] || {}; // Access the first quarterly report (you can modify this based on your requirements)
-    console.log(balanceSheet);
-    console.log(balanceSheet["Total Assets"]);
-    
-    document.getElementById('bsheet').innerHTML += 
-    `<tr>
-      <td>${balanceSheet?.totalAssets}</td>
-      <td>${balanceSheet?.totalCurrentAssets}</td>
-      <td>${balanceSheet?.cashAndCashEquivalentsAtCarryingValue}</td>
-      <td>${balanceSheet?.inventory}</td>
-      <td>${balanceSheet?.currentNetReceivables}</td>
-      <td>${balanceSheet?.totalNonCurrentAssets}</td>
-      <td>${balanceSheet?.propertyPlantEquipment}</td>
-      <td>${balanceSheet?.intangibleAssets}</td>
-      <td>${balanceSheet?.goodwill}</td>
-      <td>${balanceSheet?.totalLiabilities}</td>
-      </tr>
-    `;
+    let dataStore =(data.feed);
+    for(let i=0; i<dataStore.length-1; i++) {
+      let {banner_image, title, url} = dataStore[i];
+      let img = banner_image;
+      if (img === null || img === undefined ) {
+        img="https://www.livemint.com/lm-img/img/2023/05/29/600x338/Nifty_1669509049999_1685353797332.jpg"
+      } else {
+        img = banner_image;
+      }
+      container.innerHTML += 
+      `
+      <div id="container">
+      <img src="${img}" alt="news">
+      <a target="_blank" href="${url}">
+          ${title}
+      </a>
+      </div>
+      `
+    }
   } catch (error) {
-    console.log(error, "Error occurred");
+    console.log('Error:', error);
   }
 }
 
+newsFeedApi(url);
+
+
+//----------------------------------------------
+// inflation
+
+
+const inflationUrl = `https://www.alphavantage.co/query?function=INFLATION&apikey=${keyForApi}`;
+// const inflationUrl = `https://www.alphavantage.co/query?function=INFLATION&apikey=demo`;
+async function inflation(url) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    let dataStore =(data.data);
+    let tbody = document.getElementById('inflationTbody');
+    for (let i=0; i<dataStore.length; i++) {
+      tbody.innerHTML += 
+      `
+      <tr>
+        <td>${dataStore[i].date}</td>
+        <td>${dataStore[i].value}</td>
+      </tr>
+      `
+    }
+    
+  } catch (error) {
+    console.log('Error:', error);
+  }
+}
+
+inflation(inflationUrl);
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementsByClassName('table-of-data')[0].style.display = "block";
+    document.getElementsByClassName('data-graph-splitting')[0].style.display = "flex";
+    document.getElementsByClassName('rights-side-data')[0].style.display = 'flex';
+    // document.getElementById('balanceSheet').style.display = 'none';
+    document.getElementById('newsFeed').style.display = 'none';
+    document.getElementById('inflation').style.display = 'none';
+    document.getElementById('user').style.display = 'none';
+
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(1)").style.backgroundColor = "var(--primary-color-lite)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(1) > a").style.color = 'var(--primary-color-dark)';
+    // document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2)").style.backgroundColor = 'var(--primary-color-dark)';
+    // document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2) > a").style.color = "var(--primary-color-lite)";
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(2) > a").style.color = "var(--primary-color-lite)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(3)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(3) > a").style.color = "var(--primary-color-lite)"
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(20)").style.backgroundColor = 'var(--primary-color-dark)';
+    document.querySelector("body > div > div.left-side-bar > div > nav > ul > li:nth-child(20) > a").style.color = "var(--primary-color-lite)"
+
+});
