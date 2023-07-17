@@ -14,15 +14,18 @@ header {
   padding: 10px;
 }
 
+/* nav bar */
+
 nav {
+  background-color: #FC8019;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 20px;
+.logo img {
+  height: 40px;
 }
 
 .nav-links {
@@ -35,10 +38,14 @@ nav {
 }
 
 .nav-links a {
+  color: #FFF;
   text-decoration: none;
-  color: #333;
+  font-size: 16px;
+  font-weight: bold;
 }
 
+
+/* main content */
 .main-content {
   /* Add your styles for the main content here */
 }
