@@ -3,7 +3,9 @@ let searchBtn = document.getElementById('fetchStart');
 let tableBody = document.getElementsByClassName('table-data-filling-in-script')[0];
 let searchingOptionLi = document.querySelector('.searching-option-li');
 
-let apiArray = ["AO48IFCXLA3BX1O9", "T4Y29QFCCCFF7V03", "T4Y29QFCCCFF7V03", "7V18I4NFIV62Z5ZP", "HDW0XJ41JMQO936Y", "VU787JW5IOP6PXFZ", "IPW3ZIJPAL09OOPG", "IPW3ZIJPAL09OOPG", "3YI9UO1YNH2VBACE", "WKHEQRWNMJUGI3HG"];
+// let apiArray = ["AO48IFCXLA3BX1O9", "T4Y29QFCCCFF7V03", "T4Y29QFCCCFF7V03", "7V18I4NFIV62Z5ZP", "HDW0XJ41JMQO936Y", "VU787JW5IOP6PXFZ", "IPW3ZIJPAL09OOPG", "IPW3ZIJPAL09OOPG", "3YI9UO1YNH2VBACE", "WKHEQRWNMJUGI3HG"];
+
+let apiArray = ["WUTKFW0M27CCM81P", "DVV0BKFZDTG81FH4", "8MTUD5OJMDPNFJ48"]
 
 let keyForApi = "AO48IFCXLA3BX1O9";
 
@@ -100,9 +102,6 @@ async function fetchApiDataForsearch(apiUrl) {
   }
 }
 
-
-
-
 let searchResultData = [];
 
 function searchBarRender(searchValue) {
@@ -126,14 +125,14 @@ function searchBarRender(searchValue) {
 
 if (localStorage.length > 0) {
   for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    const value = JSON.parse(localStorage.getItem(key));
+    let key = localStorage.key(i);
+    let value = JSON.parse(localStorage.getItem(key));
     (value[0].wishList) && watchListCardRender(value);
   }
-  innitallDataShowing(localStorage.key(0));
+  initialDataShowing(localStorage.key(0));
 }
 
-function innitallDataShowing(companyKey) {
+function initialDataShowing(companyKey) {
   let key = companyKey;
   let value = JSON.parse(localStorage.getItem(key))
   console.log(value);
