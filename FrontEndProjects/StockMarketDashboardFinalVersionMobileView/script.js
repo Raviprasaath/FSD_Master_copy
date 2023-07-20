@@ -5,7 +5,7 @@ let searchingOptionLi = document.querySelector('.searching-option-li');
 
 // let apiArray = ["AO48IFCXLA3BX1O9", "T4Y29QFCCCFF7V03", "T4Y29QFCCCFF7V03", "7V18I4NFIV62Z5ZP", "HDW0XJ41JMQO936Y", "VU787JW5IOP6PXFZ", "IPW3ZIJPAL09OOPG", "IPW3ZIJPAL09OOPG", "3YI9UO1YNH2VBACE", "WKHEQRWNMJUGI3HG"];
 
-let apiArray = ["WUTKFW0M27CCM81P", "DVV0BKFZDTG81FH4", "8MTUD5OJMDPNFJ48"]
+let apiArray = ["WUTKFW0M27CCM81P", "DVV0BKFZDTG81FH4","PXY5XE1F9FLHLKBI", "KENRUCFJ9TP3UTSH", "VO17Y5C49ZIBH3XL", "8MTUD5OJMDPNFJ48"]
 
 let keyForApi = "AO48IFCXLA3BX1O9";
 
@@ -132,6 +132,8 @@ if (localStorage.length > 0) {
   initialDataShowing(localStorage.key(0));
 }
 
+
+
 function initialDataShowing(companyKey) {
   let key = companyKey;
   let value = JSON.parse(localStorage.getItem(key))
@@ -152,6 +154,7 @@ function symboltesting(e) {
       }
     }
   }
+
 
 
   console.log(e);
@@ -714,5 +717,5 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector("body > div > div.left-side-bar > div > nav > div:nth-child(1)> ul > li:nth-child(3) > a").style.color = "var(--primary-color-lite)"
   document.querySelector("body > div > div.left-side-bar > div > nav > div:nth-child(2)> ul > li").style.backgroundColor = 'var(--primary-color-dark)';
   document.querySelector("body > div > div.left-side-bar > div > nav > div:nth-child(2)> ul > li > a").style.color = "var(--primary-color-lite)"
-              
+          
 });
