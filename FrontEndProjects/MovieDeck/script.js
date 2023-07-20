@@ -197,15 +197,22 @@ async function videoApi() {
         .then(response => response.json())
         .then(data => {
           const videos = data.results;
-          if (videos.length > 0) {
-            const youtubeKey = videos[0].key;
-            const youtubeUrl = `https://www.youtube.com/watch?v=${youtubeKey}`;
+          console.log(videos);
+          videos.map((item, index, array)=> {
+            let key = videos[index];
+            let youtubeKey = key.key;
+            const youtubeUrl = `https://www.youtube.com/watch?v=${youtubeKey}`;            
             console.log(youtubeUrl);
-          } else {
-            console.log('No videos found.');
-          }
         })
-        .catch(err => console.error(err));
+        //   if (videos.length > 0) {
+        //     const youtubeKey = videos[0].key;
+        //     const youtubeUrl = `https://www.youtube.com/watch?v=${youtubeKey}`;
+        //     console.log(youtubeUrl);
+        //   } else {
+        //     console.log('No videos found.');
+        //   }
+        })
+        // .catch(err => console.error(err));
 
 }
 
