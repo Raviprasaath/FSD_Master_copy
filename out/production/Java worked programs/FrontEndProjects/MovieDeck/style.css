@@ -1,11 +1,14 @@
+:root {
+    --primary-color: rgb(229, 106, 6);
+}
+
 body {
     margin: 0;
     box-sizing: border-box;
     background-color: rgba(0, 0, 0, 0.8);
-    transition: 0.5s ease-in-out;
+    transition: 0.5s ease;
 }
 #heading-container {
-    background-color: black;
     margin-top: 30px;
 }
 #heading-title {
@@ -18,18 +21,17 @@ body {
     font-weight: 700;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     text-transform: uppercase;
-    color: lightgreen;
+    color: var(--primary-color);
 }
 #movie-search-box {
     border-radius: 5px;
     padding: 7px;
     width: 200px;
     background-color: rgba(255, 255, 255, 0.95);
-    border: 2px solid rgb(240, 193, 4);
 }
 
 #movie-search-btn {
-    background-color: rgb(229, 106, 6);
+    background-color: var(--primary-color);
     color: white;
     border-radius: 5px;
     border: none;
@@ -42,7 +44,7 @@ body {
     border: none;
     padding: 5px 15px;
     margin: 5px;
-    background-color: rgb(162, 14, 242);
+    background-color: var(--primary-color);
     color: white;
     font-size: 14px;
     text-transform: uppercase;
@@ -102,7 +104,7 @@ body {
 }
 
 .plot {
-    color: orange;
+    color: var(--primary-color);
     text-align: center;
     padding-bottom: 10px;
     font-weight: bold;
@@ -118,7 +120,7 @@ body {
     text-align: center;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
     font-size: 25px;
-    color: orange;
+    color: var(--primary-color);
 }
 .poster {
     text-align: center;
@@ -150,7 +152,7 @@ body {
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 16px;
-    background-color: rgba(241, 88, 5, 0.792);
+    background-color: var(--primary-color);
     color: white;
     transition: 0.4s ease;
 }
@@ -182,4 +184,10 @@ body {
     border-radius: 8px;
 }
 
-     
+.movie-detail-highlight {
+    height: 50vh;
+    width: 60vw;
+    background-color: red;
+    margin: auto;
+    
+}
