@@ -35,7 +35,7 @@ window.addEventListener("unhandledrejection", () => {
 //         }}
 
 //         // 2. judges the data.... 
-//         if(data.status === 200) {
+//         if(data.status === 600) {
 //             // good 
 //             resolve(data)
 //         } else if (data.status === 500) {
