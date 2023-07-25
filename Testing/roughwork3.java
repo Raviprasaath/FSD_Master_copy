@@ -1,33 +1,31 @@
 package Testing;
 import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Stack;
 
 public class roughwork3 {
 
     public static void main (String[] args) {
-        int [] array = {10, 2, -2, -20, 10};
-        int ans = countSubAarrays(array, -10);
-        System.out.println(ans);
-    }
-    
-    public static int countSubAarrays (int [] array, int target){
-        HashMap <Integer, Integer> map =  new HashMap<>();
         
-        map.put(0, 1);
+        Stack <Integer> st = new Stack<>();
         
-        int [] prefixSum = new int [array.length];
-        prefixSum[0] = array[0];
-        int ans = 0;
-
-        for(int i=1; i<array.length; i++) {
-            prefixSum[i] = array[i] + prefixSum[i-1];
-        }
-        for(int i=0; i<prefixSum.length; i++) {
-            int k = prefixSum[i] - target;
-            if (map.containsKey(k)) {
-                ans += map.get(k);
+        int [] array = {1,3,2,4};
+        int n = array.length;
+        int [] ans = new int[n];
+        for(int i=n-1; i>=0; i--) {
+            int temp = array[i];
+            while (!st.empty() && st.peek() <= temp) {
+                st.pop();
             }
-            map.put(prefixSum[i], map.getOrDefault(prefixSum[i], 0)+1);
+            if (st.empty()) {
+                ans[i] = -1;
+            } else {
+                ans[i] = st.peek();
+            }
+            st.push(temp);
         }
-        return ans;
+        for(int i : ans) {
+            System.out.print(i+" ");
+        }
     }
 }
