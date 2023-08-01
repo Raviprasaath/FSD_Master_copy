@@ -1,3 +1,10 @@
+:root {
+  --primary-color-1: #333333 ;
+  --primary-color-2: #EDEDED ;
+  --primary-color-3: #6B6B6B;
+
+}
+
 *,
 *::after,
 *::before {
@@ -138,7 +145,7 @@ textarea {
   font-size: 1.6rem;
 }
 .btn--theme {
-  background: #624f82;
+  background: rgba(26, 26, 26, 0.756);
   color: #fff;
 }
 .btn--theme-inv {
@@ -167,7 +174,7 @@ textarea {
 
 .home-hero {
   color: #fff;
-  background-color: #635985;
+  background-color: var(--primary-color-1);
   background-position: center;
   height: 100vh;
   min-height: 80rem;
@@ -224,7 +231,7 @@ textarea {
 }
 
 .about {
-  background: #fafafa;
+  background: var(--primary-color-2);
 }
 .about__content {
   display: grid;
@@ -263,6 +270,9 @@ textarea {
 .projects__row-img-cont {
   overflow: hidden;
 }
+.projects__row-img-cont img{
+  border-radius: 10px;
+}
 .projects__row-img {
   width: 100%;
   display: block;
@@ -289,7 +299,7 @@ textarea {
 }
 
 .contact {
-  background-color: #6b728e;
+  background-color: var(--primary-color-3);
 }
 .contact__form-container {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -620,10 +630,10 @@ textarea {
   margin-bottom: 1.5rem;
   margin-right: 1.5rem;
   font-size: 1.6rem;
-  background: rgba(153, 153, 153, 0.2);
+  background: rgba(26, 26, 26, 0.756);
   border-radius: 5px;
   font-weight: 600;
-  color: #777;
+  color: white;
 }
 
 .mouse {
