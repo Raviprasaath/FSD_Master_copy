@@ -22,19 +22,29 @@
 
 
 
+// const debouncedSearchCallbackFunction = myDebounce(searchCallbackFunction, 2000)
+// inputBox.addEventListener("input", debouncedSearchCallbackFunction);
+
+
+
+
+
+
+
+
 // Basic level
-const debouncedSearchCallbackFunction = myDebounce(searchCallbackFunction, 2000)
-inputBox.addEventListener("input", debouncedSearchCallbackFunction);
-
-
 const inputBox = document.getElementById("input");
 inputBox.addEventListener("input", onKeyUpHandler);
 
 let timeout;
 function onKeyUpHandler(e) {
+
     clearTimeout(timeout);
+
     timeout = setTimeout(() => {
         console.log("debounce");
+        
         console.log(e.target.value);   // callback function
-    }, 1000);
+    }, 5000);
+
 }
