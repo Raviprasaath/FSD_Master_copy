@@ -74,23 +74,6 @@
 
 
 
-// const url = `https://www.alphavantage.co/query?function=INFLATION&apikey=${keyForApi}`;
-const inflationUrl = `https://www.alphavantage.co/query?function=INFLATION&apikey=demo`;
-async function inflation(url) {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    let dataStore =(data.data);
-    console.log(dataStore);
-    
-  } catch (error) {
-    console.log('Error:', error);
-  }
-}
-
-inflation(inflationUrl);
-
-
 
 
 
