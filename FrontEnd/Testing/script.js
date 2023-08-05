@@ -73,7 +73,9 @@
 
 
 
-
+window.addEventListener('resize', (e)=> {
+    console.log("hi")
+})
 
 
 
