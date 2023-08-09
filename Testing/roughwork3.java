@@ -1,31 +1,34 @@
 package Testing;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Stack;
 
 public class roughwork3 {
 
     public static void main (String[] args) {
-        
-        Stack <Integer> st = new Stack<>();
-        
-        int [] array = {1,3,2,4};
-        int n = array.length;
-        int [] ans = new int[n];
-        for(int i=n-1; i>=0; i--) {
-            int temp = array[i];
-            while (!st.empty() && st.peek() <= temp) {
-                st.pop();
-            }
-            if (st.empty()) {
-                ans[i] = -1;
-            } else {
-                ans[i] = st.peek();
-            }
-            st.push(temp);
-        }
-        for(int i : ans) {
-            System.out.print(i+" ");
+       int n = 5;
+       int [] arr = new int[n];
+       helper(arr, n, n);
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
         }
     }
+
+    public static void helper(int [] arr, int n, int m) {
+        if (n == 0) {
+            return;
+        }
+        
+        arr[m-n] = n;
+        helper(arr, n-1, m);
+    }
+
+
+
+    // public static void helper(int [] arr, int n) {
+        
+    //     if (n == 0) {
+    //         return;
+    //     }
+        
+    //     arr[n-1] = n;
+    //     helper(arr, n-1);
+    // }
 }
