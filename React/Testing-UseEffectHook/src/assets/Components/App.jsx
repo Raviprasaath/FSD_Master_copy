@@ -1,3 +1,4 @@
+import Pokemon from "./Pokemon"
 
 
 
@@ -7,7 +8,7 @@ function App() {
 
   return (
     <>
-      Hi Hello
+      <Pokemon/>
     </>
   )
 }
