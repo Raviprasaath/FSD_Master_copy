@@ -48,6 +48,7 @@ prevBtn.onclick = function () {
 
 
 callApiForAllMovie(page);
+const imgHeaderScroll = [];
 
 // API Data storage 
 async function callApiForAllMovie(page) {
@@ -76,13 +77,16 @@ async function callApiForAllMovie(page) {
             overview: item.overview,
             release_date: item.release_date,
             id: item.id,
+            backdrop_path: item.backdrop_path,
         }
         objArr.push(movie);
+        imgHeaderScroll.push(movie);
     })
     generateCards(objArr);
     moviesData(objArr);
-
+    imgHeaderScrollFn();
 }
+
 
 // Card Rendering 
 function generateCards(films) {
@@ -98,8 +102,7 @@ function generateCards(films) {
             <div class="poster">
                 <img class="poster-size" src="https://image.tmdb.org/t/p/original${item.poster_path}" alt="movie-image">
                 <div class="heart-icon">
-                    <i class="fa-regular fa-heart"></i>
-                    
+                    <i class="fa-regular fa-heart"></i>                    
                 </div>
             </div>
             <div class="name-vote-sorting">
@@ -163,23 +166,21 @@ fav.addEventListener('click', (e) => {
 
 function favMoviesContainerAdding() {
     let movieCard = document.getElementsByClassName('movie-cards');
-    // console.log(typeof movieCard)
 
     for (const movieFav of movieCard) {
         movieFav.addEventListener("click", (e) => {
             let idOfMovie = (e.target.closest(".movie-cards").getAttribute('id'));
-            // console.log(idOfMovie)
             return idOfMovie;
         })
     }
-    console.log(movieCard, " movie")
+    // console.log(movieCard, " movie")
     return movieCard;
 }
 
 function moviesData(data) {
     let allMovieDetails = data;
-    console.log(allMovieDetails, " clikcing");
-    console.log(data);
+    // console.log(allMovieDetails, " clikcing");
+    // console.log(data);
 }
 
 
@@ -197,12 +198,12 @@ async function videoApi() {
         .then(response => response.json())
         .then(data => {
           const videos = data.results;
-          console.log(videos);
+        //   console.log(videos);
           videos.map((item, index, array)=> {
             let key = videos[index];
             let youtubeKey = key.key;
             const youtubeUrl = `https://www.youtube.com/watch?v=${youtubeKey}`;            
-            console.log(youtubeUrl);
+            // console.log(youtubeUrl);
         })
         //   if (videos.length > 0) {
         //     const youtubeKey = videos[0].key;
@@ -221,7 +222,7 @@ async function videoApi() {
 
 
 
-    // async function movieFilter() {
+// async function movieFilter() {
 //     const options = {
 //         method: 'GET',
 //         headers: {
@@ -234,10 +235,107 @@ async function videoApi() {
 //     let response = await res.json();
 //     let data = await response;
 //     console.log(data)
-
-
 // }
-
 // movieFilter();
 
 
+function imgHeaderScrollFn() {
+
+        let movieHeaderRoll = document.getElementsByClassName('movies-poster-header')[0];
+        console.log(imgHeaderScroll, " tet");
+        
+            movieHeaderRoll.innerHTML += 
+            `
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                        <li data-target="#myCarousel" data-slide-to="4"></li>
+                        <li data-target="#myCarousel" data-slide-to="5"></li>
+                        <li data-target="#myCarousel" data-slide-to="6"></li>
+                        <li data-target="#myCarousel" data-slide-to="7"></li>
+                    </ol>
+            
+                    
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img class="img-scroll" src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[0].backdrop_path}" alt="Los Angeles" >
+                            <div class="header-details">hello</div>
+                        </div>
+                        <div class="item">
+                            <img class="img-scroll"  src="https://image.tmdb.org/t/p/original${imgHeaderScroll[1].backdrop_path}" alt="Chicago">
+                        </div>
+                        <div class="item">
+                            <img class="img-scroll"  src="https://image.tmdb.org/t/p/original${imgHeaderScroll[2].backdrop_path}" alt="Chicago">
+                        </div>
+                        <div class="item">
+                            <img class="img-scroll" src="https://image.tmdb.org/t/p/original${imgHeaderScroll[3].backdrop_path}" alt="Los Angeles" >
+                        </div>            
+                        <div class="item">
+                            <img class="img-scroll"  src="https://image.tmdb.org/t/p/original${imgHeaderScroll[4].backdrop_path}" alt="Chicago">
+                        </div>
+                        <div class="item">
+                            <img class="img-scroll"  src="https://image.tmdb.org/t/p/original${imgHeaderScroll[5].backdrop_path}" alt="Chicago">
+                        </div>
+                        <div class="item">
+                            <img class="img-scroll" src="https://image.tmdb.org/t/p/original${imgHeaderScroll[6].backdrop_path}" alt="Los Angeles" >
+                        </div>            
+                        <div class="item">
+                            <img class="img-scroll" src="https://image.tmdb.org/t/p/original${imgHeaderScroll[7].backdrop_path}"  alt="Chicago">
+                        </div>
+                    </div>
+
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    
+                    
+                    </div>
+                </div>
+            `
+}
+
+
+/*
+
+
+movieHeaderRoll.innerHTML += 
+`
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+                
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+
+        
+        <div class="carousel-inner">
+            <div class="item active">
+                <img class="img-scroll" src="https://wallpapercave.com/wp/wp11157484.jpg" alt="Los Angeles" >
+            </div>            
+            <div class="item">
+                <img class="img-scroll"  src="https://i0.wp.com/www.socialnews.xyz/wp-content/uploads/2019/01/20/kamal-haasan-and-shankar-s-indian-2-movie-First-look-super-HD-posters-.jpg?fit=4500%2C2312&quality=80&zoom=1&ssl=1" alt="Chicago">
+            </div>
+        </div>
+
+        
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        </div>
+    </div>
+`
+
+*/

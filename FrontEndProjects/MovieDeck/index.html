@@ -6,15 +6,17 @@
     <title>Movie Deck</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
 </head>
 <body>
-    <header id="heading-container">
-        <nav id="heading-title">
-            <div id="title-of-page">Movie Deck</div>
-        </nav>
-    </header>
-
     <main>
+        <div class="movies-poster-header">
+            
+        </div>
+        
+
+        
         <!-- <div class="movie-detail-highlight">
             <p>Movie Name</p>
             <p>Cast Details</p>
@@ -25,18 +27,6 @@
                 <button id="movie-search-btn">Search</button>
             </div>
         </div>
-        <div id="movies-choice">
-            <div>
-                <button class="movie-selection-btn">All </button>
-                <button class="movie-selection-btn">Favorites </button>
-            </div>
-            <div>
-                <button class="movie-filter-btn by-date">Sort by date (oldest to latest) </button>
-                <button class="movie-filter-btn by-rate">Sort by rating (latest to most) </button>
-            </div>
-        </div>
-
-        
 
 
         <div class="movie-card-container">
@@ -49,7 +39,6 @@
             <button class="page-change" id="current">Current Page : 1</button>
             <button class="page-change" id="next">Next Page</button>
         </div>
-
     </main>
     
     <footer>
@@ -57,10 +46,12 @@
             @2023 Movies Copyright
         </div>
     </footer>
-
-
+    
+</body>
+    
 
 
     <script src="script.js"></script>
-</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </html>
