@@ -169,7 +169,7 @@ body {
 }
 
 
-.img-scroll {
+.carousel-inner {
     height: 40vw !important;
     transform: scale(1);
 } 
