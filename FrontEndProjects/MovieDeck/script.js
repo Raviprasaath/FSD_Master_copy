@@ -246,96 +246,143 @@ function imgHeaderScrollFn() {
         
             movieHeaderRoll.innerHTML += 
             `
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                        <li data-target="#myCarousel" data-slide-to="4"></li>
-                        <li data-target="#myCarousel" data-slide-to="5"></li>
-                        <li data-target="#myCarousel" data-slide-to="6"></li>
-                        <li data-target="#myCarousel" data-slide-to="7"></li>
-                    </ol>
-            
-                    
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img class="img-scroll" src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[0].backdrop_path}" alt="Los Angeles" >
-                            <div class="header-details">hello</div>
-                        </div>
-                        <div class="item">
-                            <img class="img-scroll"  src="https://image.tmdb.org/t/p/original${imgHeaderScroll[1].backdrop_path}" alt="Chicago">
-                        </div>
-                        <div class="item">
-                            <img class="img-scroll"  src="https://image.tmdb.org/t/p/original${imgHeaderScroll[2].backdrop_path}" alt="Chicago">
-                        </div>
-                        <div class="item">
-                            <img class="img-scroll" src="https://image.tmdb.org/t/p/original${imgHeaderScroll[3].backdrop_path}" alt="Los Angeles" >
-                        </div>            
-                        <div class="item">
-                            <img class="img-scroll"  src="https://image.tmdb.org/t/p/original${imgHeaderScroll[4].backdrop_path}" alt="Chicago">
-                        </div>
-                        <div class="item">
-                            <img class="img-scroll"  src="https://image.tmdb.org/t/p/original${imgHeaderScroll[5].backdrop_path}" alt="Chicago">
-                        </div>
-                        <div class="item">
-                            <img class="img-scroll" src="https://image.tmdb.org/t/p/original${imgHeaderScroll[6].backdrop_path}" alt="Los Angeles" >
-                        </div>            
-                        <div class="item">
-                            <img class="img-scroll" src="https://image.tmdb.org/t/p/original${imgHeaderScroll[7].backdrop_path}"  alt="Chicago">
-                        </div>
-                    </div>
+            <div class="container">
+  <h2>Carousel Example</h2>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+      <li data-target="#myCarousel" data-slide-to="6"></li>
+      <li data-target="#myCarousel" data-slide-to="7"></li>
+    </ol>
 
-                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                    
-                    
-                    </div>
-                </div>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[10].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[10].title}</h3>
+          <p>${imgHeaderScroll[10].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[3].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[3].title}</h3>
+          <p>${imgHeaderScroll[3].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[5].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[5].title}</h3>
+          <p>${imgHeaderScroll[5].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[6].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[6].title}</h3>
+          <p>${imgHeaderScroll[6].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[2].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[2].title}</h3>
+          <p>${imgHeaderScroll[2].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[1].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[1].title}</h3>
+          <p>${imgHeaderScroll[1].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[7].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[7].title}</h3>
+          <p>${imgHeaderScroll[7].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[0].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[0].title}</h3>
+          <p>${imgHeaderScroll[0].overview}</p>
+        </div>
+      </div>
+      
+
+      
+  
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+            
             `
 }
 
-
 /*
 
+<div class="container">
+  <h2>Carousel Example</h2>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+      <li data-target="#myCarousel" data-slide-to="6"></li>
+      <li data-target="#myCarousel" data-slide-to="7"></li>
+    </ol>
 
-movieHeaderRoll.innerHTML += 
-`
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-                
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-        </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
 
-        
-        <div class="carousel-inner">
-            <div class="item active">
-                <img class="img-scroll" src="https://wallpapercave.com/wp/wp11157484.jpg" alt="Los Angeles" >
-            </div>            
-            <div class="item">
-                <img class="img-scroll"  src="https://i0.wp.com/www.socialnews.xyz/wp-content/uploads/2019/01/20/kamal-haasan-and-shankar-s-indian-2-movie-First-look-super-HD-posters-.jpg?fit=4500%2C2312&quality=80&zoom=1&ssl=1" alt="Chicago">
-            </div>
+      <div class="item active">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[0].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>imgHeaderScroll[0].title</h3>
+          <p>imgHeaderScroll[0].overview</p>
         </div>
+      </div>
 
-        
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <span class="sr-only">Next</span>
-        </a>
-        </div>
+      
+  
     </div>
-`
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
 
 */
