@@ -20,4 +20,20 @@ public class FindTheDiff_389 {
 
         return c;
       }
+      // low beats
+      public static char findTheDifference1(String s, String t) {
+
+        StringBuilder sb = new StringBuilder(s);
+        char ans = 'a';
+
+        for (int i=0; i<t.length(); i++) {
+            char ch = t.charAt(i);
+            if (sb.toString().indexOf(ch) != -1) {
+                sb.deleteCharAt(sb.toString().indexOf(ch));
+            } else {
+                ans = ch;
+            }
+        }
+        return ans;
+    }
 }

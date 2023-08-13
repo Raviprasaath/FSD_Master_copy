@@ -1,0 +1,159 @@
+:root {
+  --primary-color: #2d2e30;
+  --primary-color-dull: #ffffff9b;
+  --secondary-color: white;
+  --subscribe-button: #1f80e0;
+  --user-button: rgb(145, 199, 7);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
+.header-section {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  justify-content: flex-start;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100dvw;
+  padding: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.ul-navbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.ul-li-navbar {
+  padding-left: 10px;
+  color: var(--primary-color-dull);
+}
+
+.search-box {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  height: 30px;
+  outline: none;
+  text-transform: capitalize;
+  transition: 0.5s;
+  width: 250px;
+  border-bottom: 2px var(--secondary-color) solid;
+}
+
+.input-search-bar {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.fa-magnifying-glass {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  color: var(--secondary-color);
+}
+
+.searchbar-user {
+  display: flex;
+  gap: 10px;
+}
+
+.subscribe-btn {
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: var(--subscribe-button);
+  color: var(--secondary-color);
+}
+.user-button {
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: var(--user-button);
+  color: var(--secondary-color);
+}
+
+.openbtn {
+  display: none;
+}
+
+/* ------------------ */
+.sidepanel {
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  height: 100dvh;
+  top: 0;
+  left: 0;
+  background-color: black;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidepanel a:hover {
+  color: #f1f1f1;
+}
+
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.carosal-img {
+    padding: 20px;
+}
+
+/* ------------------ */
+
+@media only screen and (max-width: 790px) {
+  .ul-navbar {
+    display: none;
+  }
+  .openbtn {
+    display: block;
+  }
+  .search-box {
+    font-size: 11px;
+    font-weight: 300;
+    width: 100px;
+  }
+}
