@@ -10,6 +10,7 @@ function App() {
   }
 
   function shapeSelector(e) {
+    console.log(e.target.value)
     setShape(e.target.value);
   }
 
