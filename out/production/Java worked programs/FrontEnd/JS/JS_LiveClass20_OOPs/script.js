@@ -235,7 +235,7 @@ bar(); // global
 // function foo(a, b) {
 //     this.a = a;
 //     this.b = b;
-//     // console.log(this, a, b)
+//     console.log(this, a, b)
 // }
 // const obj1 = {
 //     foo: foo

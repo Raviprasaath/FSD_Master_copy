@@ -1,7 +1,6 @@
 package LinkedList;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Scanner;
 
 class LList{
     Node head;
@@ -66,13 +65,19 @@ public class MergeTwoSortedList {
     public static void main(String[] args) {
         LList list1 = new LList();
         LList list2 = new LList();
-        list1.add(22);
-        list1.add(20);
-        list1.add(15);
-        list1.add(12);
-        list1.add(10);
-        list1.add(5);
-        list1.add(1);
+        Scanner sc = new Scanner(System.in);
+
+        for (int i=0; i<5; i++) {
+            list1.add(sc.nextInt()); 
+        }
+
+        // list1.add(22);
+        // list1.add(20);
+        // list1.add(15);
+        // list1.add(12);
+        // list1.add(10);
+        // list1.add(5);
+        // list1.add(1);
         list1.display();
         System.out.println();
         list2.add(11);

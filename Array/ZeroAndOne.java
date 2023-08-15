@@ -13,15 +13,12 @@ public class ZeroAndOne {
         int oneBoundary=array.length-1;
 
         while(zeroBoundary < oneBoundary){
-
             while(zeroBoundary < array.length && array[zeroBoundary]==0){
                 zeroBoundary++;
             }
-
             while(oneBoundary >= 0 && array[oneBoundary]==1){
                 oneBoundary--;
             }
-
             if(zeroBoundary < oneBoundary){
                 array[zeroBoundary] = 0;
                 array[oneBoundary] = 1;

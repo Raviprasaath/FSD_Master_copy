@@ -97,10 +97,10 @@ body {
   background-color: var(--subscribe-button);
   color: var(--secondary-color);
   font-size: 2rem;
-  height: 3.5rem;
+  height: 3.4rem;
 }
 .user-button {
-  height: 3.5rem;
+  height: 3.4rem;
   font-size: 2rem;
   border: none;
   padding: 5px 15px;
