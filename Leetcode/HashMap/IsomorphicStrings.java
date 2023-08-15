@@ -1,6 +1,8 @@
 package Leetcode.HashMap;
 import java.util.HashMap;
 
+
+// question 205
 public class IsomorphicStrings {
     public static void main(String[] args) {
         String s = "egg";

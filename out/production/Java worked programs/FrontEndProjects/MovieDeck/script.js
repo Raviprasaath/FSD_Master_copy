@@ -48,6 +48,7 @@ prevBtn.onclick = function () {
 
 
 callApiForAllMovie(page);
+const imgHeaderScroll = [];
 
 // API Data storage 
 async function callApiForAllMovie(page) {
@@ -76,13 +77,16 @@ async function callApiForAllMovie(page) {
             overview: item.overview,
             release_date: item.release_date,
             id: item.id,
+            backdrop_path: item.backdrop_path,
         }
         objArr.push(movie);
+        imgHeaderScroll.push(movie);
     })
     generateCards(objArr);
     moviesData(objArr);
-
+    imgHeaderScrollFn();
 }
+
 
 // Card Rendering 
 function generateCards(films) {
@@ -98,8 +102,7 @@ function generateCards(films) {
             <div class="poster">
                 <img class="poster-size" src="https://image.tmdb.org/t/p/original${item.poster_path}" alt="movie-image">
                 <div class="heart-icon">
-                    <i class="fa-regular fa-heart"></i>
-                    
+                    <i class="fa-regular fa-heart"></i>                    
                 </div>
             </div>
             <div class="name-vote-sorting">
@@ -163,23 +166,21 @@ fav.addEventListener('click', (e) => {
 
 function favMoviesContainerAdding() {
     let movieCard = document.getElementsByClassName('movie-cards');
-    // console.log(typeof movieCard)
 
     for (const movieFav of movieCard) {
         movieFav.addEventListener("click", (e) => {
             let idOfMovie = (e.target.closest(".movie-cards").getAttribute('id'));
-            // console.log(idOfMovie)
             return idOfMovie;
         })
     }
-    console.log(movieCard, " movie")
+    // console.log(movieCard, " movie")
     return movieCard;
 }
 
 function moviesData(data) {
     let allMovieDetails = data;
-    console.log(allMovieDetails, " clikcing");
-    console.log(data);
+    // console.log(allMovieDetails, " clikcing");
+    // console.log(data);
 }
 
 
@@ -197,12 +198,12 @@ async function videoApi() {
         .then(response => response.json())
         .then(data => {
           const videos = data.results;
-          console.log(videos);
+        //   console.log(videos);
           videos.map((item, index, array)=> {
             let key = videos[index];
             let youtubeKey = key.key;
             const youtubeUrl = `https://www.youtube.com/watch?v=${youtubeKey}`;            
-            console.log(youtubeUrl);
+            // console.log(youtubeUrl);
         })
         //   if (videos.length > 0) {
         //     const youtubeKey = videos[0].key;
@@ -221,7 +222,7 @@ async function videoApi() {
 
 
 
-    // async function movieFilter() {
+// async function movieFilter() {
 //     const options = {
 //         method: 'GET',
 //         headers: {
@@ -234,10 +235,154 @@ async function videoApi() {
 //     let response = await res.json();
 //     let data = await response;
 //     console.log(data)
-
-
 // }
-
 // movieFilter();
 
 
+function imgHeaderScrollFn() {
+
+        let movieHeaderRoll = document.getElementsByClassName('movies-poster-header')[0];
+        console.log(imgHeaderScroll, " tet");
+        
+            movieHeaderRoll.innerHTML += 
+            `
+            <div class="container">
+  <h2>Carousel Example</h2>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+      <li data-target="#myCarousel" data-slide-to="6"></li>
+      <li data-target="#myCarousel" data-slide-to="7"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[10].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[10].title}</h3>
+          <p>${imgHeaderScroll[10].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[3].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[3].title}</h3>
+          <p>${imgHeaderScroll[3].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[5].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[5].title}</h3>
+          <p>${imgHeaderScroll[5].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[6].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[6].title}</h3>
+          <p>${imgHeaderScroll[6].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[2].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[2].title}</h3>
+          <p>${imgHeaderScroll[2].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[1].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[1].title}</h3>
+          <p>${imgHeaderScroll[1].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[7].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[7].title}</h3>
+          <p>${imgHeaderScroll[7].overview}</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[0].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>${imgHeaderScroll[0].title}</h3>
+          <p>${imgHeaderScroll[0].overview}</p>
+        </div>
+      </div>
+      
+
+      
+  
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+            
+            `
+}
+
+/*
+
+<div class="container">
+  <h2>Carousel Example</h2>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+      <li data-target="#myCarousel" data-slide-to="6"></li>
+      <li data-target="#myCarousel" data-slide-to="7"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="https://image.tmdb.org/t/p/w1280${imgHeaderScroll[0].backdrop_path}" alt="Los Angeles" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>imgHeaderScroll[0].title</h3>
+          <p>imgHeaderScroll[0].overview</p>
+        </div>
+      </div>
+
+      
+  
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+*/

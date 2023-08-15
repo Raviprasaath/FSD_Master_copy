@@ -10,15 +10,15 @@ public class HashSetToArray {
         for (int i=0; i<array.length; i++) {
             hset.add(array[i]);
         }
-        System.out.println(hset);
+        // System.out.println(hset);
         
         String [] str = new String[hset.size()];
         hset.toArray(str);
 
         for(String i : str) {
-            System.out.print(i+" ");
+            // System.out.print(i+" ");
         }
-        System.out.println();
+        // System.out.println();
 
 //-------Int to Array
         int [] array2 = {1,1,3,4,5,5,6};
@@ -32,6 +32,10 @@ public class HashSetToArray {
         hset2.toArray();
 
         for(int i : array2) {
+            System.out.print(i+" ");
+        }
+        // below is suggested for int array
+        for(int i : hset2) {
             System.out.print(i+" ");
         }
 

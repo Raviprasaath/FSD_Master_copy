@@ -21,6 +21,9 @@ public class NonRepeatingCharacter {
           list.add(str.charAt(i)); 
         }
       }
+
+      System.out.println(list);
+      System.out.println(list2);
   
       for (int i=0; i<n; i++) {
         if (!list2.contains(array[i]) ){
