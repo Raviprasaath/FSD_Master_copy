@@ -8,28 +8,36 @@ function closeNav() {
 
 
 
+
 //disnep video playing 
-const videoCard = document.querySelector('.video-card');
-const video = videoCard.querySelector('.card-video');
+// const videoCard = document.querySelector('.video-card');
+// const video = videoCard.querySelector('.card-video');
 
-const videoCards = document.querySelectorAll('.video-card');
-videoCards.forEach(item => {
-  const image = item.querySelector('.video-card-image');
-  const video = item.querySelector('.card-video');
 
-  item.onmouseenter = function () {
-    video.play();
-    video.style.opacity = 1;
-    image.style.opacity = 0;
-  }
-
-  item.onmouseleave = function () {
-    video.pause();
-    video.style.opacity = 0;
-    image.style.opacity = 1;
-  }
-
+window.addEventListener('DOMContentLoaded', ()=> {
+  setTimeout(()=> {
+    const videoCards = document.querySelectorAll('.video-card');
+    videoCards.forEach(item => {
+      const image = item.querySelector('.video-card-image');
+      const video = item.querySelector('.card-video');
+    
+      item.onmouseenter = function () {
+        video.play();
+        video.style.opacity = 1;
+        image.style.opacity = 0;
+      }
+    
+      item.onmouseleave = function () {
+        video.pause();
+        video.style.opacity = 0;
+        image.style.opacity = 1;
+      }
+    })
+  }, 1000)
 })
+
+
+
 
 
 
