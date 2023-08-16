@@ -1,0 +1,23 @@
+.App {
+  height: 50vh;
+  display: grid;
+  place-items: center;
+}
+
+section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+section div {
+  border: 1px solid black;
+  padding: 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.active {
+  background: #7eaa92;
+  color: white;
+}
