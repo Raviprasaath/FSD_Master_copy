@@ -7,8 +7,8 @@
 }
 
 :root {
-  --PrimaryColor: Ihsl(225, 50%, 48%);
-  --SecondaryColor: hsl(180, 17%, 95% );
+  --PrimaryColor: hsl(225, 50%, 48%);
+  --SecondaryColor: hsl(180, 17%, 95%);
   --colorOne: hsl(15, 74%, 70%);
   --colorTwo: hsl(28, 100%, 82%);
   --HoverColor: hsl(225, 56%, 59%);
@@ -66,7 +66,7 @@ li {
 }
 
 .btn {
-  padding: 0.7rem, 1.5rem;
+  padding: 0.7rem 1.5rem;
   background: var(--PrimaryColor);
   border: none;
   outline: none;
@@ -108,4 +108,202 @@ h2 {
   font-size: 25px;
   padding: 1rem 0;
   color: var(--blackColor);
+}
+
+.navbar {
+  position: fixed;
+  flex-direction: column;
+  width: 100%;
+  z-index: 1000;
+}
+.navbar .navBarOne, .navbar .navBarTwo {
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
+}
+.navbar .navBarOne {
+  background-color: var(--SecondaryColor);
+}
+.navbar .navBarOne .icon:hover {
+  color: var(--PrimaryColor);
+}
+.navbar .atb {
+  gap: 1rem;
+}
+.navbar .atb span {
+  color: var(--blackColor);
+  font-size: 13px;
+  cursor: pointer;
+}
+.navbar .atb span:hover {
+  color: var(--PrimaryColor);
+  font-size: 700;
+}
+.navbar .navBarTwo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 3rem;
+  padding: 1.5rem 1rem;
+  position: fixed;
+  transition: 0.3s ease-in-out;
+}
+.navbar .navBarTwo .logoDiv .Logo {
+  width: 15%;
+}
+@media screen and (max-width: 768px) {
+  .navbar .navBarTwo .navBarMenu {
+    position: absolute;
+    background: var(--SecondaryColor);
+    padding: 1.5rem;
+    border-radius: 10px;
+    top: 5rem;
+    right: -50%;
+    width: 80%;
+    transform: translateX(50%);
+    z-index: 2000;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.5) 0px 4px 6px -2px;
+    border: 3px solid var(--whiteColor);
+    transition: 0.4s ease-in-out;
+  }
+  .navbar .navBarTwo .navBarMenu .menu {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  .navbar .navBarTwo .navBarMenu .menu .listItem {
+    padding: 0.5rem 0;
+    cursor: pointer;
+    color: var(--blackColor);
+  }
+  .navbar .navBarTwo .navBarMenu .menu .listItem:hover {
+    color: var(--PrimaryColor);
+    font-weight: 700;
+  }
+  .navbar .navBarTwo .navBarMenu .btnOne {
+    display: block;
+    justify-content: center;
+    margin: auto;
+    margin-top: 1rem;
+  }
+  .navbar .navBarTwo .btnTwo {
+    display: none;
+  }
+}
+.navbar .navBarTwo .toggleIcon .icon {
+  font-size: 30px;
+  color: var(--blackColor);
+}
+.navbar .navBarTwo .showNavBar {
+  right: 50%;
+  transition: 0.5s ease-in-out;
+}
+.navbar .navbar_with_bg {
+  background: var(--SecondaryColor);
+  padding: 0.5rem 1rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.home {
+  padding-top: 10rem;
+  text-align: center;
+  gap: 2rem;
+  flex-direction: column;
+}
+.home .mainText {
+  color: var(--blackColor);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 2.5rem;
+}
+.home .homeImages {
+  width: 100%;
+  margin: 1rem auto 0;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 5rem;
+}
+.home .videoDiv {
+  width: 80%;
+}
+.home .videoDiv .video {
+  border-radius: 5rem;
+  height: 85%;
+  width: 100%;
+}
+.home .plane {
+  position: absolute;
+  height: 75%;
+  width: 90%;
+  top: 0%;
+}
+
+.search .sectionContainer {
+  width: 100%;
+  padding: 1.5rem;
+  border: 2px solid var(--greyBg);
+  border-radius: 16px;
+  row-gap: 2rem;
+}
+.search .sectionContainer .btns {
+  background: var(--SecondaryColor);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  width: 100%;
+  flex-direction: column;
+  margin: auto;
+}
+.search .sectionContainer .btns .singleBtn {
+  padding: 0.8rem 1.5rem;
+  font-size: 13px;
+  border-radius: 3rem;
+  width: 80%;
+  text-align: center;
+}
+.search .sectionContainer .btns .singleBtn:hover {
+  background: var(--PrimaryColor);
+  color: var(--whiteColor);
+  font-weight: 500;
+  transition: 0.4s ease;
+}
+.search .sectionContainer .btns .active {
+  background: var(--PrimaryColor);
+  color: var(--whiteColor);
+  font-weight: 500;
+}
+.search .sectionContainer .searchInputs {
+  width: 100%;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.search .sectionContainer .searchInputs .singleInput .iconDiv {
+  padding: 16px 10px;
+  border-radius: 3rem;
+  background: var(--SecondaryColor);
+  margin-right: 1rem;
+}
+.search .sectionContainer .searchInputs .singleInput .iconDiv .icon {
+  color: var(--blackColor);
+  opacity: 0.7;
+}
+.search .sectionContainer .searchInputs .singleInput .texts h4 {
+  padding-top: 0;
+  padding-bottom: 0.7rem;
+  color: var(--blackColor);
+  font-weight: 700;
+}
+.search .sectionContainer .searchInputs .singleInput .texts input {
+  width: 95%;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+.search .sectionContainer .searchInputs .singleInput .texts input::-moz-placeholder {
+  font-size: 12px;
+  opacity: 0.5;
+}
+.search .sectionContainer .searchInputs .singleInput .texts input::placeholder {
+  font-size: 12px;
+  opacity: 0.5;
 }/*# sourceMappingURL=main.css.map */
