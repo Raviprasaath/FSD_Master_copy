@@ -361,3 +361,243 @@ h2 {
         }
     }
 }
+
+// support
+.support {
+    .sectionContainer {
+        .titlesDiv {
+            text-align: center;
+            small {
+                letter-spacing: 0.8rem;
+                text-transform: uppercase;
+                font-size: 13px;
+                color: var(--blackColor);
+                line-height: 1.5rem;
+            }
+        }
+        .infoDiv {
+            margin-top: 2rem;
+            gap: 1.5rem;
+
+            .textDiv {
+                gap: 1.5rem;
+
+                .singleInfo {
+                    .number {
+                        background: var(--PrimaryColor);
+                        padding: 5px 12px;
+                        width: 40px;
+                        border-radius: 3rem;
+                        text-align: center;
+                        font-size: 13px;
+                        font-weight: 700;
+                        color: var(--whiteColor);
+                    }
+
+                    .colorOne {
+                        background: var(--colorOne);
+                    }
+                    .colorTwo {
+                        background: var(--colorTwo);
+                    }
+                }
+            }
+
+            .imgDiv {
+                margin: auto;
+                img {
+                    width: 100%;
+                    max-width: 420px;
+                }
+            }
+        }
+    }
+}
+
+// info
+.info {
+    background: var(--SecondaryColor);
+    .titleDiv {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        justify-content: space-between;
+    }
+
+    .cardsDiv {
+        gap: 1.5rem;
+        margin-top: 3rem;
+
+        .singleCard {
+            background: var(--whiteColor);
+            padding: 3rem 2rem;
+            border-radius: 10rem;
+            gap: 1rem;
+            text-align: center;
+            margin: auto;
+            height: 320px;
+            width: 90%;
+            max-width: 250px;
+
+            .iconDiv {
+                justify-content: center;
+                margin: auto;
+                background: var(--PrimaryColor);
+                width: max-content;
+                height: 55px;
+                padding: 1rem;
+                border-radius: 3rem;
+
+                .icon {
+                    color: var(--whiteColor);
+                }
+            }
+            .cardTitle {
+                color: var(--blackColor);
+                font-weight: 700;
+            }
+
+            .colorOne {
+                background: var(--colorOne);
+            }
+            .colorTwo {
+                background: var(--colorTwo);
+            }
+        }
+    }
+}
+
+// Lounge
+.lounge {
+    .sectionContainer {
+        gap: 1.5rem;
+
+        .imgDiv {
+            margin: auto;
+
+            img {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+
+        .textDiv {
+            .grids{
+                margin-top: 1rem;
+                gap: 1.5rem;
+
+                .singleGrid {
+                    .gridTitle {
+                        display: block;
+                        padding-bottom: 0.5rem;
+                        font-weight: 500;
+                        color: var(--blackColor);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.travelers {
+    .sectionConatiner {
+        text-align: center;
+
+        .travelersContainer {
+            margin-top: 1rem;
+            gap: 1.5rem;
+
+            .singleTraveler {
+                position: relative;
+                height: 320px;
+                width: 85%;
+                max-width: 250px;
+                overflow: hidden;
+                border-radius: 10rem;
+                gap: 1rem;
+                margin: auto;
+
+                .destinationImage, .travelerImage, .traverlerName {
+                    position: absolute;
+                }
+
+                .destinationImage {
+                    height: 100%;
+                    width: 100%;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                    object-fit: cover;
+                }
+
+                .travelerImage {
+                    height: 100px;
+                    width: 100px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    bottom: 30px;
+                    left: 30%;
+                    transform: translateX(-50%);
+                    border: 5px solid rgba(225, 225, 225, 0.637);
+                    transition: var(--transition);
+                    animation: animated 2.3s infinite;
+                }
+
+                @keyframes animated {
+                    0% {
+                        transform: translateY(0px);
+                    }
+                    50% {
+                        transform: translateY(16px);
+                    }
+                    100% {
+                        transform: translateY(0px);
+                    }
+                }
+
+                .traverlerName {
+                    bottom: -100%;
+                    width: 100%;
+                    height: max-content;
+                    background: var(--whiteColor);
+                    padding: 1.5rem 1rem;
+                    transition: var(--transition);
+                    animation: animatedBorders 2.3s infinite;
+
+                    span {
+                        display: block;
+                        color: black;
+                        font-weight: 700;
+                    }
+                    p {
+                        color: var(--PrimaryColor);
+                        font-style: italic;
+                    }
+                }
+
+                @keyframes animatedBorders {
+                    0% {
+                        border-radius: 0rem;
+                    }
+                    50% {
+                        border-radius: 2rem;                        
+                    }
+                    100% {
+                        border-radius: 0rem;                        
+                    }
+                }
+                &:hover {
+                    .traverlerName {
+                        bottom: 0;
+                        transition: 1s ease-in-out;
+                    }
+                    .travelerImage {
+                        bottom: 110px;
+                        transition: 1s ease-in-out;
+                    }
+                }
+            }
+        }
+    }
+}

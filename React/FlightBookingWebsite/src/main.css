@@ -306,4 +306,207 @@ h2 {
 .search .sectionContainer .searchInputs .singleInput .texts input::placeholder {
   font-size: 12px;
   opacity: 0.5;
+}
+
+.support .sectionContainer .titlesDiv {
+  text-align: center;
+}
+.support .sectionContainer .titlesDiv small {
+  letter-spacing: 0.8rem;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--blackColor);
+  line-height: 1.5rem;
+}
+.support .sectionContainer .infoDiv {
+  margin-top: 2rem;
+  gap: 1.5rem;
+}
+.support .sectionContainer .infoDiv .textDiv {
+  gap: 1.5rem;
+}
+.support .sectionContainer .infoDiv .textDiv .singleInfo .number {
+  background: var(--PrimaryColor);
+  padding: 5px 12px;
+  width: 40px;
+  border-radius: 3rem;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--whiteColor);
+}
+.support .sectionContainer .infoDiv .textDiv .singleInfo .colorOne {
+  background: var(--colorOne);
+}
+.support .sectionContainer .infoDiv .textDiv .singleInfo .colorTwo {
+  background: var(--colorTwo);
+}
+.support .sectionContainer .infoDiv .imgDiv {
+  margin: auto;
+}
+.support .sectionContainer .infoDiv .imgDiv img {
+  width: 100%;
+  max-width: 420px;
+}
+
+.info {
+  background: var(--SecondaryColor);
+}
+.info .titleDiv {
+  flex-direction: column;
+  text-align: center;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+.info .cardsDiv {
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.info .cardsDiv .singleCard {
+  background: var(--whiteColor);
+  padding: 3rem 2rem;
+  border-radius: 10rem;
+  gap: 1rem;
+  text-align: center;
+  margin: auto;
+  height: 320px;
+  width: 90%;
+  max-width: 250px;
+}
+.info .cardsDiv .singleCard .iconDiv {
+  justify-content: center;
+  margin: auto;
+  background: var(--PrimaryColor);
+  width: -moz-max-content;
+  width: max-content;
+  height: 55px;
+  padding: 1rem;
+  border-radius: 3rem;
+}
+.info .cardsDiv .singleCard .iconDiv .icon {
+  color: var(--whiteColor);
+}
+.info .cardsDiv .singleCard .cardTitle {
+  color: var(--blackColor);
+  font-weight: 700;
+}
+.info .cardsDiv .singleCard .colorOne {
+  background: var(--colorOne);
+}
+.info .cardsDiv .singleCard .colorTwo {
+  background: var(--colorTwo);
+}
+
+.lounge .sectionContainer {
+  gap: 1.5rem;
+}
+.lounge .sectionContainer .imgDiv {
+  margin: auto;
+}
+.lounge .sectionContainer .imgDiv img {
+  width: 100%;
+  max-width: 400px;
+}
+.lounge .sectionContainer .textDiv .grids {
+  margin-top: 1rem;
+  gap: 1.5rem;
+}
+.lounge .sectionContainer .textDiv .grids .singleGrid .gridTitle {
+  display: block;
+  padding-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--blackColor);
+}
+
+.travelers .sectionConatiner {
+  text-align: center;
+}
+.travelers .sectionConatiner .travelersContainer {
+  margin-top: 1rem;
+  gap: 1.5rem;
+}
+.travelers .sectionConatiner .travelersContainer .singleTraveler {
+  position: relative;
+  height: 320px;
+  width: 85%;
+  max-width: 250px;
+  overflow: hidden;
+  border-radius: 10rem;
+  gap: 1rem;
+  margin: auto;
+}
+.travelers .sectionConatiner .travelersContainer .singleTraveler .destinationImage, .travelers .sectionConatiner .travelersContainer .singleTraveler .travelerImage, .travelers .sectionConatiner .travelersContainer .singleTraveler .traverlerName {
+  position: absolute;
+}
+.travelers .sectionConatiner .travelersContainer .singleTraveler .destinationImage {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.travelers .sectionConatiner .travelersContainer .singleTraveler .travelerImage {
+  height: 100px;
+  width: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  bottom: 30px;
+  left: 30%;
+  transform: translateX(-50%);
+  border: 5px solid rgba(225, 225, 225, 0.637);
+  transition: var(--transition);
+  animation: animated 2.3s infinite;
+}
+@keyframes animated {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(16px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+.travelers .sectionConatiner .travelersContainer .singleTraveler .traverlerName {
+  bottom: -100%;
+  width: 100%;
+  height: -moz-max-content;
+  height: max-content;
+  background: var(--whiteColor);
+  padding: 1.5rem 1rem;
+  transition: var(--transition);
+  animation: animatedBorders 2.3s infinite;
+}
+.travelers .sectionConatiner .travelersContainer .singleTraveler .traverlerName span {
+  display: block;
+  color: black;
+  font-weight: 700;
+}
+.travelers .sectionConatiner .travelersContainer .singleTraveler .traverlerName p {
+  color: var(--PrimaryColor);
+  font-style: italic;
+}
+@keyframes animatedBorders {
+  0% {
+    border-radius: 0rem;
+  }
+  50% {
+    border-radius: 2rem;
+  }
+  100% {
+    border-radius: 0rem;
+  }
+}
+.travelers .sectionConatiner .travelersContainer .singleTraveler:hover .traverlerName {
+  bottom: 0;
+  transition: 1s ease-in-out;
+}
+.travelers .sectionConatiner .travelersContainer .singleTraveler:hover .travelerImage {
+  bottom: 110px;
+  transition: 1s ease-in-out;
 }/*# sourceMappingURL=main.css.map */
