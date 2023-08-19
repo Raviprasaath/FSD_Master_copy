@@ -3,6 +3,9 @@ import Navbar from './Components/Navbar/Navbar.jsx'
 import Home from './Components/Home/Home.jsx'
 import Search from './Components/Search/Search.jsx'
 import Support from './Components/Support/Support.jsx'
+import Info from './Components/Info/Info.jsx'
+import Longue from './Components/Longue/Longue.jsx'
+import Travelers from './Components/Travelers/Travelers.jsx'
 import './App.css'
 
 function App() {
@@ -13,6 +16,9 @@ function App() {
       <Home/>
       <Search/>
       <Support/>
+      <Info/>
+      <Longue/>
+      <Travelers/>
     </>
   )
 }
