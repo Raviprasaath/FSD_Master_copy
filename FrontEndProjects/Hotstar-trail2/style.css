@@ -53,7 +53,7 @@ body {
   font-size: 2rem;
 }
 
-.ul-navbar li a{
+.ul-navbar li a {
   padding-left: 2rem;
 }
 
@@ -109,7 +109,8 @@ body {
   color: var(--secondary-color);
 }
 
-.openbtn, .openbtn-class {
+.openbtn,
+.openbtn-class {
   display: none;
 }
 
@@ -147,7 +148,6 @@ body {
   font-size: 36px;
 }
 
-
 .openbtn {
   font-size: 20px;
   cursor: pointer;
@@ -158,7 +158,7 @@ body {
 }
 
 .carosal-img {
-    padding: 20px;
+  padding: 20px;
 }
 
 /* -------carousel----------- */
@@ -166,20 +166,21 @@ body {
   width: 100%;
 }
 
-.carousel-inner img{
+.carousel-inner img {
   height: 80%;
 }
 .carousel-content h3 {
   font-size: 4rem;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .carousel-content p {
   font-size: 1.8rem;
-  font-family:Verdana, Geneva, Tahoma, sans-serif ;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.carousel-content h3, .carousel-content p {
+.carousel-content h3,
+.carousel-content p {
   color: var(--secondary-color);
   padding: 20px;
   padding-left: 40px;
@@ -188,7 +189,7 @@ body {
 /* ----------------------------------------- */
 
 .slider {
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   flex: 0 0 auto;
   height: 100%;
@@ -240,7 +241,6 @@ body {
 
 .container-movie {
   color: var(--secondary-color);
-  padding: 2rem;
 }
 
 .container-movie h1 {
@@ -250,7 +250,6 @@ body {
 
 .container-movie-section {
   position: relative;
-  width: 50%;
   max-width: 200px;
 }
 
@@ -261,14 +260,14 @@ body {
 }
 
 .overlay {
-  position: absolute; 
-  bottom: 0; 
+  position: absolute;
+  bottom: 0;
   background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.8);
-  color: #f1f1f1; 
-  width: 100%;
-  transition: .5s ease;
-  opacity:0;
+  color: #f1f1f1;
+  width: 200px;
+  transition: 0.5s ease;
+  opacity: 0;
   color: white;
   font-size: 1rem;
   text-align: center;
@@ -282,44 +281,47 @@ body {
   transform: scale(1);
 }
 
-
 /* ------------------------------------------------- */
 
-/* code pen */
+/* //multi .carosal */
+.MultiCarousel {
+  float: left;
+  overflow: hidden;
+  padding: 15px;
+  width: 100%;
+  position: relative;
+}
+.MultiCarousel .MultiCarousel-inner {
+  transition: 1s ease all;
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item {
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item > div {
+  text-align: center;
+  /* padding: 10px; */
+  margin: 10px;
+  background: #f1f1f1;
+  color: #666;
+}
+.MultiCarousel .leftLst,
+.MultiCarousel .rightLst {
+  position: absolute;
+  border-radius: 50%;
+  top: calc(50% - 20px);
+}
+.MultiCarousel .leftLst {
+  left: 0;
+}
+.MultiCarousel .rightLst {
+  right: 0;
+}
 
-.multi-item-carousel{
-  .carousel-inner{
-    > .item{
-      transition: 500ms ease-in-out left;
-    }
-    .active{
-      &.left{
-        left:-33%;
-      }
-      &.right{
-        left:33%;
-      }
-    }
-    .next{
-      left: 33%;
-    }
-    .prev{
-      left: -33%;
-    }
-    @media all and (transform-3d), (-webkit-transform-3d) {
-      .item{
-        transition: 500ms ease-in-out left;
-        transition: 500ms ease-in-out all;
-        backface-visibility: visible;
-        transform: none!important;
-      }
-    }
-  }
-  .carouse-control{
-    &.left, &.right{
-      background-image: none;
-    }
-  }
+.MultiCarousel .leftLst.over,
+.MultiCarousel .rightLst.over {
+  pointer-events: none;
+  background: #ccc;
 }
 
 
@@ -327,9 +329,7 @@ body {
 
 /* --------------------------------------------------------- */
 
-
 @media only screen and (max-width: 1024px) {
-
 }
 @media only screen and (max-width: 768px) {
   .header-section {
