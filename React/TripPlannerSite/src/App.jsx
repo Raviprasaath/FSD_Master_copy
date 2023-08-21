@@ -8,6 +8,7 @@ import Longue from './Components/Longue/Longue.jsx'
 import Travelers from './Components/Travelers/Travelers.jsx'
 import Subscribers from './Components/Subscribers/Subscribers.jsx'
 import Footer from './Components/Footer/Footer.jsx'
+import CarouselCard from './Components/CarouselCard/CarouselCard.jsx'
 import './App.css'
 
 function App() {
@@ -15,9 +16,10 @@ function App() {
   return (
     <>
       <Navbar/>
-      <Home/>
-      <Search/>
+      <CarouselCard/>
       <Support/>
+      <Search/>
+      <Home/>
       <Info/>
       <Longue/>
       <Travelers/>
