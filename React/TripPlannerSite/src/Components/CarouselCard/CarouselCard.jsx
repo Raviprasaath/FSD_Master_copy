@@ -1,11 +1,11 @@
-import Carousel from 'react-elastic-carousel';
+// import Carousel from 'react-elastic-carousel';
 
-const CarouselCard = () => {
-    return (
-        <div>
-            hi
-        </div>
-    )
-}
+// const CarouselCard = () => {
+//     return (
+//         <div>
+//             hi
+//         </div>
+//     )
+// }
 
-export default CarouselCard;
+// export default CarouselCard;
